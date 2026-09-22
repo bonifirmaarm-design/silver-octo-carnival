@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SFERIHOME — стеновые панели из соломы</title>
+<meta name="description" content="Заводские стеновые панели из соломы на каркасе из сушёной древесины. Квадратный метр стены весит 40 кг, сборка комплекта — 3–5 дней.">
+<meta name="theme-color" content="#E9E8E3">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-mark" viewBox="0 0 30 30">
+    <clipPath id="logo-clip"><circle cx="15" cy="15" r="13"/></clipPath>
+    <g clip-path="url(#logo-clip)">
+      <rect width="30" height="30" fill="var(--paper)"/>
+      <rect y="11" width="30" height="8" fill="var(--straw)"/>
+      <path d="M0 11h30M0 19h30" stroke="var(--ink)" stroke-width="1.5"/>
+    </g>
+    <circle cx="15" cy="15" r="13" fill="none" stroke="var(--ink)" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="9.5"/><path d="M12 7v6M12 16.5v.5"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main" data-i18n="nav.skip">К содержанию</a>
+
+<header class="header" id="header">
+  <div class="wrap header__bar">
+    <a class="logo capsule" href="#top" aria-label="SFERIHOME, на главную" data-i18n-aria="logo.label">
+      <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
+      <span class="logo__word">SFERIHOME</span>
+    </a>
+    <nav class="nav capsule" aria-label="Основная навигация" data-i18n-aria="nav.label">
+      <ul class="nav__list">
+        <li><a href="#tech" data-i18n="nav.tech">Технология</a></li>
+        <li><a href="#assembly" data-i18n="nav.assembly">Сборка</a></li>
+        <li><a href="#kit" data-i18n="nav.kit">Комплект</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Проекты</a></li>
+        <li><a href="#factory" data-i18n="nav.factory">Фабрика</a></li>
+      </ul>
+    </nav>
+    <div class="header__tools">
+      <div class="lang capsule" role="group" aria-label="Язык" data-i18n-aria="lang.label">
+        <button type="button" data-lang="me" lang="sr-Latn-ME" aria-label="Crnogorski" aria-pressed="false">ME</button>
+        <button type="button" data-lang="ru" lang="ru" aria-label="Русский" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--small header__cta" href="#request" data-i18n="nav.cta">Рассчитать комплект</a>
+      <button type="button" class="menu-btn capsule" aria-expanded="false" aria-controls="menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path class="menu-btn__open" d="M4 8h16M4 16h16"/><path class="menu-btn__close" d="M6 6l12 12M18 6L6 18"/></svg>
+        <span class="visually-hidden" data-i18n="nav.menu">Меню</span>
+      </button>
+    </div>
+  </div>
+  <div class="wrap menu-wrap"><div class="menu" id="menu" hidden>
+    <ul class="menu__list">
+      <li><a href="#tech" data-i18n="nav.tech">Технология</a></li>
+      <li><a href="#assembly" data-i18n="nav.assembly">Сборка</a></li>
+      <li><a href="#kit" data-i18n="nav.kit">Комплект</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Проекты</a></li>
+      <li><a href="#factory" data-i18n="nav.factory">Фабрика</a></li>
+    </ul>
+    <a class="btn" href="#request" data-i18n="nav.cta">Рассчитать комплект</a>
+  </div></div>
+</header>
+
+<main id="main">
+
+  <!-- 1 · Hero: the wall section is the product's most characteristic thing -->
+  <section class="hero wrap" id="top" aria-labelledby="hero-title">
+    <div class="panel hero__panel">
+      <div>
+        <h1 class="hero__title" id="hero-title">
+          <span data-i18n="hero.line1">Квадратный метр стены — 40 кг.</span>
+          <span class="ghost" data-i18n="hero.line2">Кирпичной — 600.</span>
+        </h1>
+        <p class="lead hero__lead" data-i18n="hero.lead">Панель из прессованной соломы на каркасе из сушёной древесины. Делаем её на фабрике в Цетине, а на участке остаётся только сборка: 3–5 дней.</p>
+        <div class="hero__actions">
+          <a class="btn" href="#request" data-i18n="hero.cta">Рассчитать комплект</a>
+          <a class="link-quiet" href="#tech" data-i18n="hero.more">Как устроена стена</a>
+        </div>
+      </div>
+
+      <figure class="wall" id="wall">
+        <!-- wall:start -->
+<svg class="wall-figure" viewBox="-226 -256 422 499" role="img" aria-labelledby="wall-fig-title"><title id="wall-fig-title" data-i18n="hero.figureTitle"></title><defs>
+<pattern id="straw" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)">
+<rect width="7" height="7" fill="var(--fig-straw-front)"/><line x1="0" y1="0" x2="0" y2="7" stroke="var(--fig-straw-line)" stroke-width="1.4"/></pattern>
+<pattern id="straw-top" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+<rect width="6" height="6" fill="var(--fig-straw-top)"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--fig-straw-line)" stroke-width="1"/></pattern>
+<pattern id="stipple" width="9" height="9" patternUnits="userSpaceOnUse">
+<rect width="9" height="9" fill="var(--fig-clay-front)"/><circle cx="2" cy="3" r="0.8" fill="var(--fig-clay-dot)"/><circle cx="6.5" cy="7" r="0.7" fill="var(--fig-clay-dot)"/></pattern>
+</defs><g class="wall-layer" data-layer="clay-in" style="--ax:0.0px;--ay:0.0px;--k:0"><polygon class="f-top" points="0.0,-250.0 190.5,-140.0 185.3,-137.0 -5.2,-247.0" fill="var(--fig-clay-top)"/><polygon class="f-front" points="-5.2,3.0 185.3,113.0 185.3,-137.0 -5.2,-247.0" fill="url(#stipple)"/><polygon class="f-side" points="190.5,110.0 185.3,113.0 185.3,-137.0 190.5,-140.0" fill="var(--fig-clay-side)"/></g><g class="wall-layer" data-layer="frame" style="--ax:55.4px;--ay:-32.0px;--k:1"><polygon class="f-top" points="-60.6,23.0 129.9,133.0 86.6,158.0 -103.9,48.0" fill="var(--fig-wood-top)"/><polygon class="f-front" points="-103.9,60.0 86.6,170.0 86.6,158.0 -103.9,48.0" fill="var(--fig-wood-front)"/><polygon class="f-side" points="129.9,145.0 86.6,170.0 86.6,158.0 129.9,133.0" fill="var(--fig-wood-side)"/><polygon class="f-top" points="-60.6,-203.0 -50.2,-197.0 -93.5,-172.0 -103.9,-178.0" fill="var(--fig-wood-top)"/><polygon class="f-front" points="-103.9,48.0 -93.5,54.0 -93.5,-172.0 -103.9,-178.0" fill="var(--fig-wood-front)"/><polygon class="f-side" points="-50.2,29.0 -93.5,54.0 -93.5,-172.0 -50.2,-197.0" fill="var(--fig-wood-side)"/><polygon class="f-top" points="29.4,-151.0 39.8,-145.0 -3.5,-120.0 -13.9,-126.0" fill="var(--fig-wood-top)"/><polygon class="f-front" points="-13.9,100.0 -3.5,106.0 -3.5,-120.0 -13.9,-126.0" fill="var(--fig-wood-front)"/><polygon class="f-side" points="39.8,81.0 -3.5,106.0 -3.5,-120.0 39.8,-145.0" fill="var(--fig-wood-side)"/><polygon class="f-top" points="119.5,-99.0 129.9,-93.0 86.6,-68.0 76.2,-74.0" fill="var(--fig-wood-top)"/><polygon class="f-front" points="76.2,152.0 86.6,158.0 86.6,-68.0 76.2,-74.0" fill="var(--fig-wood-front)"/><polygon class="f-side" points="129.9,133.0 86.6,158.0 86.6,-68.0 129.9,-93.0" fill="var(--fig-wood-side)"/><polygon class="f-top" points="-60.6,-215.0 129.9,-105.0 86.6,-80.0 -103.9,-190.0" fill="var(--fig-wood-top)"/><polygon class="f-front" points="-103.9,-178.0 86.6,-68.0 86.6,-80.0 -103.9,-190.0" fill="var(--fig-wood-front)"/><polygon class="f-side" points="129.9,-93.0 86.6,-68.0 86.6,-80.0 129.9,-105.0" fill="var(--fig-wood-side)"/></g><g class="wall-layer" data-layer="straw" style="--ax:110.9px;--ay:-64.0px;--k:2"><polygon class="f-top" points="-107.4,-164.0 -27.7,-118.0 -67.5,-95.0 -147.2,-141.0" fill="url(#straw-top)"/><polygon class="f-front" points="-147.2,85.0 -67.5,131.0 -67.5,-95.0 -147.2,-141.0" fill="url(#straw)"/><polygon class="f-side" points="-27.7,108.0 -67.5,131.0 -67.5,-95.0 -27.7,-118.0" fill="var(--fig-straw-side)"/><polygon class="f-top" points="-17.3,-112.0 62.4,-66.0 22.5,-43.0 -57.2,-89.0" fill="url(#straw-top)"/><polygon class="f-front" points="-57.2,137.0 22.5,183.0 22.5,-43.0 -57.2,-89.0" fill="url(#straw)"/><polygon class="f-side" points="62.4,160.0 22.5,183.0 22.5,-43.0 62.4,-66.0" fill="var(--fig-straw-side)"/></g><g class="wall-layer" data-layer="clay-out" style="--ax:166.3px;--ay:-96.0px;--k:3"><polygon class="f-top" points="-214.8,-126.0 -24.2,-16.0 -29.4,-13.0 -220.0,-123.0" fill="var(--fig-clay-top)"/><polygon class="f-front" points="-220.0,127.0 -29.4,237.0 -29.4,-13.0 -220.0,-123.0" fill="url(#stipple)"/><polygon class="f-side" points="-24.2,234.0 -29.4,237.0 -29.4,-13.0 -24.2,-16.0" fill="var(--fig-clay-side)"/></g><g class="wall-markers"><g class="wall-marker"><circle cx="-124.7" cy="2.0" r="13"/><text x="-124.7" y="2.0" dy="0.35em">1</text></g><g class="wall-marker"><circle cx="2.6" cy="-77.5" r="13"/><text x="2.6" y="-77.5" dy="0.35em">2</text></g><g class="wall-marker"><circle cx="-44.2" cy="-180.5" r="13"/><text x="-44.2" y="-180.5" dy="0.35em">3</text></g><g class="wall-marker"><circle cx="147.2" cy="-104.0" r="13"/><text x="147.2" y="-104.0" dy="0.35em">4</text></g></g></svg>
+<!-- wall:end -->
+        <figcaption class="wall__caption" data-i18n="hero.caption">Разрез панели, снаружи внутрь</figcaption>
+        <ol class="wall__legend">
+          <li data-layer="clay-out" data-i18n="layer.1">Глиняная штукатурка, снаружи</li>
+          <li data-layer="straw" data-i18n="layer.2">Прессованная солома</li>
+          <li data-layer="frame" data-i18n="layer.3">Каркас из калиброванной сушёной древесины</li>
+          <li data-layer="clay-in" data-i18n="layer.4">Глиняная штукатурка, внутри</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 · Comparison: the Sonder House ruled table, carrying real figures -->
+  <section class="compare wrap" id="tech" aria-labelledby="compare-title">
+    <div class="compare__grid">
+      <div class="compare__head">
+        <h2 class="h2" id="compare-title" data-i18n="compare.title">Солома держит тепло в семь раз лучше кирпича.</h2>
+        <p class="lead muted" data-i18n="compare.lead">Теплопроводность показывает, сколько тепла уходит через материал. Чем меньше число, тем меньше дом тратит на отопление зимой и тем медленнее нагревается летом.</p>
+        <p class="proto-note"><b data-i18n="proto.label">Прототип</b> <span data-i18n="proto.figures">Цифры взяты из открытых публикаций. До публикации их должна подтвердить SFERIHOME.</span></p>
+      </div>
+
+      <div>
+        <table class="data-table">
+          <caption data-i18n="compare.caption">Теплопроводность, Вт/(м·К)</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="compare.colMaterial">Материал</th>
+              <th scope="col" data-i18n="compare.colValue">Значение</th>
+              <th scope="col" data-i18n="compare.colScale">На шкале от 0 до 0,7</th>
+              <th scope="col" class="ratio" data-i18n="compare.colRatio">Солома лучше</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="is-straw">
+              <th scope="row" data-i18n="compare.straw">Солома</th>
+              <td class="val" data-i18n="compare.strawValue">0,050–0,065</td>
+              <td class="scale" aria-hidden="true"><div class="bar"><span class="bar__fill" style="width:7.14%"></span><span class="bar__range" style="left:7.14%;width:2.14%"></span></div></td>
+              <td class="ratio ratio--none">—</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="compare.wood">Дерево</th>
+              <td class="val" data-i18n="compare.woodValue">0,18–0,23</td>
+              <td class="scale" aria-hidden="true"><div class="bar"><span class="bar__fill" style="width:25.71%"></span><span class="bar__range" style="left:25.71%;width:7.14%"></span></div></td>
+              <td class="ratio"><span class="ratio__label"><span data-i18n="compare.colRatio">Солома лучше</span> </span><span data-i18n="compare.woodRatio">в 4 раза</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="compare.brick">Кирпич</th>
+              <td class="val" data-i18n="compare.brickValue">0,56–0,70</td>
+              <td class="scale" aria-hidden="true"><div class="bar"><span class="bar__fill" style="width:80%"></span><span class="bar__range" style="left:80%;width:20%"></span></div></td>
+              <td class="ratio"><span class="ratio__label"><span data-i18n="compare.colRatio">Солома лучше</span> </span><span data-i18n="compare.brickRatio">в 7 раз</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="weight">
+          <h3 class="weight__title" id="weight-title" data-i18n="compare.weightTitle">Вес квадратного метра стены</h3>
+          <table class="data-table" aria-labelledby="weight-title">
+            <tbody>
+              <tr class="is-straw">
+                <th scope="row" data-i18n="compare.weightStraw">Соломенная панель, без раствора</th>
+                <td class="val" data-i18n="compare.weightStrawValue">40 кг</td>
+                <td class="scale" aria-hidden="true"><div class="bar bar--solo"><span class="bar__fill" style="width:6.67%"></span></div></td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="compare.weightBrick">Кирпичная стена</th>
+                <td class="val" data-i18n="compare.weightBrickValue">≈ 600 кг</td>
+                <td class="scale" aria-hidden="true"><div class="bar bar--solo"><span class="bar__fill" style="width:100%"></span></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="weight__note" data-i18n="compare.weightNote">Лёгкая стена — лёгкий фундамент. Поэтому можно строить на винтовых сваях и там, где тяжёлая стена не встанет.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Assembly: numbered because the order is the information -->
+  <section class="assembly wrap" id="assembly" aria-labelledby="assembly-title">
+    <div class="section-head">
+      <h2 class="h2" id="assembly-title" data-i18n="assembly.title">Три этапа. Стены — за 3–5 дней.</h2>
+      <p class="lead muted" data-i18n="assembly.lead">Панели приходят с фабрики готовыми. На участке их собирает бригада из нескольких человек, как конструктор.</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__n num" aria-hidden="true">1</span>
+        <h3 class="step__title" data-i18n="assembly.1.title">Фундамент</h3>
+        <p class="step__text" data-i18n="assembly.1.text">Лёгкий, потому что стена весит мало. Подходят винтовые сваи — на склоне и там, куда не подъедет тяжёлая техника.</p>
+        <dl class="step__time"><dt data-i18n="assembly.timeLabel">Срок</dt><dd data-i18n="assembly.1.time">зависит от участка</dd></dl>
+      </li>
+      <li class="step is-key">
+        <span class="step__n num" aria-hidden="true">2</span>
+        <h3 class="step__title" data-i18n="assembly.2.title">Панели и кровля</h3>
+        <p class="step__text" data-i18n="assembly.2.text">Каркас, стеновые панели и кровельная система с одной фабрики. Без мокрых работ на стенах и без строительного мусора.</p>
+        <dl class="step__time"><dt data-i18n="assembly.timeLabel">Срок</dt><dd class="num" data-i18n="assembly.2.time">3–5 дней</dd></dl>
+      </li>
+      <li class="step">
+        <span class="step__n num" aria-hidden="true">3</span>
+        <h3 class="step__title" data-i18n="assembly.3.title">Отделка</h3>
+        <p class="step__text" data-i18n="assembly.3.text">Глиняная штукатурка снаружи и внутри. Раствор входит в комплект — докупать не нужно.</p>
+        <dl class="step__time"><dt data-i18n="assembly.timeLabel">Срок</dt><dd data-i18n="assembly.3.time">по проекту</dd></dl>
+      </li>
+    </ol>
+
+    <div class="sites">
+      <h3 class="sites__title" data-i18n="site.title">Где можно строить</h3>
+      <ul class="sites__grid">
+        <li class="site"><span data-i18n="site.1">На склоне и сложном рельефе</span></li>
+        <li class="site"><span data-i18n="site.2">На участке без подъезда для тяжёлой техники</span></li>
+        <li class="site site--filled"><span data-i18n="site.3">Без строительного мусора на участке</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4 · Kit: a list, not six identical icon cards -->
+  <section class="kit wrap" id="kit" aria-labelledby="kit-title">
+    <div class="kit__grid">
+      <div class="kit__head">
+        <h2 class="h2" id="kit-title" data-i18n="kit.title">Что приезжает на участок</h2>
+        <p class="lead muted" data-i18n="kit.lead">Комплект собирается на фабрике и приходит целиком. Инженерные системы входят в него вместе с материалами.</p>
+      </div>
+      <div>
+        <div class="kit__group">
+          <h3 data-i18n="kit.groupStructure">Конструкция</h3>
+          <dl>
+            <div class="kit__row"><dt data-i18n="kit.frame">Каркас из калиброванной сушёной древесины</dt><dd data-i18n="kit.frameNote">до 3 этажей, срок службы до 100 лет</dd></div>
+            <div class="kit__row"><dt data-i18n="kit.panels">Стеновые панели с соломой</dt><dd data-i18n="kit.panelsNote">изготовлены на фабрике</dd></div>
+            <div class="kit__row"><dt data-i18n="kit.clay">Глиняный раствор</dt><dd data-i18n="kit.clayNote">для наружных и внутренних стен</dd></div>
+            <div class="kit__row"><dt data-i18n="kit.roof">Кровельная система</dt><dd data-i18n="kit.roofNote">собственного производства</dd></div>
+          </dl>
+        </div>
+        <div class="kit__group">
+          <h3 data-i18n="kit.groupSystems">Инженерия</h3>
+          <dl>
+            <div class="kit__row"><dt data-i18n="kit.power">Электрика</dt><dd data-i18n="kit.powerNote">стандартная разводка по дому</dd></div>
+            <div class="kit__row"><dt data-i18n="kit.water">Водоснабжение</dt><dd data-i18n="kit.waterNote">трубы и материалы</dd></div>
+            <div class="kit__row"><dt data-i18n="kit.heating">Отопление</dt><dd data-i18n="kit.heatingNote">трубы и материалы</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Projects: САК-Строй card anatomy, honest about missing data -->
+  <section class="projects wrap section--ruled" id="projects" aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 class="h2" id="projects-title" data-i18n="projects.title">Проекты</h2>
+      <p class="lead muted" data-i18n="projects.lead">От одного до трёх этажей — это предел для деревянного каркаса.</p>
+      <p class="proto-note"><b data-i18n="proto.label">Прототип</b> <span data-i18n="proto.projects">Реальные проекты, площади и цены — от компании. Эскизы иллюстративные.</span></p>
+    </div>
+    <ul class="projects__grid">
+      <li class="project">
+        <div class="project__media">
+          <span class="project__tag" data-i18n="projects.sketch">эскиз</span>
+          <svg class="elev" viewBox="0 0 300 240" aria-hidden="true">
+            <line class="ground" x1="20" y1="225" x2="280" y2="225"/>
+            <rect class="wall-fill" x="75" y="177" width="150" height="48"/><rect class="cut" x="213" y="177" width="12" height="48"/><line x1="213" y1="177" x2="213" y2="225"/>
+            <polygon class="roof-fill" points="62,177 150,118 238,177"/>
+            <rect class="glass" x="93" y="189" width="30" height="22"/><rect class="glass" x="177" y="189" width="30" height="22"/>
+            <rect class="glass" x="139" y="192" width="22" height="33"/>
+          <g class="dim"><line x1="250" y1="225" x2="250" y2="177"/><line x1="246" y1="225" x2="254" y2="225"/><line x1="246" y1="177" x2="254" y2="177"/></g></svg>
+        </div>
+        <h3 class="project__title" data-i18n="projects.1.title">Одноэтажный дом</h3>
+        <dl class="specs">
+          <div><dt data-i18n="projects.floors">Этажей</dt><dd>1</dd></div>
+          <div><dt data-i18n="projects.area">Площадь</dt><dd>—</dd></div>
+          <div><dt data-i18n="projects.assembly">Сборка стен</dt><dd>—</dd></div>
+        </dl>
+        <div class="project__foot"><a class="pill" href="#request" data-floors="1" data-i18n="projects.price">Цена по запросу</a></div>
+      </li>
+      <li class="project">
+        <div class="project__media">
+          <span class="project__tag" data-i18n="projects.sketch">эскиз</span>
+          <svg class="elev" viewBox="0 0 300 240" aria-hidden="true">
+            <line class="ground" x1="20" y1="225" x2="280" y2="225"/>
+            <rect class="wall-fill" x="75" y="129" width="150" height="96"/><rect class="cut" x="213" y="129" width="12" height="96"/><line x1="213" y1="129" x2="213" y2="225"/>
+            <polygon class="roof-fill" points="62,129 150,70 238,129"/>
+            <line class="ground" x1="75" y1="177" x2="225" y2="177" stroke-dasharray="3 4"/>
+            <rect class="glass" x="93" y="141" width="30" height="22"/><rect class="glass" x="177" y="141" width="30" height="22"/>
+            <rect class="glass" x="93" y="189" width="30" height="22"/><rect class="glass" x="177" y="189" width="30" height="22"/>
+            <rect class="glass" x="139" y="192" width="22" height="33"/>
+          <g class="dim"><line x1="250" y1="225" x2="250" y2="129"/><line x1="246" y1="225" x2="254" y2="225"/><line x1="246" y1="177" x2="254" y2="177"/><line x1="246" y1="129" x2="254" y2="129"/></g></svg>
+        </div>
+        <h3 class="project__title" data-i18n="projects.2.title">Двухэтажный дом</h3>
+        <dl class="specs">
+          <div><dt data-i18n="projects.floors">Этажей</dt><dd>2</dd></div>
+          <div><dt data-i18n="projects.area">Площадь</dt><dd>—</dd></div>
+          <div><dt data-i18n="projects.assembly">Сборка стен</dt><dd>—</dd></div>
+        </dl>
+        <div class="project__foot"><a class="pill" href="#request" data-floors="2" data-i18n="projects.price">Цена по запросу</a></div>
+      </li>
+      <li class="project">
+        <div class="project__media">
+          <span class="project__tag" data-i18n="projects.sketch">эскиз</span>
+          <svg class="elev" viewBox="0 0 300 240" aria-hidden="true">
+            <line class="ground" x1="20" y1="225" x2="280" y2="225"/>
+            <rect class="wall-fill" x="75" y="81" width="150" height="144"/><rect class="cut" x="213" y="81" width="12" height="144"/><line x1="213" y1="81" x2="213" y2="225"/>
+            <polygon class="roof-fill" points="62,81 150,22 238,81"/>
+            <line class="ground" x1="75" y1="129" x2="225" y2="129" stroke-dasharray="3 4"/>
+            <line class="ground" x1="75" y1="177" x2="225" y2="177" stroke-dasharray="3 4"/>
+            <rect class="glass" x="93" y="93" width="30" height="22"/><rect class="glass" x="177" y="93" width="30" height="22"/>
+            <rect class="glass" x="93" y="141" width="30" height="22"/><rect class="glass" x="177" y="141" width="30" height="22"/>
+            <rect class="glass" x="93" y="189" width="30" height="22"/><rect class="glass" x="177" y="189" width="30" height="22"/>
+            <rect class="glass" x="139" y="192" width="22" height="33"/>
+          <g class="dim"><line x1="250" y1="225" x2="250" y2="81"/><line x1="246" y1="225" x2="254" y2="225"/><line x1="246" y1="177" x2="254" y2="177"/><line x1="246" y1="129" x2="254" y2="129"/><line x1="246" y1="81" x2="254" y2="81"/></g></svg>
+        </div>
+        <h3 class="project__title" data-i18n="projects.3.title">Трёхэтажный дом</h3>
+        <dl class="specs">
+          <div><dt data-i18n="projects.floors">Этажей</dt><dd>3</dd></div>
+          <div><dt data-i18n="projects.area">Площадь</dt><dd>—</dd></div>
+          <div><dt data-i18n="projects.assembly">Сборка стен</dt><dd>—</dd></div>
+        </dl>
+        <div class="project__foot"><a class="pill" href="#request" data-floors="3" data-i18n="projects.price">Цена по запросу</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 6 · Factory: the one place where reportage photography belongs -->
+  <section class="factory wrap" id="factory" aria-labelledby="factory-title">
+    <div class="factory__grid">
+      <div class="placeholder" role="img" aria-label="Фотография производства" data-i18n-aria="factory.photo">
+        <p class="placeholder__label"><strong data-i18n="proto.label">Прототип</strong> <span data-i18n="proto.photo">Здесь будет фотография производства в Цетине. Её нет — нужна от компании.</span></p>
+      </div>
+      <div class="factory__text">
+        <h2 class="h2" id="factory-title" data-i18n="factory.title">Панели делают в цехе, а не на участке.</h2>
+        <p class="lead muted" data-i18n="factory.lead">Поэтому сборка занимает дни, а не месяцы, и поэтому на участке нет мусора.</p>
+        <dl class="facts">
+          <div><dt data-i18n="factory.place">Где</dt><dd data-i18n="factory.placeValue">Цетине, комплекс Горни Обод</dd></div>
+          <div><dt data-i18n="factory.area">Площадь цехов</dt><dd data-i18n="factory.areaValue">6 267 м²</dd></div>
+          <div><dt data-i18n="factory.halls">Цехов</dt><dd data-i18n="factory.hallsValue">2</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Request -->
+  <section class="request wrap" id="request" aria-labelledby="request-title">
+    <div class="panel request__panel">
+      <div class="request__head">
+        <h2 class="h2" id="request-title" data-i18n="form.title">Рассчитать комплект</h2>
+        <p class="lead muted" data-i18n="form.lead">Опишите участок и дом. Пришлём состав комплекта и сроки.</p>
+        <p class="proto-note"><b data-i18n="proto.label">Прототип</b> <span data-i18n="proto.form">В прототипе заявка никуда не уходит. Состояние ошибки: добавьте ?demo=error к адресу.</span></p>
+      </div>
+
+      <div>
+        <form class="form" id="request-form" novalidate>
+          <p class="alert alert--error" id="form-summary" role="alert" hidden>
+            <svg aria-hidden="true"><use href="#i-alert"/></svg><span data-i18n="form.errSummary">Проверьте отмеченные поля.</span>
+          </p>
+
+          <div class="form__row">
+            <div class="field" data-field="name">
+              <label for="f-name" data-i18n="form.name">Имя</label>
+              <input class="input" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+              <p class="field__error" id="f-name-err" aria-live="polite"><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="field" data-field="contact">
+              <label for="f-contact" data-i18n="form.contact">Телефон или e-mail</label>
+              <input class="input" id="f-contact" name="contact" type="text" inputmode="email" autocomplete="email" required aria-describedby="f-contact-hint f-contact-err">
+              <p class="hint" id="f-contact-hint" data-i18n="form.contactHint">Ответим на этот контакт.</p>
+              <p class="field__error" id="f-contact-err" aria-live="polite"><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+          </div>
+
+          <div class="field" data-field="location">
+            <label for="f-location"><span data-i18n="form.location">Где участок</span> <span class="opt">· <span data-i18n="form.optional">необязательно</span></span></label>
+            <input class="input" id="f-location" name="location" type="text" autocomplete="address-level2" aria-describedby="f-location-hint">
+            <p class="hint" id="f-location-hint" data-i18n="form.locationHint">Город или посёлок. Если рельеф сложный, напишите в комментарии.</p>
+          </div>
+
+          <div class="form__row">
+            <fieldset class="field">
+              <legend data-i18n="form.floors">Этажей</legend>
+              <div class="segmented">
+                <input type="radio" name="floors" id="f-fl-1" value="1" checked><label for="f-fl-1">1</label>
+                <input type="radio" name="floors" id="f-fl-2" value="2"><label for="f-fl-2">2</label>
+                <input type="radio" name="floors" id="f-fl-3" value="3"><label for="f-fl-3">3</label>
+              </div>
+            </fieldset>
+            <div class="field" data-field="area">
+              <label for="f-area"><span data-i18n="form.area">Площадь дома, м²</span> <span class="opt">· <span data-i18n="form.optional">необязательно</span></span></label>
+              <input class="input num" id="f-area" name="area" type="text" inputmode="numeric" aria-describedby="f-area-hint f-area-err">
+              <p class="hint" id="f-area-hint" data-i18n="form.areaHint">Примерно. Можно оставить пустым.</p>
+              <p class="field__error" id="f-area-err" aria-live="polite"><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-comment"><span data-i18n="form.comment">Комментарий</span> <span class="opt">· <span data-i18n="form.optional">необязательно</span></span></label>
+            <textarea class="input" id="f-comment" name="comment" rows="4"></textarea>
+          </div>
+
+          <div class="alert alert--error" id="form-server-error" role="alert" hidden>
+            <svg aria-hidden="true"><use href="#i-alert"/></svg>
+            <div class="alert__body">
+              <span data-i18n="form.errServer">Заявка не отправилась. Проверьте соединение и попробуйте ещё раз — всё, что вы ввели, сохранено.</span>
+            </div>
+          </div>
+
+          <div class="form__foot">
+            <button class="btn" type="submit" id="form-submit">
+              <span class="spinner" aria-hidden="true" hidden></span>
+              <span class="btn__label" data-i18n="form.submit">Отправить заявку</span>
+            </button>
+            <p class="form__consent" data-i18n="form.consent">Отправляя заявку, вы соглашаетесь, что мы используем ваши контакты, чтобы ответить.</p>
+          </div>
+        </form>
+
+        <div class="success" id="form-success" tabindex="-1" hidden>
+          <svg aria-hidden="true"><use href="#i-check"/></svg>
+          <h3 data-i18n="form.successTitle">Заявка отправлена.</h3>
+          <p data-i18n="form.successText">Мы свяжемся с вами по контакту, который вы оставили.</p>
+          <button type="button" class="btn btn--ghost" id="form-again" data-i18n="form.again">Отправить ещё одну заявку</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <a class="logo" href="#top" aria-label="SFERIHOME, на главную" data-i18n-aria="logo.label">
+        <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
+        <span class="logo__word">SFERIHOME</span>
+      </a>
+      <p data-i18n="footer.address">Производство: комплекс Горни Обод, Цетине, Черногория</p>
+      <dl><dt data-i18n="footer.contacts">Контакты</dt><dd data-i18n="footer.contactsValue">телефон и e-mail — уточняются</dd></dl>
+      <div class="footer__tools">
+        <div class="lang" role="group" aria-label="Язык" data-i18n-aria="lang.label">
+          <button type="button" data-lang="me" lang="sr-Latn-ME" aria-label="Crnogorski" aria-pressed="false">ME</button>
+          <button type="button" data-lang="ru" lang="ru" aria-label="Русский" aria-pressed="true">RU</button>
+          <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="proto-toggle" id="proto-toggle" aria-pressed="false" data-i18n="proto.hide">Скрыть пометки прототипа</button>
+      </div>
+    </div>
+    <p class="proto-note footer__note"><b data-i18n="proto.label">Прототип</b> <span data-i18n="proto.logo">Логотип временный — настоящий логотип сайта недоступен.</span></p>
+    <p class="footer__rights" data-i18n="footer.rights">© 2026 SFERIHOME</p>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
