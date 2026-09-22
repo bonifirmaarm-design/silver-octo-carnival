@@ -1,0 +1,990 @@
+<title>SFERIHOME Redesign</title>
+<meta name="description" content="Прототип редизайна sferihome.me: эко-дома из соломенных панелей в Черногории.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+/* SFERIHOME redesign — references: Sonder House (backbone), Ridgewood (floating cards),
+   Hotle (stat row), САК-Строй (catalogue), MK Vita (form over image).
+   Hallmark · macrostructure: marquee-hero (leans catalogue) · nav: in-hero bar (Sonder) · theme: studied DNA */
+
+:root {
+  color-scheme: light;
+  --bg: #F3F3F0;
+  --card: #FFFFFF;
+  --ink: #111111;
+  --muted: #5E5E5A;       /* small text: 6.3:1 on white */
+  --ghost: #7E7E7A;       /* second voice in display type: 3.6:1 on the page ground */
+  --line: #DCDCD6;
+  --sky-top: #7F9BBA;
+  --sky-mid: #A9BDD2;
+  --horizon: #D8E0E8;
+  --accent: #5A7DA3;      /* Sonder's small blue mark */
+  --straw: #C49A3A;
+  --scrim: rgba(12, 18, 26, 0.55);
+  --glass: rgba(255, 255, 255, 0.94);
+  --dusk: #2B3346;
+
+  --font: "Onest", "Helvetica Neue", Arial, sans-serif;
+  --fs-micro: 0.6875rem;   /* 11 */
+  --fs-small: 0.8125rem;   /* 13 */
+  --fs-body: 1rem;
+  --fs-lead: 1.125rem;
+  --fs-h3: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  --fs-display: clamp(2.5rem, 1rem + 6.4vw, 7rem);
+  --fs-word: clamp(4rem, 0.5rem + 15vw, 15rem);
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 144px;
+  --gutter: clamp(16px, 3vw, 40px);
+  --r-xl: 28px; --r-lg: 20px; --r-md: 14px; --r-pill: 999px;
+  --shadow: 0 10px 30px -12px rgba(20, 30, 45, 0.35), 0 1px 3px rgba(20, 30, 45, 0.08);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 var(--fs-body)/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--straw); color: var(--ink); }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { list-style: none; padding: 0; }
+a { color: inherit; }
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.page { max-width: 1440px; margin-inline: auto; padding-inline: var(--gutter); padding-block: var(--s-4) 0; }
+
+.caps { text-transform: uppercase; letter-spacing: 0.01em; }
+.micro { font-size: var(--fs-micro); font-weight: 500; line-height: 1.25; text-transform: uppercase; letter-spacing: 0.02em; }
+.display {
+  font-size: var(--fs-display); font-weight: 700; line-height: 0.9;
+  letter-spacing: -0.05em; text-transform: uppercase;
+}
+
+/* ---------- pills ---------- */
+.pill {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  min-height: 44px; padding: 0 var(--s-5);
+  border-radius: var(--r-pill); border: 1px solid transparent;
+  font-size: var(--fs-small); font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em;
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease);
+}
+.pill:active { transform: translateY(1px); }
+.pill--light { background: var(--card); color: var(--ink); }
+.pill--light:hover { background: var(--ink); color: var(--card); }
+.pill--dark { background: var(--ink); color: var(--card); }
+.pill--dark:hover { background: #2A2A2A; }
+.pill--line { border-color: var(--ink); background: transparent; color: var(--ink); }
+.pill--line:hover { background: var(--ink); color: var(--card); }
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pill:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------- hero (Sonder) ---------- */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  height: clamp(600px, 88vh, 860px);
+  border-radius: var(--r-xl);
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 42%, var(--horizon) 70%);
+}
+.hero__word {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  color: #fff; font-weight: 700; font-size: var(--fs-word);
+  line-height: 0.8; letter-spacing: -0.06em; text-transform: uppercase;
+}
+.hero__word span { position: absolute; white-space: nowrap; }
+.hero__word .w1 { left: 3.5%; top: 17%; }
+.hero__word .w2 { right: 3%; top: 33%; }
+.hero__word sup { font-size: 0.14em; font-weight: 500; vertical-align: top; margin-left: 0.1em; letter-spacing: 0; position: relative; top: 0.35em; }
+.hero canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; display: block; }
+.hero__scrim {
+  position: absolute; inset: auto 0 0 0; height: 55%; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--scrim));
+}
+.hero__ui { position: absolute; inset: 0; z-index: 4; display: grid; grid-template-rows: auto 1fr auto; padding: var(--s-5) clamp(20px, 3vw, 44px) clamp(24px, 3vw, 40px); pointer-events: none; }
+.hero__ui > * { pointer-events: auto; }
+
+.nav { display: flex; align-items: center; gap: var(--s-5); }
+.logo { display: inline-flex; align-items: center; gap: var(--s-2); text-decoration: none; font-weight: 800; letter-spacing: -0.02em; min-height: 44px; }
+.logo svg { width: 28px; height: 28px; }
+.nav__links { display: flex; gap: var(--s-5); margin-inline: auto; }
+.nav__links a { font-size: var(--fs-micro); font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.nav__links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.lang { display: inline-flex; gap: 2px; }
+.lang button {
+  min-width: 36px; min-height: 36px; padding: 0 var(--s-2); border: 0; border-radius: var(--r-pill);
+  background: transparent; font-size: var(--fs-micro); font-weight: 600; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.nav__cta { margin-left: var(--s-2); }
+
+.hero__side { justify-self: end; align-self: start; margin-top: var(--s-6); display: flex; gap: var(--s-3); align-items: flex-start; color: #fff; text-align: right; }
+.hero__side svg { width: 26px; height: 26px; flex: none; }
+
+.hero__bottom { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: var(--s-6); color: #fff; }
+.hero__claim { font-size: clamp(1.75rem, 1rem + 2.6vw, 3.25rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.045em; text-transform: uppercase; max-width: 12ch; }
+.hero__meta { margin-top: var(--s-5); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5); }
+.hero__meta p { max-width: 24ch; }
+.cards { display: flex; gap: var(--s-3); align-items: flex-end; }
+.stat {
+  width: 184px; padding: var(--s-4); border-radius: var(--r-lg);
+  background: var(--glass); color: var(--ink); box-shadow: var(--shadow);
+}
+.stat b { display: block; font-size: 2.25rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat p { margin-top: var(--s-2); font-size: var(--fs-micro); line-height: 1.35; color: var(--muted); }
+.stat--tall { padding-top: var(--s-3); }
+.stat__img { height: 76px; border-radius: 10px; margin-bottom: var(--s-3); background: var(--horizon) center/cover; }
+
+.menu-btn { display: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--card); cursor: pointer; place-items: center; }
+.menu-btn svg { width: 20px; height: 20px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; }
+.menu { position: absolute; z-index: 5; top: 76px; left: 16px; right: 16px; padding: var(--s-4) var(--s-5) var(--s-5); background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.menu a { display: flex; align-items: center; min-height: 48px; border-bottom: 1px solid var(--line); font-weight: 600; text-transform: uppercase; text-decoration: none; font-size: var(--fs-small); }
+.menu .pill { margin-top: var(--s-4); width: 100%; justify-content: center; }
+
+/* ---------- section 2: split headline (Sonder "A place that feels right") ---------- */
+.intro { padding-block: var(--s-10) var(--s-9); }
+.intro__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); row-gap: var(--s-3); align-items: end; }
+.intro__l1 { grid-column: 3 / 10; }
+.intro__l2 { grid-column: 1 / 10; }
+.intro__l3 { grid-column: 1 / 4; align-self: start; }
+.intro__img { grid-column: 4 / 9; align-self: start; aspect-ratio: 16 / 9; border-radius: 4px; background: var(--horizon) center/cover; }
+.intro__ghost { grid-column: 9 / 13; align-self: start; color: var(--ghost); font-size: clamp(1.75rem, 0.6rem + 3.2vw, 3.5rem); line-height: 0.95; }
+.intro__text { grid-column: 1 / 5; margin-top: var(--s-6); max-width: 34ch; font-size: var(--fs-small); font-weight: 500; line-height: 1.45; }
+.intro__note { grid-column: 9 / 13; margin-top: var(--s-6); display: flex; gap: var(--s-3); align-items: flex-start; justify-self: end; text-align: right; }
+.intro__note svg { width: 14px; height: 14px; color: var(--accent); flex: none; margin-top: 1px; }
+
+/* ---------- section 3: asymmetric tiles (Sonder) ---------- */
+.tiles { padding-block: var(--s-8) var(--s-10); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); row-gap: var(--s-7); }
+.tile { display: contents; }
+.tile__img { aspect-ratio: 1; border-radius: 4px; background: var(--horizon) center/cover; }
+.tile__label { font-size: clamp(0.8125rem, 0.6rem + 0.5vw, 1rem); font-weight: 600; line-height: 1.1; text-transform: uppercase; letter-spacing: -0.01em; }
+.t1 .tile__label { grid-column: 3 / 5; grid-row: 1; text-align: right; align-self: start; }
+.t1 .tile__img   { grid-column: 5 / 7; grid-row: 1; }
+.t2 .tile__label { grid-column: 8 / 11; grid-row: 1; text-align: right; align-self: start; }
+.t2 .tile__img   { grid-column: 11 / 13; grid-row: 1; }
+.t3 .tile__img   { grid-column: 1 / 3; grid-row: 2; margin-top: var(--s-6); }
+.t3 .tile__label { grid-column: 3 / 5; grid-row: 2; align-self: end; }
+.t4 .tile__img   { grid-column: 6 / 8; grid-row: 2; margin-top: calc(-1 * var(--s-8)); }
+.t4 .tile__label { grid-column: 8 / 11; grid-row: 2; align-self: end; }
+
+/* ---------- section 4: why (Sonder ruled list) ---------- */
+.why { padding-block: var(--s-8) var(--s-10); }
+.why__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); margin-bottom: var(--s-7); }
+.why__head h2 { grid-column: 3 / 12; font-size: var(--fs-display); font-weight: 500; line-height: 0.95; letter-spacing: -0.05em; }
+.why__row {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5);
+  align-items: center; padding-block: var(--s-3); border-bottom: 1px solid var(--line);
+}
+.why__n { grid-column: 1 / 3; font-size: var(--fs-micro); font-weight: 500; font-variant-numeric: tabular-nums; }
+.why__t { grid-column: 3 / 9; font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.045em; line-height: 1.1; }
+.why__d { grid-column: 9 / 13; text-align: right; font-size: var(--fs-small); font-weight: 500; line-height: 1.35; justify-self: end; max-width: 28ch; }
+
+/* ---------- section 5: catalogue (САК-Строй) ---------- */
+.catalog { padding-block: var(--s-8) var(--s-10); }
+.catalog__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-5); align-items: end; margin-bottom: var(--s-7); }
+.catalog__head h2 { font-size: clamp(1.75rem, 1rem + 2.8vw, 3.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.045em; text-transform: uppercase; max-width: 20ch; }
+.catalog__head p { max-width: 32ch; color: var(--muted); font-size: var(--fs-small); }
+.catalog__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-7) var(--s-5); }
+.proj__img { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-lg); background: var(--horizon) center/cover; overflow: hidden; }
+.proj__tag {
+  position: absolute; right: var(--s-3); bottom: var(--s-3);
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-4); border-radius: var(--r-pill);
+  background: rgba(17, 17, 17, 0.72); color: #fff; font-size: var(--fs-small); font-weight: 500;
+}
+.proj__tag i { width: 28px; height: 28px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+.proj__tag svg { width: 12px; height: 12px; stroke: var(--ink); fill: none; stroke-width: 2; }
+.proj__body { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s-4); padding-top: var(--s-4); margin-top: var(--s-3); border-top: 1px solid var(--line); }
+.specs { display: flex; gap: var(--s-5); flex-wrap: wrap; }
+.specs dt { display: flex; align-items: center; gap: 6px; font-size: var(--fs-micro); color: var(--muted); }
+.specs dt::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--straw); }
+.specs dd { font-size: var(--fs-small); font-weight: 600; }
+
+/* ---------- section 6: factory (Hotle stat row) ---------- */
+.factory { padding-block: var(--s-8) var(--s-10); border-top: 1px solid var(--line); }
+.factory__text { font-size: clamp(1.75rem, 1rem + 2.6vw, 3.5rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.045em; max-width: 22ch; }
+.factory__text span { color: var(--ghost); }
+.stats { margin-top: var(--s-8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stats > div { padding: var(--s-2) var(--s-6); border-left: 1px solid var(--line); }
+.stats > div:first-child { border-left: 0; padding-left: 0; }
+.stats b { display: block; font-size: clamp(2.5rem, 1.5rem + 3.4vw, 5rem); font-weight: 500; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stats p { margin-top: var(--s-3); color: var(--muted); font-size: var(--fs-small); }
+
+/* ---------- section 7: form over image (MK Vita) ---------- */
+.request {
+  position: relative; overflow: hidden; border-radius: var(--r-xl);
+  min-height: 640px; padding: clamp(20px, 4vw, 56px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); align-items: center;
+  background: var(--dusk) center/cover;
+}
+.request__lead { color: #fff; align-self: end; }
+.request__lead p { max-width: 26ch; font-size: var(--fs-lead); margin-top: var(--s-4); opacity: 0.92; }
+.request__lead h2 { font-size: clamp(2rem, 1rem + 3.4vw, 4.25rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.05em; text-transform: uppercase; max-width: 11ch; }
+.request__card { background: var(--glass); border-radius: var(--r-lg); padding: clamp(20px, 3vw, 36px); box-shadow: var(--shadow); }
+.form { display: grid; gap: var(--s-4); }
+.field { display: grid; gap: 6px; }
+.field label, .field legend { font-size: var(--fs-small); font-weight: 600; padding: 0; }
+.field .opt { color: var(--muted); font-weight: 400; }
+.input {
+  min-height: 48px; width: 100%; padding: 0 var(--s-4);
+  border: 1px solid #8F8F8A; border-radius: var(--r-md); background: #fff;
+  outline: 2px solid transparent; outline-offset: 1px;
+}
+.input:hover { border-color: var(--ink); }
+.input:focus-visible { outline-color: var(--ink); border-color: var(--ink); }
+.field.bad .input { border-color: #A1271C; box-shadow: inset 0 0 0 1px #A1271C; background: #FBF1EF; }
+.err { min-height: 1lh; visibility: hidden; font-size: var(--fs-small); font-weight: 500; color: #A1271C; }
+.err.on { visibility: visible; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.seg { display: flex; gap: var(--s-2); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { min-width: 48px; min-height: 44px; display: grid; place-items: center; border: 1px solid #8F8F8A; border-radius: var(--r-pill); font-weight: 600; cursor: pointer; background: #fff; }
+.seg input:checked + label { background: var(--ink); color: #fff; border-color: var(--ink); }
+.seg input:focus-visible + label { outline: 2px solid var(--ink); outline-offset: 3px; }
+.form .pill--dark { justify-self: start; min-height: 48px; }
+.consent { font-size: var(--fs-micro); color: var(--muted); line-height: 1.4; }
+.alert { padding: var(--s-3) var(--s-4); border-radius: var(--r-md); background: #FBF1EF; color: #A1271C; font-size: var(--fs-small); font-weight: 500; }
+.done { display: grid; gap: var(--s-3); justify-items: start; }
+.done h3 { font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; text-transform: uppercase; }
+.spin { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+
+/* ---------- footer (statement) ---------- */
+.foot { padding-block: var(--s-8) var(--s-6); }
+.foot__word { font-size: clamp(3rem, 1rem + 13.6vw, 13.5rem); font-weight: 700; letter-spacing: -0.065em; line-height: 0.8; text-transform: uppercase; margin-left: -0.04em; }
+.foot__row { margin-top: var(--s-6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+.foot__row p { font-size: var(--fs-small); }
+.foot__row .micro { color: var(--muted); margin-bottom: 4px; }
+.foot__note { grid-column: 1 / -1; color: var(--muted); font-size: var(--fs-micro); line-height: 1.5; margin-top: var(--s-4); }
+
+.img-loading { background-image: linear-gradient(180deg, var(--sky-mid), var(--horizon)); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .nav__links { display: none; }
+  .nav { justify-content: space-between; }
+  .nav__cta { display: none; }
+  .menu-btn { display: grid; }
+}
+@media (max-width: 900px) {
+  .intro__l1 { grid-column: 1 / -1; padding-left: 12%; }
+  .intro__l2, .intro__l3 { grid-column: 1 / -1; }
+  .intro__img { grid-column: 1 / 11; }
+  .intro__ghost { grid-column: 3 / -1; margin-top: var(--s-4); }
+  .intro__text, .intro__note { grid-column: 1 / -1; justify-self: start; text-align: left; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-3); }
+  .tile { display: grid; gap: var(--s-3); align-content: start; }
+  .tile .tile__img, .tile .tile__label { grid-column: auto !important; grid-row: auto !important; margin-top: 0 !important; text-align: left !important; }
+  .why__head h2 { grid-column: 1 / -1; }
+  .why__n { grid-column: 1 / 2; }
+  .why__t { grid-column: 2 / -1; }
+  .why__d { grid-column: 2 / -1; text-align: left; justify-self: start; margin-top: var(--s-1); }
+  .catalog__grid { grid-template-columns: minmax(0, 1fr); }
+  .catalog__head { grid-template-columns: minmax(0, 1fr); }
+  .request { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); min-height: 0; }
+  .request__lead { align-self: start; }
+  .foot__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .hero { height: 680px; }
+  .hero__word .w1 { top: 11%; }
+  .hero__word .w2 { top: 19.5%; }
+  .hero__side { display: none; }
+  .hero__ui { grid-template-rows: auto 1fr auto; padding-bottom: var(--s-5); }
+  .hero__scrim { height: 72%; background: linear-gradient(180deg, transparent, rgba(12,18,26,.34) 38%, rgba(12,18,26,.72)); }
+  .hero__bottom { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+  .hero__claim { font-size: clamp(1.5rem, 1rem + 4vw, 2.25rem); }
+  .hero__meta { margin-top: var(--s-4); gap: var(--s-3); }
+  .hero__meta p { display: none; }
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { width: auto; padding: var(--s-3); }
+  .stat b { font-size: 1.75rem; }
+  .stat__img { display: none; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stats > div { border-left: 0; border-top: 1px solid var(--line); padding: var(--s-4) 0; }
+  .stats > div:first-child { border-top: 0; }
+  .proj__body { grid-template-columns: minmax(0, 1fr); }
+  .foot__row { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .spin { animation: none; }
+}
+</style>
+
+<div class="page">
+
+  <!-- 1 · Hero -->
+  <header class="hero" id="top">
+    <div class="hero__word" aria-hidden="true"><span class="w1">Sferi</span><span class="w2">Home<sup>©</sup></span></div>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__scrim"></div>
+
+    <div class="hero__ui">
+      <nav class="nav" aria-label="Main" data-i18n-aria="nav.label">
+        <a class="logo" href="#top" aria-label="SFERIHOME">
+          <svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#fff" stroke="#111" stroke-width="2"/><rect x="2" y="11" width="26" height="8" fill="#C49A3A"/><path d="M2.5 11h25M2.5 19h25" stroke="#111" stroke-width="1.5"/></svg>
+        </a>
+        <div class="nav__links">
+          <a href="#tech" data-i18n="nav.tech">Технология</a>
+          <a href="#why" data-i18n="nav.why">Преимущества</a>
+          <a href="#projects" data-i18n="nav.projects">Проекты</a>
+          <a href="#factory" data-i18n="nav.factory">Фабрика</a>
+          <a href="#request" data-i18n="nav.contact">Контакты</a>
+        </div>
+        <div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang">
+          <button type="button" id="lang-me" data-lang="me" aria-pressed="false">ME</button>
+          <button type="button" id="lang-ru" data-lang="ru" aria-pressed="true">RU</button>
+          <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="pill pill--light nav__cta" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
+        <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16"/></svg>
+          <span class="sr" data-i18n="nav.menu">Меню</span>
+        </button>
+      </nav>
+
+      <p class="hero__side micro">
+        <span data-i18n="hero.side">Строим эко-дома из соломенных панелей в Черногории</span>
+        <svg viewBox="0 0 26 26" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.2"><path d="M13 1v24M1 13h24M4.5 4.5l17 17M21.5 4.5l-17 17"/></svg>
+      </p>
+
+      <div class="hero__bottom">
+        <div>
+          <h1 class="hero__claim" data-i18n="hero.claim">Тёплый дом из соломы и дерева</h1>
+          <div class="hero__meta">
+            <a class="pill pill--light" href="#projects"><span data-i18n="hero.cta">Смотреть проекты</span><span class="dot"></span></a>
+            <p class="micro" data-i18n="hero.meta">Панели с фабрики в Цетине. Сборка на участке — 3–5 дней</p>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="stat">
+            <b data-i18n="hero.stat1n">40 кг</b>
+            <p data-i18n="hero.stat1">весит квадратный метр стены — в 15 раз легче кирпичной</p>
+          </div>
+          <div class="stat stat--tall">
+            <div class="stat__img img-loading" data-render="cutaway"></div>
+            <b data-i18n="hero.stat2n">3–5</b>
+            <p data-i18n="hero.stat2">дней на сборку комплекта бригадой из нескольких человек</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu" id="menu" hidden>
+      <a href="#tech" data-i18n="nav.tech">Технология</a>
+      <a href="#why" data-i18n="nav.why">Преимущества</a>
+      <a href="#projects" data-i18n="nav.projects">Проекты</a>
+      <a href="#factory" data-i18n="nav.factory">Фабрика</a>
+      <a href="#request" data-i18n="nav.contact">Контакты</a>
+      <a class="pill pill--dark" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2 · Split headline -->
+    <section class="intro" id="tech" aria-labelledby="intro-h">
+      <h2 class="sr" id="intro-h" data-i18n="intro.full">Тепло внутри стены, не в счёте за отопление</h2>
+      <div class="intro__grid">
+        <p class="display intro__l1" aria-hidden="true" data-i18n="intro.l1">Тепло</p>
+        <p class="display intro__l2" aria-hidden="true" data-i18n="intro.l2">внутри</p>
+        <p class="display intro__l3" aria-hidden="true" data-i18n="intro.l3">стены</p>
+        <div class="intro__img img-loading" role="img" data-render="golden" aria-label="" data-i18n-aria="img.golden"></div>
+        <p class="display intro__ghost" aria-hidden="true" data-i18n="intro.ghost">/ не в счёте</p>
+        <p class="intro__text" data-i18n="intro.text">SFERIHOME делает стеновые панели из прессованной соломы на каркасе из сушёной древесины. Теплопроводность соломы — 0,050–0,065 Вт/(м·К): в 7 раз ниже, чем у кирпича.</p>
+        <p class="intro__note micro"><span data-i18n="intro.note">Панели делают в цехе — на участке только сборка</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0L8.6 5.4 14 7 8.6 8.6 7 14 5.4 8.6 0 7 5.4 5.4Z" fill="currentColor"/></svg></p>
+      </div>
+    </section>
+
+    <!-- 3 · Tiles -->
+    <section class="tiles" aria-label="Технология" data-i18n-aria="tiles.label">
+      <figure class="tile t1"><figcaption class="tile__label" data-i18n="tile.1">Солома внутри стены</figcaption><div class="tile__img img-loading" data-render="cutaway" role="img" aria-label="" data-i18n-aria="img.cutaway"></div></figure>
+      <figure class="tile t2"><figcaption class="tile__label" data-i18n="tile.2">Каркас до 3 этажей, служба до 100 лет</figcaption><div class="tile__img img-loading" data-render="frame" role="img" aria-label="" data-i18n-aria="img.frame"></div></figure>
+      <figure class="tile t3"><div class="tile__img img-loading" data-render="aerial" role="img" aria-label="" data-i18n-aria="img.aerial"></div><figcaption class="tile__label" data-i18n="tile.3">Без строительного мусора на участке</figcaption></figure>
+      <figure class="tile t4"><div class="tile__img img-loading" data-render="piles" role="img" aria-label="" data-i18n-aria="img.piles"></div><figcaption class="tile__label" data-i18n="tile.4">Лёгкий фундамент, винтовые сваи, склон</figcaption></figure>
+    </section>
+
+    <!-- 4 · Why -->
+    <section class="why" id="why" aria-labelledby="why-h">
+      <div class="why__head"><h2 id="why-h" data-i18n="why.title">/ Почему SFERIHOME?</h2></div>
+      <ol>
+        <li class="why__row"><span class="why__n">1</span><h3 class="why__t" data-i18n="why.1t">Лёгкая стена</h3><p class="why__d" data-i18n="why.1d">40 кг на м² без раствора — в 15 раз легче кирпичной</p></li>
+        <li class="why__row"><span class="why__n">2</span><h3 class="why__t" data-i18n="why.2t">Тёплая стена</h3><p class="why__d" data-i18n="why.2d">Теплопроводность соломы в 4 раза ниже дерева и в 7 раз ниже кирпича</p></li>
+        <li class="why__row"><span class="why__n">3</span><h3 class="why__t" data-i18n="why.3t">Быстрая сборка</h3><p class="why__d" data-i18n="why.3d">Комплект собирают за 3–5 дней, как конструктор</p></li>
+        <li class="why__row"><span class="why__n">4</span><h3 class="why__t" data-i18n="why.4t">На сто лет</h3><p class="why__d" data-i18n="why.4d">Каркас из калиброванной сушёной древесины, до 3 этажей</p></li>
+      </ol>
+    </section>
+
+    <!-- 5 · Catalogue -->
+    <section class="catalog" id="projects" aria-labelledby="cat-h">
+      <div class="catalog__head">
+        <h2 id="cat-h" data-i18n="cat.title">Выберите дом — комплект соберём под него</h2>
+        <p data-i18n="cat.lead">Один, два или три этажа. Все проекты — на одном каркасе и одних панелях.</p>
+      </div>
+      <ul class="catalog__grid">
+        <li class="proj">
+          <div class="proj__img img-loading" data-render="p1" role="img" aria-label="" data-i18n-aria="img.p1"><span class="proj__tag"><span data-i18n="cat.p1">Одноэтажный</span><i><svg viewBox="0 0 12 12"><path d="M3 9l6-6M4 3h5v5"/></svg></i></span></div>
+          <div class="proj__body">
+            <dl class="specs"><div><dt data-i18n="cat.floors">Этажей</dt><dd>1</dd></div><div><dt data-i18n="cat.walls">Стены</dt><dd data-i18n="cat.wallsV">солома + глина</dd></div></dl>
+            <a class="pill pill--line" href="#request" data-floors="1" data-i18n="cat.price">Цена по запросу</a>
+          </div>
+        </li>
+        <li class="proj">
+          <div class="proj__img img-loading" data-render="p2" role="img" aria-label="" data-i18n-aria="img.p2"><span class="proj__tag"><span data-i18n="cat.p2">Двухэтажный</span><i><svg viewBox="0 0 12 12"><path d="M3 9l6-6M4 3h5v5"/></svg></i></span></div>
+          <div class="proj__body">
+            <dl class="specs"><div><dt data-i18n="cat.floors">Этажей</dt><dd>2</dd></div><div><dt data-i18n="cat.walls">Стены</dt><dd data-i18n="cat.wallsV">солома + глина</dd></div></dl>
+            <a class="pill pill--line" href="#request" data-floors="2" data-i18n="cat.price">Цена по запросу</a>
+          </div>
+        </li>
+        <li class="proj">
+          <div class="proj__img img-loading" data-render="p3" role="img" aria-label="" data-i18n-aria="img.p3"><span class="proj__tag"><span data-i18n="cat.p3">Трёхэтажный</span><i><svg viewBox="0 0 12 12"><path d="M3 9l6-6M4 3h5v5"/></svg></i></span></div>
+          <div class="proj__body">
+            <dl class="specs"><div><dt data-i18n="cat.floors">Этажей</dt><dd>3</dd></div><div><dt data-i18n="cat.walls">Стены</dt><dd data-i18n="cat.wallsV">солома + глина</dd></div></dl>
+            <a class="pill pill--line" href="#request" data-floors="3" data-i18n="cat.price">Цена по запросу</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 6 · Factory -->
+    <section class="factory" id="factory" aria-labelledby="fac-h">
+      <h2 class="factory__text" id="fac-h"><span data-i18n="fac.a">Панели делают на фабрике в Цетине.</span> <span data-i18n="fac.b">На участок приезжает готовый комплект — с глиняным раствором, электрикой, водой и отоплением.</span></h2>
+      <div class="stats">
+        <div><b data-i18n="fac.s1n">6 267 м²</b><p data-i18n="fac.s1">площадь цехов</p></div>
+        <div><b>2</b><p data-i18n="fac.s2">цеха в комплексе Горни Обод</p></div>
+        <div><b>3–5</b><p data-i18n="fac.s3">дней на сборку комплекта</p></div>
+      </div>
+    </section>
+
+    <!-- 7 · Request -->
+    <section class="request" id="request" aria-labelledby="req-h" data-render-bg="dusk">
+      <div class="request__lead">
+        <h2 id="req-h" data-i18n="req.title">Ещё не выбрали проект?</h2>
+        <p data-i18n="req.lead">Расскажите об участке — пришлём состав комплекта и сроки.</p>
+      </div>
+      <div class="request__card">
+        <form class="form" id="form" novalidate>
+          <div class="field" id="fld-name">
+            <label for="f-name" data-i18n="req.name">Имя</label>
+            <input class="input" id="f-name" name="name" autocomplete="name" aria-describedby="e-name">
+            <p class="err" id="e-name" aria-live="polite"></p>
+          </div>
+          <div class="field" id="fld-contact">
+            <label for="f-contact" data-i18n="req.contact">Телефон или e-mail</label>
+            <input class="input" id="f-contact" name="contact" autocomplete="email" inputmode="email" aria-describedby="e-contact">
+            <p class="err" id="e-contact" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-place"><span data-i18n="req.place">Где участок</span> <span class="opt" data-i18n="req.opt">необязательно</span></label>
+            <input class="input" id="f-place" name="place" autocomplete="address-level2">
+          </div>
+          <fieldset class="field">
+            <legend data-i18n="req.floors">Этажей</legend>
+            <div class="seg">
+              <input type="radio" name="floors" id="fl1" value="1" checked><label for="fl1">1</label>
+              <input type="radio" name="floors" id="fl2" value="2"><label for="fl2">2</label>
+              <input type="radio" name="floors" id="fl3" value="3"><label for="fl3">3</label>
+            </div>
+          </fieldset>
+          <p class="alert" id="f-alert" role="alert" hidden data-i18n="req.errServer">Заявка не отправилась. Проверьте соединение и попробуйте ещё раз — введённое сохранено.</p>
+          <button class="pill pill--dark" type="submit" id="f-submit"><span class="spin" hidden></span><span id="f-label" data-i18n="req.submit">Отправить заявку</span></button>
+          <p class="consent" data-i18n="req.consent">Отправляя заявку, вы соглашаетесь, что мы используем контакт, чтобы ответить.</p>
+        </form>
+        <div class="done" id="done" tabindex="-1" hidden>
+          <h3 data-i18n="req.okT">Заявка отправлена</h3>
+          <p data-i18n="req.okD">Мы свяжемся с вами по контакту, который вы оставили.</p>
+          <button class="pill pill--line" type="button" id="again" data-i18n="req.again">Отправить ещё одну</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot__word" aria-hidden="true">Sferihome</p>
+    <div class="foot__row">
+      <div><p class="micro" data-i18n="foot.prod">Производство</p><p data-i18n="foot.prodV">Горни Обод, Цетине, Черногория</p></div>
+      <div><p class="micro" data-i18n="foot.office">Офис</p><p data-i18n="foot.officeV">Подгорица</p></div>
+      <div><p class="micro" data-i18n="foot.contacts">Контакты</p><p data-i18n="foot.contactsV">Телефон и e-mail — уточняются</p></div>
+      <div><p class="micro" data-i18n="foot.lang">Язык</p><div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang"><button type="button" id="lang2-me" data-lang="me" aria-pressed="false">ME</button><button type="button" id="lang2-ru" data-lang="ru" aria-pressed="true">RU</button><button type="button" id="lang2-en" data-lang="en" aria-pressed="false">EN</button></div></div>
+      <p class="foot__note" data-i18n="foot.note">Прототип редизайна. Изображения — 3D-визуализация, не фотографии реальных объектов. Цифры взяты из открытых публикаций и требуют подтверждения SFERIHOME.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script>
+(() => {
+"use strict";
+
+/* ================= copy ================= */
+const I18N = {
+  ru: {
+    _lang: "ru", _title: "SFERIHOME — эко-дома из соломенных панелей",
+    "nav.label": "Основная навигация", "nav.lang": "Язык", "nav.menu": "Меню",
+    "nav.tech": "Технология", "nav.why": "Преимущества", "nav.projects": "Проекты", "nav.factory": "Фабрика", "nav.contact": "Контакты", "nav.cta": "Рассчитать дом",
+    "hero.side": "Строим эко-дома из соломенных панелей в Черногории",
+    "hero.claim": "Тёплый дом из соломы и дерева",
+    "hero.cta": "Смотреть проекты",
+    "hero.meta": "Панели с фабрики в Цетине. Сборка на участке — 3–5 дней",
+    "hero.stat1": "весит квадратный метр стены — в 15 раз легче кирпичной",
+    "hero.stat1n": "40 кг", "fac.s1n": "6 267 м²",
+    "hero.stat2n": "3–5", "hero.stat2": "дней на сборку комплекта бригадой из нескольких человек",
+    "intro.full": "Тепло остаётся внутри стены, а не уходит в счёт за отопление",
+    "intro.l1": "Тепло", "intro.l2": "внутри", "intro.l3": "стены", "intro.ghost": "/ не в счёте",
+    "intro.text": "SFERIHOME делает стеновые панели из прессованной соломы на каркасе из сушёной древесины. Теплопроводность соломы — 0,050–0,065 Вт/(м·К): в 7 раз ниже, чем у кирпича.",
+    "intro.note": "Панели делают в цехе — на участке только сборка",
+    "tiles.label": "Технология",
+    "tile.1": "Солома внутри стены", "tile.2": "Каркас до 3 этажей, служба до 100 лет", "tile.3": "Без строительного мусора на участке", "tile.4": "Лёгкий фундамент, винтовые сваи, склон",
+    "img.golden": "Двухэтажный дом с глиняной штукатуркой и деревом на склоне, вечерний свет", "img.cutaway": "Разрез панели: глина, прессованная солома, деревянный каркас, глина", "img.frame": "Деревянный каркас дома со смонтированными панелями первого этажа", "img.aerial": "Вид сверху на дома разной этажности на склоне", "img.piles": "Дом на винтовых сваях на склоне", "img.p1": "Одноэтажный дом", "img.p2": "Двухэтажный дом", "img.p3": "Трёхэтажный дом",
+    "why.title": "/ Почему SFERIHOME?",
+    "why.1t": "Лёгкая стена", "why.1d": "40 кг на м² без раствора — в 15 раз легче кирпичной",
+    "why.2t": "Тёплая стена", "why.2d": "Теплопроводность соломы в 4 раза ниже дерева и в 7 раз ниже кирпича",
+    "why.3t": "Быстрая сборка", "why.3d": "Комплект собирают за 3–5 дней, как конструктор",
+    "why.4t": "На сто лет", "why.4d": "Каркас из калиброванной сушёной древесины, до 3 этажей",
+    "cat.title": "Выберите дом — комплект соберём под него", "cat.lead": "Один, два или три этажа. Все проекты — на одном каркасе и одних панелях.",
+    "cat.p1": "Одноэтажный", "cat.p2": "Двухэтажный", "cat.p3": "Трёхэтажный",
+    "cat.floors": "Этажей", "cat.walls": "Стены", "cat.wallsV": "солома + глина", "cat.price": "Цена по запросу",
+    "fac.a": "Панели делают на фабрике в Цетине.", "fac.b": "На участок приезжает готовый комплект — с глиняным раствором, электрикой, водой и отоплением.",
+    "fac.s1": "площадь цехов", "fac.s2": "цеха в комплексе Горни Обод", "fac.s3": "дней на сборку комплекта",
+    "req.title": "Ещё не выбрали проект?", "req.lead": "Расскажите об участке — пришлём состав комплекта и сроки.",
+    "req.name": "Имя", "req.contact": "Телефон или e-mail", "req.place": "Где участок", "req.opt": "необязательно", "req.floors": "Этажей",
+    "req.submit": "Отправить заявку", "req.sending": "Отправляем…",
+    "req.consent": "Отправляя заявку, вы соглашаетесь, что мы используем контакт, чтобы ответить.",
+    "req.errName": "Напишите имя, чтобы мы знали, к кому обращаться.", "req.errContact": "Укажите телефон или e-mail — без него мы не сможем ответить.", "req.errFormat": "Не похоже ни на телефон, ни на e-mail.",
+    "req.errServer": "Заявка не отправилась. Проверьте соединение и попробуйте ещё раз — введённое сохранено.",
+    "req.okT": "Заявка отправлена", "req.okD": "Мы свяжемся с вами по контакту, который вы оставили.", "req.again": "Отправить ещё одну",
+    "foot.prod": "Производство", "foot.prodV": "Горни Обод, Цетине, Черногория", "foot.office": "Офис", "foot.officeV": "Подгорица", "foot.contacts": "Контакты", "foot.contactsV": "Телефон и e-mail — уточняются", "foot.lang": "Язык",
+    "foot.note": "Прототип редизайна. Изображения — 3D-визуализация, не фотографии реальных объектов. Цифры взяты из открытых публикаций и требуют подтверждения SFERIHOME.",
+  },
+  me: {
+    _lang: "sr-Latn-ME", _title: "SFERIHOME — eko kuće od slamnatih panela",
+    "nav.label": "Glavna navigacija", "nav.lang": "Jezik", "nav.menu": "Meni",
+    "nav.tech": "Tehnologija", "nav.why": "Prednosti", "nav.projects": "Projekti", "nav.factory": "Fabrika", "nav.contact": "Kontakt", "nav.cta": "Izračunajte kuću",
+    "hero.side": "Gradimo eko kuće od slamnatih panela u Crnoj Gori",
+    "hero.claim": "Topla kuća od slame i drveta",
+    "hero.cta": "Pogledajte projekte",
+    "hero.meta": "Paneli iz fabrike na Cetinju. Montaža na placu — 3–5 dana",
+    "hero.stat1": "teži kvadratni metar zida — 15 puta lakši od zida od cigle",
+    "hero.stat1n": "40 kg", "fac.s1n": "6 267 m²",
+    "hero.stat2n": "3–5", "hero.stat2": "dana za montažu kompleta, ekipa od nekoliko ljudi",
+    "intro.full": "Toplota ostaje u zidu, a ne odlazi na račun za grijanje",
+    "intro.l1": "Toplota", "intro.l2": "ostaje", "intro.l3": "u zidu", "intro.ghost": "/ ne na računu",
+    "intro.text": "SFERIHOME pravi zidne panele od presovane slame na okviru od sušenog drveta. Toplotna provodljivost slame je 0,050–0,065 W/(m·K): sedam puta niža nego kod cigle.",
+    "intro.note": "Paneli se prave u fabrici — na placu je samo montaža",
+    "tiles.label": "Tehnologija",
+    "tile.1": "Slama u zidu", "tile.2": "Okvir do 3 sprata, vijek do 100 godina", "tile.3": "Bez građevinskog otpada na placu", "tile.4": "Lagan temelj, šrafovi, padina",
+    "img.golden": "Kuća na dva sprata sa glinenim malterom i drvetom na padini, večernje svjetlo", "img.cutaway": "Presjek panela: glina, presovana slama, drveni okvir, glina", "img.frame": "Drveni okvir kuće sa postavljenim panelima prizemlja", "img.aerial": "Pogled odozgo na kuće različite spratnosti na padini", "img.piles": "Kuća na šrafovima na padini", "img.p1": "Prizemna kuća", "img.p2": "Kuća na dva sprata", "img.p3": "Kuća na tri sprata",
+    "why.title": "/ Zašto SFERIHOME?",
+    "why.1t": "Lagan zid", "why.1d": "40 kg po m² bez maltera — 15 puta lakši od zida od cigle",
+    "why.2t": "Topao zid", "why.2d": "Toplotna provodljivost slame je 4 puta niža od drveta i 7 puta niža od cigle",
+    "why.3t": "Brza montaža", "why.3d": "Komplet se sklapa za 3–5 dana, kao konstruktor",
+    "why.4t": "Na sto godina", "why.4d": "Okvir od kalibrisanog sušenog drveta, do 3 sprata",
+    "cat.title": "Izaberite kuću — komplet pravimo za nju", "cat.lead": "Jedan, dva ili tri sprata. Svi projekti su na istom okviru i istim panelima.",
+    "cat.p1": "Prizemna", "cat.p2": "Dva sprata", "cat.p3": "Tri sprata",
+    "cat.floors": "Spratova", "cat.walls": "Zidovi", "cat.wallsV": "slama + glina", "cat.price": "Cijena na upit",
+    "fac.a": "Paneli se prave u fabrici na Cetinju.", "fac.b": "Na plac stiže gotov komplet — sa glinenim malterom, strujom, vodom i grijanjem.",
+    "fac.s1": "proizvodnog prostora", "fac.s2": "hale u kompleksu Gornji Obod", "fac.s3": "dana za montažu kompleta",
+    "req.title": "Još niste izabrali projekat?", "req.lead": "Opišite plac — poslaćemo sastav kompleta i rokove.",
+    "req.name": "Ime", "req.contact": "Telefon ili e-mail", "req.place": "Gdje je plac", "req.opt": "neobavezno", "req.floors": "Spratova",
+    "req.submit": "Pošaljite zahtjev", "req.sending": "Šaljemo…",
+    "req.consent": "Slanjem zahtjeva pristajete da koristimo kontakt da bismo vam odgovorili.",
+    "req.errName": "Upišite ime da znamo kome da se obratimo.", "req.errContact": "Upišite telefon ili e-mail — bez toga ne možemo da odgovorimo.", "req.errFormat": "Ovo ne liči na telefon ni na e-mail.",
+    "req.errServer": "Zahtjev nije poslat. Provjerite vezu i pokušajte ponovo — upisani podaci su sačuvani.",
+    "req.okT": "Zahtjev je poslat", "req.okD": "Javićemo se na kontakt koji ste ostavili.", "req.again": "Pošaljite još jedan",
+    "foot.prod": "Proizvodnja", "foot.prodV": "Gornji Obod, Cetinje, Crna Gora", "foot.office": "Kancelarija", "foot.officeV": "Podgorica", "foot.contacts": "Kontakt", "foot.contactsV": "Telefon i e-mail — potvrđuje se", "foot.lang": "Jezik",
+    "foot.note": "Prototip redizajna. Slike su 3D vizuelizacija, ne fotografije stvarnih objekata. Brojke su iz javnih objava i treba da ih potvrdi SFERIHOME.",
+  },
+  en: {
+    _lang: "en", _title: "SFERIHOME — straw-panel eco houses",
+    "nav.label": "Main navigation", "nav.lang": "Language", "nav.menu": "Menu",
+    "nav.tech": "Technology", "nav.why": "Why us", "nav.projects": "Projects", "nav.factory": "Factory", "nav.contact": "Contact", "nav.cta": "Price a house",
+    "hero.side": "We build straw-panel eco houses in Montenegro",
+    "hero.claim": "A warm house of straw and timber",
+    "hero.cta": "See the projects",
+    "hero.meta": "Panels from our factory in Cetinje. On-site assembly — 3–5 days",
+    "hero.stat1": "is the weight of a square metre of wall — 15 times lighter than brick",
+    "hero.stat1n": "40 kg", "fac.s1n": "6,267 m²",
+    "hero.stat2n": "3–5", "hero.stat2": "days to assemble a kit with a crew of a few people",
+    "intro.full": "Warmth stays in the wall instead of going into the heating bill",
+    "intro.l1": "Warmth", "intro.l2": "in the", "intro.l3": "wall", "intro.ghost": "/ not in the bill",
+    "intro.text": "SFERIHOME makes wall panels of pressed straw in a kiln-dried timber frame. Straw's thermal conductivity is 0.050–0.065 W/(m·K): seven times lower than brick.",
+    "intro.note": "Panels are made in the factory — only assembly happens on site",
+    "tiles.label": "Technology",
+    "tile.1": "Straw inside the wall", "tile.2": "Frame up to 3 storeys, rated for 100 years", "tile.3": "No construction waste on the plot", "tile.4": "Light foundation, screw piles, slopes",
+    "img.golden": "Two-storey house in clay plaster and timber on a slope, evening light", "img.cutaway": "Panel section: clay, pressed straw, timber frame, clay", "img.frame": "Timber house frame with ground-floor panels installed", "img.aerial": "Aerial view of houses of different heights on a slope", "img.piles": "House on screw piles on a slope", "img.p1": "Single-storey house", "img.p2": "Two-storey house", "img.p3": "Three-storey house",
+    "why.title": "/ Why SFERIHOME?",
+    "why.1t": "A light wall", "why.1d": "40 kg per m² without mortar — 15 times lighter than brick",
+    "why.2t": "A warm wall", "why.2d": "Straw conducts heat 4 times less than timber and 7 times less than brick",
+    "why.3t": "Fast assembly", "why.3d": "A kit goes up in 3–5 days, like a set of parts",
+    "why.4t": "Built for a century", "why.4d": "Frame of calibrated kiln-dried timber, up to 3 storeys",
+    "cat.title": "Choose a house — we build the kit for it", "cat.lead": "One, two or three storeys. Every project uses the same frame and the same panels.",
+    "cat.p1": "Single-storey", "cat.p2": "Two-storey", "cat.p3": "Three-storey",
+    "cat.floors": "Storeys", "cat.walls": "Walls", "cat.wallsV": "straw + clay", "cat.price": "Price on request",
+    "fac.a": "Panels are made in our factory in Cetinje.", "fac.b": "A complete kit arrives on your plot — with clay mortar, electrics, water and heating.",
+    "fac.s1": "production floor", "fac.s2": "halls at the Gornji Obod complex", "fac.s3": "days to assemble a kit",
+    "req.title": "Not sure which house yet?", "req.lead": "Tell us about the plot — we will send what the kit contains and how long it takes.",
+    "req.name": "Name", "req.contact": "Phone or email", "req.place": "Where is the plot", "req.opt": "optional", "req.floors": "Storeys",
+    "req.submit": "Send request", "req.sending": "Sending…",
+    "req.consent": "By sending this you agree that we use your contact details to reply.",
+    "req.errName": "Enter your name so we know who to reply to.", "req.errContact": "Enter a phone number or email — we cannot reply without one.", "req.errFormat": "This doesn't look like a phone number or an email.",
+    "req.errServer": "The request didn't go through. Check your connection and try again — what you entered is kept.",
+    "req.okT": "Request sent", "req.okD": "We will get back to you at the contact you left.", "req.again": "Send another",
+    "foot.prod": "Production", "foot.prodV": "Gornji Obod, Cetinje, Montenegro", "foot.office": "Office", "foot.officeV": "Podgorica", "foot.contacts": "Contact", "foot.contactsV": "Phone and email — to be confirmed", "foot.lang": "Language",
+    "foot.note": "Redesign prototype. Images are 3D renders, not photographs of real buildings. Figures come from public press coverage and need confirming by SFERIHOME.",
+  },
+};
+
+let lang = "ru";
+try { const s = localStorage.getItem("sferi-lang"); if (I18N[s]) lang = s; } catch (_) {}
+const q = new URLSearchParams(location.search).get("lang"); if (I18N[q]) lang = q;
+
+const NB = " ";
+const SHORT = {
+  ru: /(^|[\s ])(в|во|на|и|с|со|к|о|у|из|за|до|от|по|не|а|но|для|без)\s/gi,
+  me: /(^|[\s ])(i|u|na|za|od|do|sa|s|k|o|a|po|iz|bez)\s/gi,
+  en: /(^|[\s ])(a|an|the|of|in|on|to|by|for|and|or)\s/gi,
+};
+const typeset = (s) => {
+  let o = String(s).replace(/ —/g, NB + "—").replace(/(\d)–(\d)/g, "$1–⁠$2").replace(/(\d) (\d{3})\b/g, "$1" + NB + "$2").replace(/(\d) (?=[^\s\d—–])/g, "$1" + NB).replace(/e-mail/g, "e-⁠mail");
+  const r = SHORT[lang]; if (r) o = o.replace(r, "$1$2" + NB).replace(r, "$1$2" + NB);
+  return o;
+};
+const t = (k) => I18N[lang][k] ?? I18N.ru[k] ?? "";
+
+function applyLang(next) {
+  lang = next;
+  document.documentElement.lang = I18N[lang]._lang;
+  document.title = I18N[lang]._title;
+  document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = typeset(t(el.dataset.i18n)); });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
+  document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  Object.entries(errs).forEach(([f, k]) => { document.getElementById("e-" + f).textContent = typeset(t(k)); });
+  try { localStorage.setItem("sferi-lang", lang); } catch (_) {}
+}
+document.querySelectorAll("[data-lang]").forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+/* ================= menu ================= */
+const menuBtn = document.getElementById("menu-btn"), menu = document.getElementById("menu");
+const setMenu = (open) => { menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+menuBtn.addEventListener("click", () => setMenu(menu.hidden));
+menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
+
+/* ================= form ================= */
+const form = document.getElementById("form"), errs = {};
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/, PHONE = /^\+?[\d\s()\-]{7,}$/;
+function check() {
+  const out = {}, name = form.name.value.trim(), c = form.contact.value.trim();
+  if (!name) out.name = "req.errName";
+  if (!c) out.contact = "req.errContact"; else if (!EMAIL.test(c) && !PHONE.test(c)) out.contact = "req.errFormat";
+  return out;
+}
+function show(found) {
+  for (const f of ["name", "contact"]) {
+    const box = document.getElementById("fld-" + f), e = document.getElementById("e-" + f), inp = document.getElementById("f-" + f);
+    if (found[f]) { errs[f] = found[f]; box.classList.add("bad"); inp.setAttribute("aria-invalid", "true"); e.textContent = typeset(t(found[f])); e.classList.add("on"); }
+    else { delete errs[f]; box.classList.remove("bad"); inp.removeAttribute("aria-invalid"); e.textContent = ""; e.classList.remove("on"); }
+  }
+}
+form.addEventListener("input", () => { if (Object.keys(errs).length) { const f = check(); const keep = {}; for (const k in errs) if (f[k]) keep[k] = f[k]; show(keep); } });
+document.querySelectorAll("[data-floors]").forEach((a) => a.addEventListener("click", () => { document.getElementById("fl" + a.dataset.floors).checked = true; }));
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const alert = document.getElementById("f-alert"); alert.hidden = true;
+  const f = check(); show(f);
+  const first = Object.keys(f)[0]; if (first) { document.getElementById("f-" + first).focus(); return; }
+  const btn = document.getElementById("f-submit"), lab = document.getElementById("f-label");
+  btn.disabled = true; btn.setAttribute("aria-busy", "true"); btn.querySelector(".spin").hidden = false; lab.dataset.i18n = "req.sending"; lab.textContent = t("req.sending");
+  const fail = new URLSearchParams(location.search).get("demo") === "error";
+  setTimeout(() => {
+    btn.disabled = false; btn.removeAttribute("aria-busy"); btn.querySelector(".spin").hidden = true; lab.dataset.i18n = "req.submit"; lab.textContent = t("req.submit");
+    if (fail) { alert.hidden = false; return; }
+    form.hidden = true; const d = document.getElementById("done"); d.hidden = false; d.focus();
+  }, 1200);
+});
+document.getElementById("again").addEventListener("click", () => { form.reset(); document.getElementById("done").hidden = true; form.hidden = false; document.getElementById("f-name").focus(); });
+
+applyLang(lang);
+
+/* ================= 3D: every image on the page is rendered from this scene ================= */
+if (!window.THREE) return;
+const T = window.THREE;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* --- material textures, drawn once --- */
+function canvasTex(size, draw, rep = [1, 1]) {
+  const c = document.createElement("canvas"); c.width = c.height = size; draw(c.getContext("2d"), size);
+  const tx = new T.CanvasTexture(c); tx.encoding = T.sRGBEncoding; tx.wrapS = tx.wrapT = T.RepeatWrapping; tx.repeat.set(rep[0], rep[1]); tx.anisotropy = 4; return tx;
+}
+const R0 = rng(7);
+const texClay = canvasTex(256, (g, s) => { g.fillStyle = "#ECE8E0"; g.fillRect(0, 0, s, s); for (let i = 0; i < 2600; i++) { g.fillStyle = `rgba(${150 + R0() * 60},${140 + R0() * 55},${120 + R0() * 50},${0.06 + R0() * 0.1})`; g.fillRect(R0() * s, R0() * s, 1 + R0() * 2, 1 + R0() * 2); } });
+const texStraw = canvasTex(512, (g, s) => { g.fillStyle = "#C9A04A"; g.fillRect(0, 0, s, s); const cols = ["#E6C46F", "#B88C2E", "#D9B458", "#9E7824", "#F1D68E", "#C49A3A"]; for (let i = 0; i < 4200; i++) { const x = R0() * s, y = R0() * s, a = (R0() - 0.5) * 0.9, l = 14 + R0() * 46; g.strokeStyle = cols[(R0() * cols.length) | 0]; g.lineWidth = 0.8 + R0() * 1.8; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); } });
+const texWood = canvasTex(512, (g, s) => { g.fillStyle = "#9A6D45"; g.fillRect(0, 0, s, s); for (let x = 0; x < s; x += 32) { g.fillStyle = `rgba(0,0,0,${0.05 + R0() * 0.08})`; g.fillRect(x, 0, 32, s); g.fillStyle = "rgba(40,24,10,0.55)"; g.fillRect(x, 0, 2, s); } for (let i = 0; i < 500; i++) { g.strokeStyle = `rgba(60,36,16,${0.08 + R0() * 0.12})`; g.lineWidth = 1; const x = R0() * s; g.beginPath(); g.moveTo(x, 0); g.bezierCurveTo(x + 3, s * 0.3, x - 3, s * 0.6, x + 2, s); g.stroke(); } });
+
+const M = {
+  plaster: new T.MeshStandardMaterial({ color: "#F4F1EB", map: texClay, roughness: 0.95 }),
+  slab: new T.MeshStandardMaterial({ color: "#F7F5F0", roughness: 0.9 }),
+  wood: new T.MeshStandardMaterial({ color: "#FFFFFF", map: texWood, roughness: 0.8 }),
+  deck: new T.MeshStandardMaterial({ color: "#B08A63", roughness: 0.85 }),
+  frame: new T.MeshStandardMaterial({ color: "#26272A", roughness: 0.5, metalness: 0.3 }),
+  glass: new T.MeshStandardMaterial({ color: "#1F2D38", roughness: 0.06, metalness: 0.75, emissive: "#3C5670", emissiveIntensity: 0.35 }),
+  glassWarm: new T.MeshStandardMaterial({ color: "#2A2016", roughness: 0.2, metalness: 0.1, emissive: "#FFB36A", emissiveIntensity: 1.6 }),
+  straw: new T.MeshStandardMaterial({ color: "#FFFFFF", map: texStraw, roughness: 1 }),
+  timber: new T.MeshStandardMaterial({ color: "#B08E5F", roughness: 0.85 }),
+  rock: new T.MeshStandardMaterial({ color: "#C7C1B4", roughness: 1, flatShading: true }),
+  cypress: new T.MeshStandardMaterial({ color: "#2E3A24", roughness: 1 }),
+  olive: new T.MeshStandardMaterial({ color: "#6E7A55", roughness: 1 }),
+  trunk: new T.MeshStandardMaterial({ color: "#5A4632", roughness: 1 }),
+  pile: new T.MeshStandardMaterial({ color: "#5B5E62", roughness: 0.4, metalness: 0.7 }),
+  path: new T.MeshStandardMaterial({ color: "#D9D3C6", roughness: 1 }),
+  studio: new T.ShadowMaterial({ opacity: 0.22 }),
+};
+
+function box(g, w, h, d, x, y, z, m, shadow = true) {
+  const mesh = new T.Mesh(new T.BoxGeometry(w, h, d), m); mesh.position.set(x, y, z);
+  mesh.castShadow = shadow; mesh.receiveShadow = true; g.add(mesh); return mesh;
+}
+function woodPanel(g, w, h, x, y, z, rotY = 0) {
+  const m = M.wood.clone(); m.map = texWood.clone(); m.map.needsUpdate = true; m.map.repeat.set(w / 2.4, h / 3);
+  const p = box(g, w, h, 0.12, x, y, z, m); p.rotation.y = rotY; return p;
+}
+function windowPane(g, w, h, x, y, z, warm, rotY = 0) {
+  const grp = new T.Group(); grp.position.set(x, y, z); grp.rotation.y = rotY;
+  box(grp, w, h, 0.06, 0, 0, 0, warm ? M.glassWarm : M.glass, false);
+  const f = 0.07;
+  box(grp, w + f * 2, f, 0.12, 0, h / 2, 0, M.frame, false); box(grp, w + f * 2, f, 0.12, 0, -h / 2, 0, M.frame, false);
+  box(grp, f, h, 0.12, -w / 2, 0, 0, M.frame, false); box(grp, f, h, 0.12, w / 2, 0, 0, M.frame, false);
+  const n = Math.max(1, Math.round(w / 1.6)); for (let i = 1; i < n; i++) box(grp, 0.05, h, 0.1, -w / 2 + (w / n) * i, 0, 0, M.frame, false);
+  g.add(grp); return grp;
+}
+
+/* --- the house: stacked, offset volumes (Sonder's language), 1–3 storeys --- */
+function house({ floors = 2, warm = false } = {}) {
+  const g = new T.Group();
+  const H = 3.1;
+  // ground floor
+  const gw = floors === 1 ? 15 : 13, gd = 8.5;
+  box(g, gw, H, gd, 0, H / 2, 0, M.plaster);
+  box(g, gw + 0.5, 0.32, gd + 0.5, 0, H + 0.16, 0, M.slab);
+  woodPanel(g, 3.6, H, -gw / 2 + 1.9, H / 2, gd / 2 + 0.07);
+  windowPane(g, gw * 0.46, 2.45, gw * 0.12, 1.35, gd / 2 + 0.04, warm);
+  windowPane(g, 2.2, 1.4, gw / 2 + 0.04, 1.9, -1.5, warm, Math.PI / 2);
+  box(g, 1.1, 2.3, 0.1, -gw / 2 + 4.6, 1.15, gd / 2 + 0.05, M.frame);
+  // terrace, low wall, path
+  box(g, gw + 5, 0.22, 4.2, 1.5, 0.11, gd / 2 + 2.1, M.deck);
+  box(g, 7, 0.7, 0.3, gw / 2 + 1.5, 0.35, gd / 2 + 4.3, M.plaster);
+  box(g, 1.6, 0.05, 14, -gw / 2 + 4.6, 0.03, gd / 2 + 11, M.path, false);
+  if (floors >= 2) {
+    const uw = 10.5, ud = 7.4, ux = 2.6, uz = 0.9, y0 = H + 0.32;
+    box(g, uw, H, ud, ux, y0 + H / 2, uz, M.plaster);
+    box(g, uw + 0.5, 0.34, ud + 0.5, ux, y0 + H + 0.17, uz, M.slab);
+    windowPane(g, uw * 0.66, 1.5, ux + 0.8, y0 + 1.7, uz + ud / 2 + 0.04, warm);
+    woodPanel(g, 2.4, H, ux - uw / 2 + 1.25, y0 + H / 2, uz + ud / 2 + 0.07);
+    windowPane(g, 1.4, 2.2, ux + uw / 2 + 0.04, y0 + 1.4, uz + 1.2, warm, Math.PI / 2);
+    if (floors >= 3) {
+      const tw = 7, td = 6.2, tx = -0.6, tz = 0.4, y1 = y0 + H + 0.34;
+      box(g, tw, H, td, tx, y1 + H / 2, tz, M.plaster);
+      box(g, tw + 0.5, 0.34, td + 0.5, tx, y1 + H + 0.17, tz, M.slab);
+      woodPanel(g, tw, H, tx, y1 + H / 2, tz + td / 2 + 0.07);
+      windowPane(g, tw * 0.55, 1.6, tx + 0.6, y1 + 1.65, tz + td / 2 + 0.16, warm);
+    }
+  }
+  return g;
+}
+
+/* --- a panel pulled apart into its layers --- */
+function cutaway() {
+  const g = new T.Group(), W = 2.4, Hh = 2.6, gap = 0.55;
+  box(g, W, Hh, 0.05, 0, Hh / 2, 0, M.plaster);                               // inner clay
+  const fz = gap, s = 0.12, fd = 0.4;
+  [[-W / 2 + s / 2], [0], [W / 2 - s / 2]].forEach(([x]) => box(g, s, Hh, fd, x, Hh / 2, fz + fd / 2, M.timber));
+  box(g, W, s, fd, 0, s / 2, fz + fd / 2, M.timber); box(g, W, s, fd, 0, Hh - s / 2, fz + fd / 2, M.timber);
+  const sm = M.straw.clone(); sm.map = texStraw.clone(); sm.map.needsUpdate = true; sm.map.repeat.set(1.2, 1.4);
+  const bw = (W - 3 * s) / 2, sz = fz + gap + fd / 2;
+  box(g, bw, Hh - 2 * s, fd * 0.9, -W / 4 - s / 4, Hh / 2, sz, sm); box(g, bw, Hh - 2 * s, fd * 0.9, W / 4 + s / 4, Hh / 2, sz, sm);
+  box(g, W, Hh, 0.05, 0, Hh / 2, sz + gap + fd / 2, M.plaster);             // outer clay
+  const floor = new T.Mesh(new T.PlaneGeometry(40, 40), M.studio); floor.rotation.x = -Math.PI / 2; floor.position.y = -0.01; floor.receiveShadow = true; g.add(floor);
+  g.rotation.y = -0.3;
+  return g;
+}
+
+/* --- a timber frame, ground floor partly closed with panels --- */
+function frame() {
+  const g = new T.Group(), W = 12, D = 8, H = 3, s = 0.2, step = 1.2;
+  const studs = [];
+  for (let f = 0; f < 2; f++) {
+    const y = f * (H + 0.2);
+    for (let x = -W / 2; x <= W / 2 + 0.01; x += step) { studs.push([x, y, -D / 2]); studs.push([x, y, D / 2]); }
+    for (let z = -D / 2 + step; z < D / 2; z += step) { studs.push([-W / 2, y, z]); studs.push([W / 2, y, z]); }
+    box(g, W + s, s, s, 0, y + s / 2, -D / 2, M.timber); box(g, W + s, s, s, 0, y + s / 2, D / 2, M.timber);
+    box(g, W + s, s, s, 0, y + H, -D / 2, M.timber); box(g, W + s, s, s, 0, y + H, D / 2, M.timber);
+    box(g, s, s, D, -W / 2, y + H, 0, M.timber); box(g, s, s, D, W / 2, y + H, 0, M.timber);
+  }
+  const im = new T.InstancedMesh(new T.BoxGeometry(s, H, s), M.timber, studs.length); const m4 = new T.Matrix4();
+  studs.forEach(([x, y, z], i) => { m4.makeTranslation(x, y + H / 2, z); im.setMatrixAt(i, m4); }); im.castShadow = im.receiveShadow = true; g.add(im);
+  box(g, W + 0.4, 0.2, D + 0.4, 0, H + 0.1, 0, M.deck);
+  // installed panels: back wall and left half of the front wall
+  box(g, W, H, 0.4, 0, H / 2, -D / 2, M.plaster);
+  box(g, 0.4, H, D, -W / 2, H / 2, 0, M.plaster);
+  const sm = M.straw.clone(); sm.map = texStraw.clone(); sm.map.needsUpdate = true; sm.map.repeat.set(2, 1);
+  box(g, 4.8, H, 0.4, -W / 2 + 2.4, H / 2, D / 2, sm);
+  box(g, 2.4, H, 0.42, -W / 2 + 6, H / 2, D / 2 + 0.6, sm).rotation.y = 0.35;   // a panel being set
+  return g;
+}
+
+/* --- landscape: a terrace on a gentle hill, karst rocks, cypresses, olives, distant ridges --- */
+function heightAt(x, z, slope) {
+  const d = Math.hypot(x, z);
+  let h = 3.2 * Math.sin(x * 0.021 + 1.3) * Math.cos(z * 0.018) + 1.6 * Math.sin(x * 0.055 + z * 0.04) + 0.7 * Math.sin(x * 0.13) * Math.sin(z * 0.11);
+  h += Math.max(0, -z - 40) * 0.035;                                         // the land lifts gently behind the house
+  h *= T.MathUtils.smoothstep(d, 18, 60);                                    // flat terrace around the house
+  h += slope * -z * (1 - T.MathUtils.smoothstep(d, 30, 80));                 // local slope (piles scene)
+  const ridge = T.MathUtils.smoothstep(-z, 300, 520);
+  h += ridge * (26 + 14 * Math.sin(x * 0.009 + 0.7) + 9 * Math.sin(x * 0.023 + 2.1) + 4 * Math.sin(x * 0.061));
+  return h;
+}
+function terrain({ slope = 0, seed = 3 } = {}) {
+  const r = rng(seed), size = 1400, seg = 240;
+  const geo = new T.PlaneGeometry(size, size, seg, seg); geo.rotateX(-Math.PI / 2);
+  const pos = geo.attributes.position, col = [], c = new T.Color();
+  const grassA = new T.Color("#6F7A3E"), grassB = new T.Color("#9A9658"), dry = new T.Color("#B7A874"), far = new T.Color("#7D8FA6");
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), z = pos.getZ(i);
+    pos.setY(i, heightAt(x, z, slope));
+    const n = 0.5 + 0.5 * Math.sin(x * 0.31 + z * 0.17) * Math.cos(x * 0.11 - z * 0.23);
+    c.copy(grassA).lerp(grassB, n); if (n > 0.85) c.lerp(dry, 0.5);
+    c.lerp(far, T.MathUtils.smoothstep(-z, 260, 480));
+    col.push(c.r, c.g, c.b);
+  }
+  geo.setAttribute("color", new T.Float32BufferAttribute(col, 3)); geo.computeVertexNormals();
+  const mesh = new T.Mesh(geo, new T.MeshStandardMaterial({ vertexColors: true, roughness: 1 })); mesh.receiveShadow = true;
+  const g = new T.Group(); g.add(mesh);
+  const hAt = (x, z) => heightAt(x, z, slope);
+  const cypGeo = new T.LatheGeometry([[0, 0], [0.55, 0.4], [0.95, 1.6], [1, 3], [0.85, 4.6], [0.55, 6.2], [0.22, 7.5], [0, 8.1]].map(([x, y]) => new T.Vector2(x, y)), 14);
+  const cyp = (x, y, z, r) => { const m = new T.Mesh(cypGeo, M.cypress); const k = 0.8 + r() * 0.6; m.scale.set(k, k * (0.9 + r() * 0.5), k); m.position.set(x, y, z); m.castShadow = true; g.add(m); };
+  const oliGeo = new T.IcosahedronGeometry(1, 2);
+  const oli = (x, y, z, r) => { const t = new T.Group(); const tr = new T.Mesh(new T.CylinderGeometry(0.14, 0.22, 1.5, 6), M.trunk); tr.position.y = 0.75; t.add(tr); for (let j = 0; j < 3; j++) { const cr = new T.Mesh(oliGeo, M.olive); const k = 0.9 + r() * 0.7; cr.scale.set(k * 1.2, k * 0.75, k * 1.1); cr.position.set((r() - 0.5) * 1.6, 1.9 + r() * 0.6, (r() - 0.5) * 1.4); cr.castShadow = true; t.add(cr); } t.position.set(x, y, z); g.add(t); };
+  const rock = (x, y, z, r) => { const m = new T.Mesh(new T.DodecahedronGeometry(0.4 + r() * 1.1, 1), M.rock); m.scale.y = 0.45; m.position.set(x, y + 0.1, z); m.rotation.y = r() * 3; m.castShadow = m.receiveShadow = true; g.add(m); };
+  const place = (n, fn, rmin, rmax) => { for (let i = 0; i < n; i++) { const a = r() * Math.PI * 2, d = rmin + r() * (rmax - rmin); const x = Math.cos(a) * d, z = Math.sin(a) * d; if (z > 4 && Math.abs(x) < 30) continue; fn(x, hAt(x, z), z, r); } };
+  [[-13, -7], [-16, -3], [12, -9], [15, -10], [-20, -10], [18, -4], [-9, -11]].forEach(([x, z]) => cyp(x, hAt(x, z), z, r));
+  place(34, cyp, 28, 160); place(46, oli, 22, 140); place(70, rock, 12, 110);
+  return g;
+}
+
+/* --- light moods --- */
+function gradientBg(stops) {
+  const c = document.createElement("canvas"); c.width = 4; c.height = 256; const g = c.getContext("2d");
+  const lg = g.createLinearGradient(0, 0, 0, 256); stops.forEach(([o, col]) => lg.addColorStop(o, col)); g.fillStyle = lg; g.fillRect(0, 0, 4, 256);
+  const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t;
+}
+const MOODS = {
+  day:    { sky: [[0, "#7F9BBA"], [0.45, "#A9BDD2"], [0.75, "#D8E0E8"]], fog: "#D3DCE6", hemi: ["#D6E3F2", "#6E6A4E", 0.62], sun: ["#FFF1DA", 1.75, [-45, 55, 42]], exposure: 0.95 },
+  golden: { sky: [[0, "#8FA2BD"], [0.5, "#E9C9A6"], [0.8, "#F3DCC0"]], fog: "#E6D2BA", hemi: ["#EAD8C0", "#5E5038", 0.55], sun: ["#FFCF94", 2.1, [60, 20, 35]], exposure: 0.95 },
+  dusk:   { sky: [[0, "#1E2940"], [0.55, "#4A4D66"], [0.85, "#B98067"]], fog: "#5A5566", hemi: ["#7A86A6", "#2C2620", 0.45], sun: ["#FFB27A", 0.9, [70, 12, 20]], exposure: 1.1 },
+  studio: { sky: [[0, "#CFCBC2"], [1, "#AFAAA0"]], fog: null, hemi: ["#FFFFFF", "#8C877C", 0.75], sun: ["#FFF6E8", 2.2, [4.5, 7, 6]], exposure: 0.98 },
+};
+function light(scene, mood, transparent) {
+  const m = MOODS[mood];
+  if (!transparent) scene.background = gradientBg(m.sky);
+  if (m.fog) scene.fog = new T.Fog(m.fog, 160, 900);
+  scene.add(new T.HemisphereLight(m.hemi[0], m.hemi[1], m.hemi[2]));
+  const s = new T.DirectionalLight(m.sun[0], m.sun[1]); s.position.set(...m.sun[2]); s.castShadow = true;
+  s.shadow.mapSize.set(2048, 2048); const sc = s.shadow.camera; sc.left = sc.bottom = -30; sc.right = sc.top = 30; sc.near = 1; sc.far = 200; s.shadow.bias = -0.0004; s.shadow.normalBias = 0.02;
+  scene.add(s); return m.exposure;
+}
+
+/* --- scenes, by name --- */
+const SCENES = {
+  hero:    () => ({ mood: "day", items: [terrain(), house({ floors: 2 })], cam: [-17, 2.6, 30], look: [2.5, 4.6, 0], fov: 32 }),
+  golden:  () => ({ mood: "golden", items: [terrain({ seed: 5 }), house({ floors: 2 })], cam: [24, 4, 22], look: [0, 3.2, 0], fov: 30 }),
+  cutaway: () => ({ mood: "studio", items: [cutaway()], cam: [4.6, 3.6, 6.4], look: [0, 1.3, 1.1], fov: 27 }),
+  frame:   () => ({ mood: "day", items: [terrain({ seed: 9 }), frame()], cam: [12.5, 4.2, 14.5], look: [-0.5, 3.2, 0], fov: 32 }),
+  aerial:  () => { const g = new T.Group(); const a = house({ floors: 1 }); a.position.set(-26, 0, 10); a.rotation.y = 0.3; const b = house({ floors: 2 }); const c = house({ floors: 3 }); c.position.set(24, 0, -8); c.rotation.y = -0.25; g.add(a, b, c); return { mood: "day", items: [terrain({ seed: 4 }), g], cam: [30, 46, 62], look: [-2, 2, -2], fov: 34 }; },
+  piles:   () => { const g = new T.Group(); const hs = house({ floors: 1 }); hs.position.y = 2.4; g.add(hs); for (let x = -7; x <= 7; x += 3.5) for (let z = -4; z <= 4; z += 4) { const p = new T.Mesh(new T.CylinderGeometry(0.14, 0.14, 6, 8), M.pile); p.position.set(x, -0.6, z); p.castShadow = true; g.add(p); } return { mood: "day", items: [terrain({ slope: 0.32, seed: 11 }), g], cam: [22, 5, 24], look: [0, 2.2, 0], fov: 32 }; },
+  p1:      () => ({ mood: "day", items: [terrain({ seed: 21 }), house({ floors: 1 })], cam: [-19, 4.5, 26], look: [0, 2.2, 0], fov: 30 }),
+  p2:      () => ({ mood: "day", items: [terrain({ seed: 22 }), house({ floors: 2 })], cam: [-19, 5.5, 27], look: [1, 3.6, 0], fov: 30 }),
+  p3:      () => ({ mood: "day", items: [terrain({ seed: 23 }), house({ floors: 3 })], cam: [-20, 6.5, 29], look: [0.5, 5.2, 0], fov: 30 }),
+  dusk:    () => ({ mood: "dusk", items: [terrain({ seed: 31 }), house({ floors: 2, warm: true })], cam: [-26, 3.2, 26], look: [4, 4.2, 0], fov: 30 }),
+};
+
+function makeRenderer(canvas, alpha) {
+  const opts = { antialias: true, alpha, preserveDrawingBuffer: !canvas }; if (canvas) opts.canvas = canvas;
+  const r = new T.WebGLRenderer(opts);
+  r.outputEncoding = T.sRGBEncoding; r.toneMapping = T.ACESFilmicToneMapping;
+  r.shadowMap.enabled = true; r.shadowMap.type = T.PCFSoftShadowMap; r.setClearColor(0x000000, 0);
+  return r;
+}
+function build(name, transparent) {
+  const spec = SCENES[name](); const scene = new T.Scene();
+  const exposure = light(scene, spec.mood, transparent); spec.items.forEach((i) => scene.add(i));
+  const cam = new T.PerspectiveCamera(spec.fov, 1, 0.1, 2000); cam.position.set(...spec.cam); cam.lookAt(...spec.look);
+  return { scene, cam, exposure, spec };
+}
+
+/* stills: one offscreen renderer, each slot rendered once at its own size */
+let still;
+function renderStill(name, w, h) {
+  still = still || makeRenderer(null, false);
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  still.setPixelRatio(dpr); still.setSize(w, h, false);
+  const { scene, cam, exposure, spec } = build(name, false);
+  still.toneMappingExposure = exposure; cam.aspect = w / h;
+  if (cam.aspect < 1.25) cam.fov = Math.min(64, spec.fov * (1 + (1.25 - cam.aspect) * 0.8));
+  cam.updateProjectionMatrix();
+  still.render(scene, cam);
+  const url = still.domElement.toDataURL("image/jpeg", 0.86);
+  scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); });
+  return url;
+}
+
+/* hero: live canvas, transparent sky so the wordmark sits behind the house */
+const hc = document.getElementById("hero-canvas");
+const hr = makeRenderer(hc, true);
+const H = build("hero", true);
+hr.toneMappingExposure = H.exposure;
+const endPos = new T.Vector3(...H.spec.cam), startPos = endPos.clone().add(new T.Vector3(-3, -0.6, 7)), look = new T.Vector3(...H.spec.look);
+const portraitEnd = new T.Vector3(-18, 11, 66), portraitLook = new T.Vector3(1, 4.5, 0);
+function fitHero() {
+  const w = hc.clientWidth, h = hc.clientHeight; if (!w || !h) return;
+  hr.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); hr.setSize(w, h, false);
+  H.cam.aspect = w / h;
+  H.cam.fov = H.cam.aspect < 0.95 ? 34 : H.spec.fov;
+  H.cam.updateProjectionMatrix();
+}
+function frameHero(p) {
+  const portrait = H.cam.aspect < 0.95;
+  const to = portrait ? portraitEnd : endPos, at = portrait ? portraitLook : look;
+  H.cam.position.lerpVectors(to.clone().add(new T.Vector3(-3, -0.6, 7)), to, p);
+  H.cam.lookAt(at); hr.render(H.scene, H.cam);
+}
+fitHero();
+if (reduce) frameHero(1);
+else { const t0 = performance.now(), dur = 2600; const step = (now) => { const k = Math.min(1, (now - t0) / dur); frameHero(1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { fitHero(); frameHero(1); }, 120); });
+
+/* fill every image slot, one per frame so the page stays responsive */
+const slots = [...document.querySelectorAll("[data-render]"), ...document.querySelectorAll("[data-render-bg]")];
+const cache = {};
+function next() {
+  const el = slots.shift(); if (!el) return;
+  const name = el.dataset.render || el.dataset.renderBg;
+  const r = el.getBoundingClientRect(); const w = Math.max(320, Math.round(r.width)), h = Math.max(240, Math.round(r.height));
+  const key = name + w + "x" + h;
+  const url = cache[key] || (cache[key] = renderStill(name, w, h));
+  if (el.dataset.renderBg) el.style.backgroundImage = `linear-gradient(90deg, rgba(20,24,36,.55), rgba(20,24,36,.1) 60%), url(${url})`;
+  else el.style.backgroundImage = `url(${url})`;
+  el.classList.remove("img-loading");
+  requestAnimationFrame(next);
+}
+requestAnimationFrame(() => requestAnimationFrame(next));
+})();
+</script>
