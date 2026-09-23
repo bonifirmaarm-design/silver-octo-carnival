@@ -19,7 +19,7 @@
   --muted:  #5C5B52;   /* 6.4:1 on paper */
   --ghost:  #7C7B71;   /* second voice in display type, 3.8:1 on ground */
   --line:   #D6D4CC;
-  --straw:  #96690F;   /* straw as text, 5.4:1 on paper */
+  --straw:  #855C0C;   /* straw as text: 5.0:1 on the page ground, 5.9:1 on paper */
   --straw-bar: #C0911F;/* straw as a filled bar */
   --olive:  #29331F;   /* cypress shadow — filled dark surfaces */
   --dusk:   #0D1422;   /* the dusk photograph's sky */
@@ -61,10 +61,17 @@ button, input { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
 [hidden] { display: none !important; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip {
+  position: absolute; z-index: 40; left: var(--gutter); top: var(--s3);
+  padding: var(--s3) var(--s5); border-radius: var(--r-pill);
+  background: var(--ink); color: var(--paper); font-size: var(--small); font-weight: 600;
+  text-decoration: none; transform: translateY(-220%);
+}
+.skip:focus-visible { transform: none; }
 .page { max-width: 1480px; margin-inline: auto; padding-inline: var(--gutter); padding-block: var(--s3) 0; }
 
 .micro { font-size: var(--micro); font-weight: 500; line-height: 1.3; text-transform: uppercase; letter-spacing: .04em; }
-.display { font-size: var(--display); font-weight: 800; line-height: .9; letter-spacing: -.045em; text-transform: uppercase; overflow-wrap: anywhere; }
+.display { font-size: var(--display); font-weight: 800; line-height: .9; letter-spacing: -.045em; text-transform: uppercase; overflow-wrap: anywhere; padding-left: .04em; }
 .h2 { font-size: var(--h2); font-weight: 800; line-height: .95; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; overflow-wrap: anywhere; }
 .lead { font-size: var(--lead); line-height: 1.45; color: var(--muted); max-width: 42ch; text-wrap: pretty; }
 .num { font-variant-numeric: tabular-nums; }
@@ -99,7 +106,7 @@ button, input { font: inherit; color: inherit; }
 .hero__word {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; color: #fff;
   font-weight: 800; font-size: var(--word); line-height: .82; letter-spacing: -.055em; text-transform: uppercase;
-  mix-blend-mode: soft-light;
+  opacity: .92;
 }
 .hero__word span { position: absolute; white-space: nowrap; }
 .hero__word .a { left: 2.5%; top: 12%; }
@@ -107,7 +114,7 @@ button, input { font: inherit; color: inherit; }
 .hero__veil {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(13,20,34,.36) 0 13%, transparent 33%),
+    linear-gradient(180deg, rgba(13,20,34,.62) 0 6%, rgba(13,20,34,.34) 16%, transparent 34%),
     linear-gradient(0deg, rgba(13,20,34,.66) 0 22%, transparent 58%);
 }
 .hero__ui { position: absolute; inset: 0; z-index: 3; display: grid; grid-template-rows: auto 1fr auto; padding: var(--s5) clamp(18px, 2.4vw, 40px) clamp(22px, 2.4vw, 38px); pointer-events: none; }
@@ -124,7 +131,7 @@ button, input { font: inherit; color: inherit; }
 .lang button:hover { background: rgba(255,255,255,.2); }
 .lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
 
-.hero__mid { justify-self: end; align-self: start; margin-top: var(--s6); color: #fff; text-align: right; max-width: 24ch; }
+.hero__mid { justify-self: end; align-self: start; margin-top: var(--s7); color: #fff; text-align: right; max-width: 34ch; text-wrap: balance; }
 .hero__bottom { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: var(--s6); color: #fff; }
 .hero__claim { font-size: clamp(1.75rem, .9rem + 2.8vw, 3.5rem); font-weight: 800; line-height: .94; letter-spacing: -.04em; text-transform: uppercase; max-width: 13ch; }
 .hero__row { margin-top: var(--s5); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s5); }
@@ -150,14 +157,14 @@ button, input { font: inherit; color: inherit; }
 
 /* ---------- 2 · the wall ---------- */
 .wall__grid { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s8); align-items: center; }
-.wall__l1 { margin-left: 14%; }
+.wall__l1 { margin-left: 13%; }
 .wall__ghost { color: var(--ghost); }
 .wall__shot { aspect-ratio: 4/5; }
 .wall__text { margin-top: var(--s7); }
 .wall__layers { margin-top: var(--s7); border-top: 1px solid var(--line); }
-.layer { display: grid; grid-template-columns: 12px minmax(0,1fr) auto; align-items: baseline; gap: var(--s4); padding-block: var(--s4); border-bottom: 1px solid var(--line); }
-.layer i { width: 10px; height: 10px; border-radius: 2px; align-self: center; }
-.layer b { font-weight: 600; }
+.layer { display: grid; grid-template-columns: 28px minmax(0,1fr) auto; align-items: center; gap: var(--s4); padding-block: var(--s5); border-bottom: 1px solid var(--line); }
+.layer i { width: 26px; height: 26px; border-radius: 6px; }
+.layer b { font-weight: 600; font-size: var(--lead); letter-spacing: -.015em; }
 .layer span { font-size: var(--small); color: var(--muted); text-align: right; }
 
 /* ---------- 3 · warmth ---------- */
@@ -169,10 +176,14 @@ button, input { font: inherit; color: inherit; }
 .tbl tr:last-child > * { border-bottom: 1px solid var(--line); }
 .tbl thead th { font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border-top: 0; padding-block: var(--s2); }
 .tbl tbody th { font-size: var(--h3); font-weight: 700; letter-spacing: -.03em; width: 26%; }
+.tbl .is-straw th { font-size: calc(var(--h3) * 1.2); }
+.tbl .is-straw td { padding-block: var(--s5); }
 .tbl .v { width: 24%; font-weight: 600; white-space: nowrap; }
 .tbl .r { width: 18%; text-align: right; padding-right: 0; white-space: nowrap; font-size: var(--small); color: var(--muted); }
-.bar { height: 8px; border-radius: 0 4px 4px 0; background: #B6B4AA; }
-.bar--straw { background: var(--straw-bar); }
+.tbl .r b { font-weight: 600; color: var(--ink); }
+.bar { height: 10px; border-radius: 0 5px 5px 0; background: #B6B4AA; }
+.bar--straw { height: 14px; border-radius: 0 7px 7px 0; }
+.bar--straw { background: var(--straw-bar); box-shadow: 0 0 0 4px rgba(192,145,31,.14); }
 .is-straw th, .is-straw .v { color: var(--straw); }
 .warm__note { grid-column: 6 / 13; margin-top: var(--s5); font-size: var(--small); color: var(--muted); max-width: 52ch; }
 
@@ -198,11 +209,12 @@ button, input { font: inherit; color: inherit; }
 /* ---------- 6 · projects ---------- */
 .proj__head { grid-column: 1 / 13; margin-bottom: var(--s7); display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s6); align-items: end; }
 .proj__shot { grid-column: 1 / 7; aspect-ratio: 1; }
-.proj__list { grid-column: 7 / 13; align-self: center; }
-.prow { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: var(--s5); padding-block: var(--s5); border-top: 1px solid var(--line); }
+.proj__list { grid-column: 7 / 13; align-self: start; }
+.prow { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: var(--s5); padding-block: var(--s6); border-top: 1px solid var(--line); transition: padding-left .2s var(--ease); }
+.prow:hover { padding-left: var(--s3); }
 .prow:last-child { border-bottom: 1px solid var(--line); }
-.prow__n { font-size: var(--h3); font-weight: 800; letter-spacing: -.04em; line-height: 1; }
-.prow__t b { display: block; font-weight: 600; }
+.prow__n { font-size: calc(var(--h3) * 1.35); font-weight: 800; letter-spacing: -.05em; line-height: .9; min-width: 1.2ch; }
+.prow__t b { display: block; font-weight: 600; font-size: var(--lead); letter-spacing: -.015em; }
 .prow__t span { display: block; font-size: var(--small); color: var(--muted); }
 
 /* ---------- 7 · request ---------- */
@@ -252,7 +264,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 /* ---------- footer ---------- */
 .foot { padding-block: var(--s8) var(--s6); }
 .foot__word { font-size: clamp(2.75rem, .5rem + 13vw, 13rem); font-weight: 800; letter-spacing: -.06em; line-height: .82; text-transform: uppercase; margin-left: -.03em; }
-.foot__grid { margin-top: var(--s7); padding-top: var(--s4); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--s5); }
+.foot__grid { margin-top: var(--s7); padding-top: var(--s5); border-top: 2px solid var(--straw-bar); display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--s5); }
 .foot__grid dt { font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 4px; }
 .foot__grid dd { font-size: var(--small); margin: 0; }
 .foot__lang { display: grid; gap: var(--s3); justify-items: start; }
@@ -292,20 +304,30 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .req__veil { background: linear-gradient(0deg, rgba(13,20,34,.86) 0 46%, rgba(13,20,34,.34)); }
   .foot__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
+@media (max-width: 780px) {
+  /* the drawer already carries the call to action */
+  .nav__cta { display: none; }
+  .nav { gap: var(--s3); }
+  .brand span { font-size: .9375rem; }
+  .lang button { min-width: 32px; padding: 0 6px; }
+}
+@media (max-width: 400px) {
+  .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+}
 @media (max-width: 680px) {
   .hero { height: 660px; }
   .hero__word .a { top: 9%; }
   .hero__word .b { top: 17%; }
   .hero__mid { display: none; }
   .hero__bottom { grid-template-columns: minmax(0,1fr); gap: var(--s4); }
-  .hero__veil { background: linear-gradient(180deg, rgba(13,20,34,.42) 0 12%, transparent 30%), linear-gradient(0deg, rgba(13,20,34,.78) 0 34%, transparent 66%); }
+  .hero__veil { background: linear-gradient(180deg, rgba(13,20,34,.58) 0 5%, rgba(13,20,34,.34) 22%, transparent 44%), linear-gradient(0deg, rgba(13,20,34,.8) 0 34%, transparent 66%); }
   .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
   .stat { width: auto; padding: var(--s3); }
   .stat b { font-size: 1.625rem; }
   .wall__grid { grid-template-columns: minmax(0,1fr); }
   .wall__l1 { margin-left: 8%; }
   .wall__shot { aspect-ratio: 4/3; }
-  .layer { grid-template-columns: 12px minmax(0,1fr); }
+  .layer { grid-template-columns: 28px minmax(0,1fr); }
   .layer span { grid-column: 2; text-align: left; }
   .tbl thead { display: none; }
   .tbl tbody tr { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--s2) var(--s4); align-items: baseline; padding-block: var(--s4); border-top: 1px solid var(--line); }
@@ -313,12 +335,17 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .tbl tbody th, .tbl tbody td { width: auto; padding: 0; border: 0 !important; }
   .tbl .s { grid-column: 1 / -1; order: 3; }
   .tbl .r { grid-column: 1 / -1; order: 4; text-align: left; }
+  /* stacked, the straw row needs no extra air and its "—" says nothing */
+  .tbl .is-straw td { padding-block: 0; }
+  .tbl .is-straw .r { display: none; }
   .stage { grid-template-columns: 2.25rem minmax(0,1fr); gap: var(--s3); padding-block: var(--s6); }
   .prow { grid-template-columns: auto minmax(0,1fr); }
   .prow .pill { grid-column: 1 / -1; justify-self: start; margin-top: var(--s2); }
   .foot__grid { grid-template-columns: minmax(0,1fr); }
 }
 </style>
+
+<a class="skip" href="#main" data-i18n="nav.skip">К содержанию</a>
 
 <div class="page">
 
@@ -346,7 +373,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         <button type="button" data-lang="ru" aria-pressed="true">RU</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
-      <a class="pill pill--light" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
+      <a class="pill pill--light nav__cta" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
       <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="drawer">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path class="o" d="M4 9h16M4 15h16"/><path class="x" d="M6 6l12 12M18 6L6 18"/></svg>
         <span class="sr" data-i18n="nav.menu">Меню</span>
@@ -380,7 +407,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   </div>
 </header>
 
-<main>
+<main id="main">
 
 <!-- 2 · The wall -->
 <section class="sec" id="wall" aria-labelledby="wall-h">
@@ -392,9 +419,9 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
       <p class="display wall__ghost" aria-hidden="true" data-i18n="wall.ghost">/ не в счёте</p>
       <p class="lead wall__text" data-i18n="wall.text">Панель делают на фабрике: каркас из калиброванной сушёной древесины, внутри плотно спрессованная солома, снаружи и внутри глиняная штукатурка. На участок она приезжает готовой.</p>
       <dl class="wall__layers">
-        <div class="layer"><i style="background:var(--straw-bar)"></i><b data-i18n="wall.la">Прессованная солома</b><span data-i18n="wall.lad">утеплитель, 0,050–0,065 Вт/(м·К)</span></div>
-        <div class="layer"><i style="background:#D9BE94"></i><b data-i18n="wall.lb">Сушёная древесина</b><span data-i18n="wall.lbd">каркас до 3 этажей, срок службы до 100 лет</span></div>
-        <div class="layer"><i style="background:#E2DFD6"></i><b data-i18n="wall.lc">Глиняный раствор</b><span data-i18n="wall.lcd">снаружи и внутри, входит в комплект</span></div>
+        <div class="layer"><i style="background:repeating-linear-gradient(58deg,#C0911F 0 3px,#D9B863 3px 5px,#A97C15 5px 7px)"></i><b data-i18n="wall.la">Прессованная солома</b><span data-i18n="wall.lad">утеплитель, 0,050–0,065 Вт/(м·К)</span></div>
+        <div class="layer"><i style="background:repeating-linear-gradient(90deg,#DFC79F 0 5px,#CDB185 5px 6px)"></i><b data-i18n="wall.lb">Сушёная древесина</b><span data-i18n="wall.lbd">каркас до 3 этажей, срок службы до 100 лет</span></div>
+        <div class="layer"><i style="background:radial-gradient(circle at 30% 30%,#EDEAE1,#DBD7CC)"></i><b data-i18n="wall.lc">Глиняный раствор</b><span data-i18n="wall.lcd">снаружи и внутри, входит в комплект</span></div>
       </dl>
     </div>
     <figure class="shot wall__shot"><img src="img/panel.webp" alt="" width="1184" height="896" data-i18n-alt="alt.panel"></figure>
@@ -428,13 +455,13 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
             <th scope="row" data-i18n="warm.wood">Дерево</th>
             <td class="v">0,18–0,23</td>
             <td class="s" aria-hidden="true"><div class="bar" style="width:33%"></div></td>
-            <td class="r" data-i18n="warm.w4">в 4 раза</td>
+            <td class="r"><b data-i18n="warm.w4">в 4 раза</b></td>
           </tr>
           <tr>
             <th scope="row" data-i18n="warm.brick">Кирпич</th>
             <td class="v">0,56–0,70</td>
             <td class="s" aria-hidden="true"><div class="bar" style="width:100%"></div></td>
-            <td class="r" data-i18n="warm.w7">в 7 раз</td>
+            <td class="r"><b data-i18n="warm.w7">в 7 раз</b></td>
           </tr>
         </tbody>
       </table>
@@ -602,7 +629,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 const I18N = {
   ru: {
     _lang: "ru", _title: "SFERIHOME — дома из соломенных панелей",
-    "nav.label": "Основная навигация", "nav.lang": "Язык", "nav.menu": "Меню",
+    "nav.label": "Основная навигация", "nav.lang": "Язык", "nav.menu": "Меню", "nav.close": "Закрыть", "nav.skip": "К содержанию",
     "nav.wall": "Стена", "nav.warm": "Тепло", "nav.stages": "Как строим", "nav.where": "Участок", "nav.projects": "Проекты", "nav.cta": "Рассчитать дом",
     "hero.mid": "Дома из соломенных панелей. Производство — Цетине, Черногория",
     "hero.claim": "Дом, который держит тепло сам",
@@ -648,7 +675,7 @@ const I18N = {
   },
   me: {
     _lang: "sr-Latn-ME", _title: "SFERIHOME — kuće od slamnatih panela",
-    "nav.label": "Glavna navigacija", "nav.lang": "Jezik", "nav.menu": "Meni",
+    "nav.label": "Glavna navigacija", "nav.lang": "Jezik", "nav.menu": "Meni", "nav.close": "Zatvori", "nav.skip": "Na sadržaj",
     "nav.wall": "Zid", "nav.warm": "Toplota", "nav.stages": "Kako gradimo", "nav.where": "Plac", "nav.projects": "Projekti", "nav.cta": "Izračunajte kuću",
     "hero.mid": "Kuće od slamnatih panela. Proizvodnja — Cetinje, Crna Gora",
     "hero.claim": "Kuća koja sama drži toplotu",
@@ -694,7 +721,7 @@ const I18N = {
   },
   en: {
     _lang: "en", _title: "SFERIHOME — straw-panel houses",
-    "nav.label": "Main navigation", "nav.lang": "Language", "nav.menu": "Menu",
+    "nav.label": "Main navigation", "nav.lang": "Language", "nav.menu": "Menu", "nav.close": "Close", "nav.skip": "Skip to content",
     "nav.wall": "The wall", "nav.warm": "Warmth", "nav.stages": "How we build", "nav.where": "Your plot", "nav.projects": "Projects", "nav.cta": "Price a house",
     "hero.mid": "Straw-panel houses. Made in Cetinje, Montenegro",
     "hero.claim": "A house that holds its own warmth",
@@ -776,7 +803,13 @@ document.querySelectorAll("[data-lang]").forEach((b) => b.addEventListener("clic
 
 /* menu */
 const burger = document.getElementById("burger"), drawer = document.getElementById("drawer");
-const setMenu = (open) => { drawer.hidden = !open; burger.setAttribute("aria-expanded", String(open)); };
+const setMenu = (open) => {
+  drawer.hidden = !open;
+  burger.setAttribute("aria-expanded", String(open));
+  const label = burger.querySelector("[data-i18n]");
+  label.dataset.i18n = open ? "nav.close" : "nav.menu";
+  label.textContent = t(label.dataset.i18n);
+};
 burger.addEventListener("click", () => setMenu(drawer.hidden));
 drawer.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !drawer.hidden) { setMenu(false); burger.focus(); } });
