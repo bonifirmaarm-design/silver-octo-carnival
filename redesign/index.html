@@ -301,30 +301,24 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 
 /* ---------- 8 · kits ---------- */
 .kits__head { grid-column: 1 / 9; }
-.kits__wrap { grid-column: 1 / 13; margin-top: var(--s8); }
-.kits__hint { display: none; margin-bottom: var(--s4); font-size: var(--micro); color: var(--muted); }
-.kits__box { position: relative; }
-.kits__box::after { content: ""; position: absolute; z-index: 1; inset: 0 0 0 auto; width: 44px; pointer-events: none; background: linear-gradient(90deg, rgba(237,236,231,0), var(--ground)); }
-.kits__box.is-end::after { display: none; }
-.kits__scroll { overflow-x: auto; }
-.kits__scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.kits { width: 100%; min-width: 720px; border-collapse: collapse; }
-.kits th, .kits td { text-align: left; padding: var(--s4) var(--s4) var(--s4) 0; border-top: 1px solid var(--line); vertical-align: top; }
-.kits thead th { border-top: 0; padding-top: 0; vertical-align: bottom; }
-.kits thead .c { width: 21%; padding-right: var(--s3); }
-.kits thead .what { width: 37%; }
-.kits .kn { display: block; font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
-.kits .kt { display: block; margin-top: var(--s2); font-size: var(--h3); font-weight: 700; letter-spacing: -.035em; line-height: 1.06; }
-.kits .kp { display: block; margin-top: var(--s3); padding-bottom: var(--s4); font-size: var(--small); font-weight: 600; color: var(--straw); }
-.kits tbody th { font-weight: 600; font-size: var(--small); line-height: 1.4; padding-right: var(--s6); }
-.kits tbody th span { display: block; margin-top: 3px; font-weight: 400; font-size: var(--micro); line-height: 1.5; color: var(--muted); }
-.kits tbody td { width: 21%; text-align: center; }
-.kits tbody tr:last-child > * { border-bottom: 1px solid var(--line); }
-.kits .is-full { background: rgba(192,145,31,.08); }
-.yes { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: var(--straw-bar); position: relative; }
-.yes::after { content: ""; position: absolute; left: 6px; top: 7px; width: 9px; height: 5px; border-left: 2px solid #241A00; border-bottom: 2px solid #241A00; transform: rotate(-45deg); }
-.no { display: inline-block; width: 13px; height: 2px; background: #AFADA3; vertical-align: 10px; }
-.kits__note { grid-column: 1 / 13; margin-top: var(--s5); font-size: var(--small); line-height: 1.55; color: var(--muted); max-width: 66ch; }
+.kits__grid { grid-column: 1 / 13; margin-top: var(--s8); display: grid; grid-template-columns: repeat(auto-fit, minmax(272px, 1fr)); gap: var(--s5); align-items: start; }
+.kit { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--r-lg); padding: clamp(20px, 2vw, 30px); box-shadow: var(--shadow); }
+.kit--full { box-shadow: inset 0 0 0 2px var(--straw-bar), var(--shadow); }
+.kit__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); color: var(--muted); }
+.kit__badge { padding: 3px var(--s3); border-radius: var(--r-pill); background: var(--straw-bar); color: #241A00; font-size: var(--micro); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.kit__t { margin-top: var(--s3); font-size: var(--h3); font-weight: 800; letter-spacing: -.035em; line-height: 1.06; text-wrap: balance; }
+.kit__p { margin-top: var(--s3); font-size: var(--small); font-weight: 600; color: var(--straw); }
+.kit__intro { margin-top: var(--s6); padding-bottom: var(--s3); font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.kit__list { border-top: 1px solid var(--line); }
+.kit__list > li { padding-block: var(--s4); border-bottom: 1px solid var(--line); }
+.kit__list > li > b { display: block; font-size: var(--small); font-weight: 600; line-height: 1.4; }
+.kit__list > li > span { display: block; margin-top: 4px; font-size: var(--micro); line-height: 1.55; color: var(--muted); }
+.kit__sub { margin-top: var(--s3); display: grid; gap: 5px; }
+.kit__sub li { position: relative; padding-left: 15px; font-size: var(--micro); line-height: 1.55; color: var(--muted); }
+.kit__sub li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 2px; background: var(--straw-bar); }
+.kit__note { margin-top: var(--s4); font-size: var(--micro); line-height: 1.6; color: var(--muted); }
+.kit__foot { padding-top: var(--s6); }
+.kits__note { grid-column: 1 / 13; margin-top: var(--s6); font-size: var(--small); line-height: 1.55; color: var(--muted); max-width: 66ch; }
 
 /* ---------- 9 · questions ---------- */
 .faq__head { grid-column: 1 / 5; }
@@ -349,7 +343,6 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 @media (max-width: 1100px) {
   .wall__grid { gap: var(--s6); }
   .built__head, .kits__head, .faq__head { grid-column: 1 / 13; }
-  .kits__hint { display: block; }
   .faq__list { grid-column: 1 / 13; margin-top: var(--s7); }
   .warm__head { grid-column: 1 / 13; margin-bottom: var(--s7); }
   .warm__table, .warm__note { grid-column: 1 / 13; }
@@ -666,36 +659,57 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
       <h2 class="h2" id="kits-h" data-i18n="kits.title">Три домокомплекта</h2>
       <p class="lead" data-i18n="kits.lead">Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.</p>
     </div>
-    <div class="kits__wrap">
-      <p class="kits__hint" data-i18n="kits.hint">Таблица прокручивается вбок</p>
-      <div class="kits__box">
-      <div class="kits__scroll" tabindex="0" role="region" aria-labelledby="kits-h">
-      <table class="kits">
-        <caption class="sr" data-i18n="kits.cap">Что входит в каждый из трёх домокомплектов</caption>
-        <thead>
-          <tr>
-            <th scope="col" class="c what"><span class="sr" data-i18n="kits.what">Что входит</span></th>
-            <th scope="col" class="c"><span class="kn" data-i18n="kits.k1n">Комплект 1</span><span class="kt" data-i18n="kits.k1t">Без сборки</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
-            <th scope="col" class="c"><span class="kn" data-i18n="kits.k2n">Комплект 2</span><span class="kt" data-i18n="kits.k2t">Со сборкой и штукатуркой</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
-            <th scope="col" class="c is-full"><span class="kn" data-i18n="kits.k3n">Комплект 3</span><span class="kt" data-i18n="kits.k3t">Под чистовую отделку</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr><th scope="row"><span data-i18n="kits.r1">Стеновые соломенные панели</span><span data-i18n="kits.n1">с надоконными и подоконными перемычками, утеплитель — солома</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r2">Нижний и верхний обвязочный брус</span><span data-i18n="kits.n2">стен и перегородок</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r3">Деревянный каркас перегородок</span><span data-i18n="kits.n3">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r4">Деревянные фермы межэтажного перекрытия</span><span data-i18n="kits.n4">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r5">Деревянные стропила или фермы крыши</span><span data-i18n="kits.n5">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r6">Сборка домокомплекта</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r7">Глиняная штукатурка стен</span><span data-i18n="kits.n7">снаружи и внутри</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r8">Доставка на участок</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        <tr><th scope="row"><span data-i18n="kits.r9">Инженерные системы</span><span data-i18n="kits.n9">электрика, вода и канализация, отопление с котлом — с материалами</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
+    <div class="kits__grid">
+
+      <article class="kit">
+        <div class="kit__top"><p class="micro" data-i18n="kits.k1n">Комплект 1</p></div>
+        <h3 class="kit__t" data-i18n="kits.k1t">Без сборки</h3>
+        <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
+        <p class="kit__intro" data-i18n="kits.base">В комплект входит</p>
+        <ul class="kit__list">
+          <li><b data-i18n="kits.r1">·</b><span data-i18n="kits.n1">·</span></li>
+          <li><b data-i18n="kits.r2">·</b><span data-i18n="kits.n2">·</span></li>
+          <li><b data-i18n="kits.r3">·</b><span data-i18n="kits.n3">·</span></li>
+          <li><b data-i18n="kits.r4">·</b><span data-i18n="kits.n4">·</span></li>
+          <li><b data-i18n="kits.r5">·</b><span data-i18n="kits.n5">·</span></li>
+        </ul>
+        <p class="kit__note" data-i18n="kits.note1">Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции.</p>
+        <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+      </article>
+
+      <article class="kit">
+        <div class="kit__top"><p class="micro" data-i18n="kits.k2n">Комплект 2</p></div>
+        <h3 class="kit__t" data-i18n="kits.k2t">Со сборкой и штукатуркой</h3>
+        <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
+        <p class="kit__intro" data-i18n="kits.plus1">Всё из первого комплекта, плюс</p>
+        <ul class="kit__list">
+          <li><b data-i18n="kits.r6">·</b></li>
+          <li><b data-i18n="kits.r7">·</b><span data-i18n="kits.n7">·</span></li>
+        </ul>
+        <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+      </article>
+
+      <article class="kit kit--full">
+        <div class="kit__top"><p class="micro" data-i18n="kits.k3n">Комплект 3</p><span class="kit__badge" data-i18n="kits.full">Полный</span></div>
+        <h3 class="kit__t" data-i18n="kits.k3t">Под чистовую отделку</h3>
+        <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
+        <p class="kit__intro" data-i18n="kits.plus2">Всё из второго комплекта, плюс</p>
+        <ul class="kit__list">
+          <li><b data-i18n="kits.r8">·</b></li>
+          <li><b data-i18n="kits.r9">·</b>
+            <ul class="kit__sub">
+              <li data-i18n="kits.e1">·</li>
+              <li data-i18n="kits.e2">·</li>
+              <li data-i18n="kits.e3">·</li>
+            </ul>
+          </li>
+        </ul>
+        <p class="kit__note" data-i18n="kits.note3">Котёл — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно.</p>
+        <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+      </article>
+
     </div>
-    <p class="kits__note" data-i18n="kits.note">Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции. Котёл в третьем комплекте — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно. Состав комплектов взят с текущего сайта и требует подтверждения компанией.</p>
+    <p class="kits__note" data-i18n="kits.note">Состав комплектов взят с текущего сайта и требует подтверждения компанией.</p>
   </div>
 </section>
 
@@ -857,12 +871,17 @@ const I18N = {
     "alt.b2": "Дом-купол, целиком крытый соломой, с деревянной террасой в лесу",
     "alt.b3": "Дом на деревянных сваях с белой штукатуркой и соломенной кровлей на склоне",
     "alt.b4": "Одноэтажный дом с плоской кровлей, серой штукатуркой и деревянной обшивкой",
+    "kits.base": "В комплект входит",
+    "kits.plus1": "Всё из первого комплекта, плюс",
+    "kits.plus2": "Всё из второго комплекта, плюс",
+    "kits.full": "Полный",
+    "kits.note1": "Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции.",
+    "kits.note3": "Котёл — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно.",
+    "kits.e1": "Электропроводка к розеткам и светильникам",
+    "kits.e2": "Вода и канализация ко всем предметам сантехники",
+    "kits.e3": "Отопление с котлом, материалы включены",
     "kits.title": "Три домокомплекта",
     "kits.lead": "Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.",
-    "kits.hint": "Таблица прокручивается вбок", "kits.cap": "Что входит в каждый из трёх домокомплектов",
-    "kits.what": "Что входит",
-    "kits.yes": "входит",
-    "kits.no": "не входит",
     "kits.price": "Цена по запросу",
     "kits.k1n": "Комплект 1",
     "kits.k1t": "Без сборки",
@@ -885,8 +904,7 @@ const I18N = {
     "kits.n7": "снаружи и внутри",
     "kits.r8": "Доставка на участок",
     "kits.r9": "Инженерные системы",
-    "kits.n9": "электрика, вода и канализация, отопление с котлом — с материалами",
-    "kits.note": "Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции. Котёл в третьем комплекте — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно. Состав комплектов взят с текущего сайта и требует подтверждения компанией.",
+    "kits.note": "Состав комплектов взят с текущего сайта и требует подтверждения компанией.",
     "faq.title": "Вопросы",
     "faq.lead": "О соломенном доме спрашивают примерно одно и то же. Ответы собраны из открытых материалов о технологии и требуют подтверждения компанией.",
     "faq.q1": "Солома горит?",
@@ -973,12 +991,17 @@ const I18N = {
     "alt.b2": "Kuća-kupola potpuno pokrivena slamom, sa drvenom terasom u šumi",
     "alt.b3": "Kuća na drvenim šipovima sa bijelim malterom i slamnatim krovom na padini",
     "alt.b4": "Prizemna kuća sa ravnim krovom, sivim malterom i drvenom oblogom",
+    "kits.base": "Komplet sadrži",
+    "kits.plus1": "Sve iz prvog kompleta, plus",
+    "kits.plus2": "Sve iz drugog kompleta, plus",
+    "kits.full": "Pun",
+    "kits.note1": "Međuspratna konstrukcija, pregrade i rogovi idu bez izolacije i zvučne izolacije.",
+    "kits.note3": "Kotao je osnovni, dvokružni, srednje cijene. Ventilacija sa rekuperacijom plaća se posebno.",
+    "kits.e1": "Električne instalacije do utičnica i svjetiljki",
+    "kits.e2": "Voda i kanalizacija do svih sanitarija",
+    "kits.e3": "Grijanje sa kotlom, materijal uključen",
     "kits.title": "Tri kompleta",
     "kits.lead": "Razlika je samo u tome gdje se završava naš posao. Paneli, grede, okvir pregrada, međuspratna konstrukcija i rogovi ulaze u sva tri.",
-    "kits.hint": "Tabela se pomjera bočno", "kits.cap": "Šta ulazi u svaki od tri kompleta",
-    "kits.what": "Šta je uključeno",
-    "kits.yes": "uključeno",
-    "kits.no": "nije uključeno",
     "kits.price": "Cijena na upit",
     "kits.k1n": "Komplet 1",
     "kits.k1t": "Bez montaže",
@@ -1001,8 +1024,7 @@ const I18N = {
     "kits.n7": "spolja i iznutra",
     "kits.r8": "Dostava na plac",
     "kits.r9": "Instalacije",
-    "kits.n9": "struja, voda i kanalizacija, grijanje sa kotlom — sa materijalom",
-    "kits.note": "Međuspratna konstrukcija, pregrade i rogovi idu bez izolacije i zvučne izolacije. Kotao u trećem kompletu je osnovni, dvokružni, srednje cijene. Ventilacija sa rekuperacijom plaća se posebno. Sastav kompleta preuzet je sa sadašnjeg sajta i treba da ga potvrdi kompanija.",
+    "kits.note": "Sastav kompleta preuzet je sa sadašnjeg sajta i treba da ga potvrdi kompanija.",
     "faq.title": "Pitanja",
     "faq.lead": "O slamnatoj kući pitaju otprilike isto. Odgovori su sastavljeni iz javnih materijala o tehnologiji i treba da ih potvrdi kompanija.",
     "faq.q1": "Da li slama gori?",
@@ -1089,12 +1111,17 @@ const I18N = {
     "alt.b2": "A dome house fully covered in thatch, with a timber deck in the woods",
     "alt.b3": "A house on timber piles with white render and a thatched roof on a slope",
     "alt.b4": "A single-storey house with a flat roof, grey render and timber cladding",
+    "kits.base": "The kit contains",
+    "kits.plus1": "Everything in kit 1, plus",
+    "kits.plus2": "Everything in kit 2, plus",
+    "kits.full": "Complete",
+    "kits.note1": "Floor structure, partitions and rafters come without insulation or soundproofing.",
+    "kits.note3": "The boiler is a basic mid-range combi. Supply ventilation with heat recovery is charged separately.",
+    "kits.e1": "Wiring to sockets and light fittings",
+    "kits.e2": "Water and drainage to every sanitary fitting",
+    "kits.e3": "Heating with a boiler, materials included",
     "kits.title": "Three kits",
     "kits.lead": "They differ only in where our work stops. Panels, wall plates, partition frames, floor structure and rafters are in all three.",
-    "kits.hint": "The table scrolls sideways", "kits.cap": "What each of the three kits includes",
-    "kits.what": "What is included",
-    "kits.yes": "included",
-    "kits.no": "not included",
     "kits.price": "Price on request",
     "kits.k1n": "Kit 1",
     "kits.k1t": "Without assembly",
@@ -1117,8 +1144,7 @@ const I18N = {
     "kits.n7": "inside and out",
     "kits.r8": "Delivery to the plot",
     "kits.r9": "Building services",
-    "kits.n9": "wiring, water and drainage, heating with a boiler — materials included",
-    "kits.note": "Floor structure, partitions and rafters come without insulation or soundproofing. The boiler in the third kit is a basic mid-range combi. Supply ventilation with heat recovery is charged separately. The contents of the kits are taken from the current site and need confirming by the company.",
+    "kits.note": "The contents of the kits are taken from the current site and need confirming by the company.",
     "faq.title": "Questions",
     "faq.lead": "People ask much the same things about a straw house. The answers are drawn from public material about the technology and need confirming by the company.",
     "faq.q1": "Does straw burn?",
@@ -1222,13 +1248,17 @@ const I18N = {
     "built.d3": "Enduit blanc et toit de chaume, pente de montagne raide",
     "built.t4": "Toit plat",
     "built.d4": "Enduit de terre gris et bois foncé, terrain plat",
+    "kits.base": "Le kit comprend",
+    "kits.plus1": "Tout le kit 1, plus",
+    "kits.plus2": "Tout le kit 2, plus",
+    "kits.full": "Complet",
+    "kits.note1": "Plancher, cloisons et chevrons sont livrés sans isolation ni isolation phonique.",
+    "kits.note3": "La chaudière est un modèle double service d'entrée de gamme. La ventilation double flux est facturée à part.",
+    "kits.e1": "Électricité jusqu'aux prises et aux luminaires",
+    "kits.e2": "Eau et évacuation vers tous les appareils sanitaires",
+    "kits.e3": "Chauffage avec chaudière, fournitures comprises",
     "kits.title": "Trois kits",
     "kits.lead": "Ils ne diffèrent que par l'endroit où notre travail s'arrête. Panneaux, lisses, ossature des cloisons, plancher et chevrons sont dans les trois.",
-    "kits.hint": "Le tableau défile latéralement",
-    "kits.cap": "Ce que contient chacun des trois kits",
-    "kits.what": "Ce qui est compris",
-    "kits.yes": "compris",
-    "kits.no": "non compris",
     "kits.price": "Prix sur demande",
     "kits.k1n": "Kit 1",
     "kits.k1t": "Sans montage",
@@ -1251,8 +1281,7 @@ const I18N = {
     "kits.n7": "intérieur et extérieur",
     "kits.r8": "Livraison sur le terrain",
     "kits.r9": "Réseaux techniques",
-    "kits.n9": "électricité, eau et évacuation, chauffage avec chaudière — fournitures comprises",
-    "kits.note": "Plancher, cloisons et chevrons sont livrés sans isolation ni isolation phonique. La chaudière du troisième kit est un modèle double service d'entrée de gamme. La ventilation double flux est facturée à part. Le contenu des kits provient du site actuel et doit être confirmé par l'entreprise.",
+    "kits.note": "Le contenu des kits provient du site actuel et doit être confirmé par l'entreprise.",
     "faq.title": "Questions",
     "faq.lead": "On pose à peu près toujours les mêmes questions sur une maison en paille. Les réponses viennent de documents publics sur la technique et doivent être confirmées par l'entreprise.",
     "faq.q1": "La paille brûle-t-elle ?",
@@ -1370,16 +1399,6 @@ if ("IntersectionObserver" in window && targets.length) {
     }
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((s) => spy.observe(s));
-}
-
-/* the kit table scrolls sideways on a narrow screen; drop the edge fade at the end */
-const ks = document.querySelector(".kits__scroll");
-if (ks) {
-  const box = ks.parentElement;
-  const upd = () => box.classList.toggle("is-end", ks.scrollWidth <= ks.clientWidth + 1 || ks.scrollLeft + ks.clientWidth >= ks.scrollWidth - 2);
-  ks.addEventListener("scroll", upd, { passive: true });
-  addEventListener("resize", upd);
-  upd();
 }
 
 /* a project row presets the storey field */
