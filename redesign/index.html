@@ -13,12 +13,12 @@
 :root {
   color-scheme: light;
 
-  --ground: #EDECE7;   /* page: the cool side of clay plaster */
+  --ground: #EFEFEC;   /* page: the cool side of clay plaster */
   --paper:  #FBFAF7;   /* cards laid on the ground */
   --ink:    #000000;
   --muted:  #5C5B52;   /* 6.4:1 on paper */
   --ghost:  #7C7B71;   /* second voice in display type, 3.8:1 on ground */
-  --line:   #D6D4CC;
+  --line:   #DBDAD3;
   --straw:  #855C0C;   /* straw as text: 5.0:1 on the page ground, 5.9:1 on paper */
   --straw-bar: #C0911F;/* straw as a filled bar */
   --olive:  #29331F;   /* cypress shadow — filled dark surfaces */
@@ -39,7 +39,7 @@
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px;
   --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 140px;
   --gutter: clamp(16px, 2.6vw, 36px);
-  --r-xl: 26px; --r-lg: 18px; --r-md: 12px; --r-pill: 999px;
+  --r-xl: 0; --r-lg: 0; --r-md: 0; --r-pill: 999px;  /* only controls are round */
   --shadow: 0 12px 32px -14px rgba(28, 32, 22, .38), 0 1px 3px rgba(28, 32, 22, .07);
   --ease: cubic-bezier(.16, 1, .3, 1);
 }
@@ -71,8 +71,8 @@ button, input { font: inherit; color: inherit; }
 .page { max-width: 1480px; margin-inline: auto; padding-inline: var(--gutter); padding-block: var(--s3) 0; }
 
 .micro { font-size: var(--micro); font-weight: 500; line-height: 1.3; text-transform: uppercase; letter-spacing: .04em; }
-.display { font-size: var(--display); font-weight: 800; line-height: .9; letter-spacing: -.045em; text-transform: uppercase; overflow-wrap: anywhere; padding-left: .04em; }
-.h2 { font-size: var(--h2); font-weight: 800; line-height: .95; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; overflow-wrap: anywhere; }
+.display { font-size: var(--display); font-weight: 800; line-height: .98; letter-spacing: -.045em; text-transform: uppercase; overflow-wrap: anywhere; padding-left: .04em; }
+.h2 { font-size: var(--h2); font-weight: 800; line-height: 1.02; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; overflow-wrap: anywhere; }
 .lead { font-size: var(--lead); line-height: 1.45; color: var(--muted); max-width: 42ch; text-wrap: pretty; }
 .num { font-variant-numeric: tabular-nums; }
 
@@ -96,56 +96,39 @@ button, input { font: inherit; color: inherit; }
 .pill .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 
 /* ---------- 1 · hero ---------- */
-.hero {
-  position: relative; isolation: isolate; overflow: hidden;
-  border-radius: var(--r-xl);
-  height: clamp(580px, 90vh, 880px);
-  background: #CBD6DF;
-}
-.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: 0; }
-.hero__word {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none; color: #fff;
-  font-weight: 800; font-size: var(--word); line-height: .82; letter-spacing: -.055em; text-transform: uppercase;
-  opacity: .92;
-}
-.hero__word span { position: absolute; white-space: nowrap; }
-.hero__word .a { left: 2.5%; top: 12%; }
-.hero__word .b { right: 2.5%; top: 29%; }
-.hero__veil {
-  position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(13,20,34,.62) 0 6%, rgba(13,20,34,.34) 16%, transparent 34%),
-    linear-gradient(0deg, rgba(13,20,34,.66) 0 22%, transparent 58%);
-}
-.hero__ui { position: absolute; inset: 0; z-index: 3; display: grid; grid-template-rows: auto 1fr auto; padding: var(--s5) clamp(18px, 2.4vw, 40px) clamp(22px, 2.4vw, 38px); pointer-events: none; }
-.hero__ui > * { pointer-events: auto; }
-
-.nav { display: flex; align-items: center; gap: var(--s5); color: #fff; }
+.hero { position: relative; }
+.nav { display: flex; align-items: center; gap: var(--s5); padding-bottom: var(--s4); border-bottom: 1px solid var(--line); }
 .brand { display: inline-flex; align-items: center; gap: var(--s3); text-decoration: none; font-weight: 800; letter-spacing: -.02em; font-size: 1.0625rem; min-height: 44px; }
-.brand svg { width: 30px; height: 30px; flex: none; }
+.brand svg { width: 28px; height: 28px; flex: none; }
 .nav__links { display: flex; gap: var(--s5); margin-inline: auto; }
 .nav__links a { font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
-.nav__links a:hover, .nav__links a[aria-current="true"] { text-decoration: underline; text-underline-offset: 5px; }
-.lang { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid rgba(255,255,255,.5); border-radius: var(--r-pill); }
-.lang button { min-width: 36px; min-height: 34px; padding: 0 var(--s2); border: 0; border-radius: var(--r-pill); background: transparent; color: #fff; font-size: var(--micro); font-weight: 600; cursor: pointer; }
-.lang button:hover { background: rgba(255,255,255,.2); }
-.lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+.nav__links a:hover, .nav__links a[aria-current="true"] { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
+.lang { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--r-pill); }
+.lang button { min-width: 36px; min-height: 34px; padding: 0 var(--s2); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--ink); font-size: var(--micro); font-weight: 600; cursor: pointer; }
+.lang button:hover { background: rgba(0,0,0,.06); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 
-.hero__mid { justify-self: end; align-self: start; margin-top: var(--s7); color: #fff; text-align: right; max-width: 34ch; text-wrap: balance; }
-.hero__bottom { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: var(--s6); color: #fff; }
-.hero__claim { font-size: clamp(1.75rem, .9rem + 2.8vw, 3.5rem); font-weight: 800; line-height: .94; letter-spacing: -.04em; text-transform: uppercase; max-width: 13ch; }
-.hero__row { margin-top: var(--s5); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s5); }
-.cards { display: flex; gap: var(--s3); }
-.stat { width: 182px; padding: var(--s4); border-radius: var(--r-lg); background: rgba(251,250,247,.96); color: var(--ink); box-shadow: var(--shadow); }
-.stat b { display: block; font-size: 2.125rem; font-weight: 700; letter-spacing: -.045em; line-height: 1; }
-.stat p { margin-top: var(--s2); font-size: var(--micro); line-height: 1.45; color: var(--muted); }
+.hero__body { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s7); align-items: end; padding-top: clamp(var(--s7), 6vw, var(--s10)); }
+.hero__kick { color: var(--muted); max-width: 44ch; }
+.hero__claim { margin-top: var(--s6); font-size: var(--display); font-weight: 800; line-height: .96; letter-spacing: -.05em; text-transform: uppercase; overflow-wrap: anywhere; }
+.hero__claim .ln { display: block; }
+.hero__ghost { color: var(--ghost); }
+.hero__row { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s3) var(--s4); }
+.hero__shot { aspect-ratio: 3/2; }
+.hero__cap { margin-top: var(--s3); font-size: var(--micro); line-height: 1.55; color: var(--muted); }
 
-.burger { display: none; width: 44px; height: 44px; place-items: center; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+.facts { margin-top: clamp(var(--s8), 6vw, var(--s9)); display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid var(--line); }
+.fact { padding: var(--s6) var(--s5) 0 0; }
+.fact + .fact { border-left: 1px solid var(--line); padding-left: var(--s5); }
+.fact dt { font-size: clamp(1.625rem, 1rem + 2vw, 2.625rem); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+.fact dd { margin: var(--s3) 0 0; font-size: var(--micro); line-height: 1.55; color: var(--muted); }
+
+.burger { display: none; width: 44px; height: 44px; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
 .burger svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
 .burger[aria-expanded="true"] .o { display: none; }
 .burger .x { display: none; }
 .burger[aria-expanded="true"] .x { display: inline; }
-.drawer { position: absolute; z-index: 4; top: 78px; left: 14px; right: 14px; padding: var(--s3) var(--s5) var(--s5); background: var(--paper); border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.drawer { position: absolute; z-index: 4; top: 72px; left: 0; right: 0; padding: var(--s3) var(--s5) var(--s5); background: var(--paper); border-radius: var(--r-lg); box-shadow: var(--shadow); }
 .drawer a { display: flex; align-items: center; min-height: 50px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: var(--small); text-transform: uppercase; letter-spacing: .03em; text-decoration: none; }
 .drawer .pill { margin-top: var(--s4); width: 100%; justify-content: center; }
 
@@ -159,11 +142,13 @@ button, input { font: inherit; color: inherit; }
 .wall__grid { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s8); align-items: center; }
 .wall__l1 { margin-left: 13%; }
 .wall__ghost { color: var(--ghost); }
-.wall__shot { aspect-ratio: 4/5; }
+.wall__fig { max-width: 600px; margin-left: auto; }
+.wall__shot { aspect-ratio: 7/5; }
+.wall__cap { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); font-size: var(--micro); line-height: 1.55; color: var(--muted); }
 .wall__text { margin-top: var(--s7); }
 .wall__layers { margin-top: var(--s7); border-top: 1px solid var(--line); }
 .layer { display: grid; grid-template-columns: 28px minmax(0,1fr) auto; align-items: center; gap: var(--s4); padding-block: var(--s5); border-bottom: 1px solid var(--line); }
-.layer i { width: 26px; height: 26px; border-radius: 6px; }
+.layer i { width: 26px; height: 26px; }
 .layer b { font-weight: 600; font-size: var(--lead); letter-spacing: -.015em; }
 .layer span { font-size: var(--small); color: var(--muted); text-align: right; }
 
@@ -181,8 +166,8 @@ button, input { font: inherit; color: inherit; }
 .tbl .v { width: 24%; font-weight: 600; white-space: nowrap; }
 .tbl .r { width: 18%; text-align: right; padding-right: 0; white-space: nowrap; font-size: var(--small); color: var(--muted); }
 .tbl .r b { font-weight: 600; color: var(--ink); }
-.bar { height: 10px; border-radius: 0 5px 5px 0; background: #B6B4AA; }
-.bar--straw { height: 14px; border-radius: 0 7px 7px 0; }
+.bar { height: 10px; background: #B6B4AA; }
+.bar--straw { height: 14px; }
 .bar--straw { background: var(--straw-bar); box-shadow: 0 0 0 4px rgba(192,145,31,.14); }
 .is-straw th, .is-straw .v { color: var(--straw); }
 .warm__note { grid-column: 6 / 13; margin-top: var(--s5); font-size: var(--small); color: var(--muted); max-width: 52ch; }
@@ -230,7 +215,10 @@ button, input { font: inherit; color: inherit; }
 .req__veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(13,20,34,.84) 0 32%, rgba(13,20,34,.2) 70%, rgba(13,20,34,.4)); }
 .req > *:not(.req__photo):not(.req__veil) { position: relative; z-index: 2; }
 .req__lead { color: #fff; align-self: center; }
-.req__lead h2 { font-size: clamp(1.875rem, 1rem + 3.2vw, 4rem); font-weight: 800; line-height: .94; letter-spacing: -.04em; text-transform: uppercase; max-width: 12ch; }
+.req__lead h2 { font-size: clamp(1.875rem, 1rem + 3.2vw, 4rem); font-weight: 800; line-height: 1.02; letter-spacing: -.04em; text-transform: uppercase; max-width: 12ch; }
+.req__contacts { margin-top: var(--s5); display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); font-size: var(--small); font-weight: 600; }
+.req__contacts a { color: #fff; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.45); }
+.req__contacts a:hover { text-decoration-color: #fff; }
 .req__lead p { margin-top: var(--s4); max-width: 30ch; font-size: var(--lead); color: rgba(255,255,255,.9); }
 .card { background: var(--paper); border-radius: var(--r-lg); padding: clamp(20px, 2.4vw, 32px); box-shadow: var(--shadow); }
 .form { display: grid; gap: var(--s4); }
@@ -257,13 +245,13 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .consent { font-size: var(--micro); color: var(--muted); line-height: 1.5; }
 .alert { padding: var(--s3) var(--s4); border-radius: var(--r-md); background: var(--error-bg); color: var(--error); font-size: var(--small); font-weight: 500; }
 .done { display: grid; gap: var(--s3); justify-items: start; }
-.done h3 { font-size: 1.75rem; font-weight: 800; letter-spacing: -.035em; text-transform: uppercase; line-height: 1; }
+.done h3 { font-size: 1.75rem; font-weight: 800; letter-spacing: -.035em; text-transform: uppercase; line-height: 1.05; }
 .spin { width: 13px; height: 13px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: sp .8s linear infinite; }
 @keyframes sp { to { transform: rotate(1turn); } }
 
 /* ---------- footer ---------- */
 .foot { padding-block: var(--s8) var(--s6); }
-.foot__word { font-size: clamp(2.75rem, .5rem + 13vw, 13rem); font-weight: 800; letter-spacing: -.06em; line-height: .82; text-transform: uppercase; margin-left: -.03em; }
+.foot__word { font-size: clamp(2.75rem, .5rem + 13vw, 13rem); font-weight: 800; letter-spacing: -.06em; line-height: .88; text-transform: uppercase; margin-left: -.03em; }
 .foot__grid { margin-top: var(--s7); padding-top: var(--s5); border-top: 2px solid var(--straw-bar); display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--s5); }
 .foot__grid dt { font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 4px; }
 .foot__grid dd { font-size: var(--small); margin: 0; }
@@ -272,23 +260,82 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .foot .lang button { color: var(--ink); }
 .foot .lang button:hover { background: var(--ground); }
 .foot .lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.foot__links a { display: block; word-break: break-word; }
+.foot__links a + a { margin-top: 4px; }
 .foot__note { margin-top: var(--s6); font-size: var(--micro); line-height: 1.6; color: var(--muted); max-width: 70ch; }
 
 /* ---------- one orchestrated entrance ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .hero__photo { animation: rise 1.6s var(--ease) both; }
-  .hero__ui > * { animation: fade .9s var(--ease) both .3s; }
-  .hero__word span { animation: fade 1s var(--ease) both .5s; }
-  @keyframes rise { from { transform: scale(1.06); } to { transform: none; } }
-  @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .hero__claim .ln { animation: lift .9s var(--ease) both; }
+  .hero__claim .ln + .ln { animation-delay: .09s; }
+  .hero__shot img { animation: settle 1.5s var(--ease) both; }
+  @keyframes lift { from { opacity: 0; transform: translateY(.16em); } to { opacity: 1; transform: none; } }
+  @keyframes settle { from { transform: scale(1.05); } to { transform: none; } }
 }
 
+/* ---------- 6 · built ---------- */
+.built__head { grid-column: 1 / 9; }
+.built__grid { grid-column: 1 / 13; margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s6); }
+.built__item:nth-child(2) { margin-top: var(--s8); }
+.built__item .shot { aspect-ratio: 3/2; }
+.built__cap { margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid var(--line); }
+.built__cap b { display: block; font-weight: 700; font-size: var(--small); letter-spacing: -.005em; }
+.built__cap span { display: block; margin-top: 5px; font-size: var(--micro); line-height: 1.55; color: var(--muted); }
+
+/* ---------- 8 · kits ---------- */
+.kits__head { grid-column: 1 / 9; }
+.kits__wrap { grid-column: 1 / 13; margin-top: var(--s8); }
+.kits__hint { display: none; margin-bottom: var(--s4); font-size: var(--micro); color: var(--muted); }
+.kits__box { position: relative; }
+.kits__box::after { content: ""; position: absolute; z-index: 1; inset: 0 0 0 auto; width: 44px; pointer-events: none; background: linear-gradient(90deg, rgba(239,239,236,0), var(--ground)); }
+.kits__box.is-end::after { display: none; }
+.kits__scroll { overflow-x: auto; }
+.kits__scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.kits { width: 100%; min-width: 720px; border-collapse: collapse; }
+.kits th, .kits td { text-align: left; padding: var(--s4) var(--s4) var(--s4) 0; border-top: 1px solid var(--line); vertical-align: top; }
+.kits thead th { border-top: 0; padding-top: 0; vertical-align: bottom; }
+.kits thead .c { width: 21%; padding-right: var(--s3); }
+.kits thead .what { width: 37%; }
+.kits .kn { display: block; font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.kits .kt { display: block; margin-top: var(--s2); font-size: var(--h3); font-weight: 700; letter-spacing: -.035em; line-height: 1.06; }
+.kits .kp { display: block; margin-top: var(--s3); padding-bottom: var(--s4); font-size: var(--small); font-weight: 600; color: var(--straw); }
+.kits tbody th { font-weight: 600; font-size: var(--small); line-height: 1.4; padding-right: var(--s6); }
+.kits tbody th span { display: block; margin-top: 3px; font-weight: 400; font-size: var(--micro); line-height: 1.5; color: var(--muted); }
+.kits tbody td { width: 21%; text-align: center; }
+.kits tbody tr:last-child > * { border-bottom: 1px solid var(--line); }
+.kits .is-full { background: rgba(192,145,31,.08); }
+.yes { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: var(--straw-bar); position: relative; }
+.yes::after { content: ""; position: absolute; left: 6px; top: 7px; width: 9px; height: 5px; border-left: 2px solid #241A00; border-bottom: 2px solid #241A00; transform: rotate(-45deg); }
+.no { display: inline-block; width: 13px; height: 2px; background: #AFADA3; vertical-align: 10px; }
+.kits__note { grid-column: 1 / 13; margin-top: var(--s5); font-size: var(--small); line-height: 1.55; color: var(--muted); max-width: 66ch; }
+
+/* ---------- 9 · questions ---------- */
+.faq__head { grid-column: 1 / 5; }
+.faq__list { grid-column: 6 / 13; border-top: 1px solid var(--line); }
+.qa { border-bottom: 1px solid var(--line); }
+.qa > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0,1fr) 26px; align-items: start; gap: var(--s4); padding-block: var(--s5); font-size: var(--h3); font-weight: 700; letter-spacing: -.03em; line-height: 1.16; }
+.qa > summary::-webkit-details-marker { display: none; }
+.qa > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.qa__x { width: 26px; height: 26px; margin-top: .2em; border: 1px solid var(--line); border-radius: 50%; position: relative; }
+.qa__x::before, .qa__x::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; background: var(--ink); transform: translate(-50%,-50%); }
+.qa__x::after { transform: translate(-50%,-50%) rotate(90deg); }
+.qa[open] .qa__x::after { transform: translate(-50%,-50%) rotate(0deg); }
+.qa[open] > summary { padding-bottom: var(--s4); }
+.qa__a { padding-bottom: var(--s6); max-width: 60ch; font-size: var(--lead); line-height: 1.5; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .qa__x::after { transition: transform .18s ease; } }
+
 /* ---------- responsive ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .nav__links { display: none; }
   .burger { display: grid; }
+}
+@media (max-width: 1100px) {
   .wall__grid { gap: var(--s6); }
-  .wall__shot { aspect-ratio: 3/4; }
+  .built__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .built__item:nth-child(2) { margin-top: 0; }
+  .built__head, .kits__head, .faq__head { grid-column: 1 / 13; }
+  .kits__hint { display: block; }
+  .faq__list { grid-column: 1 / 13; margin-top: var(--s7); }
   .warm__head { grid-column: 1 / 13; margin-bottom: var(--s7); }
   .warm__table, .warm__note { grid-column: 1 / 13; }
   .stages__head { grid-column: 1 / 13; }
@@ -315,18 +362,17 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
 @media (max-width: 680px) {
-  .hero { height: 660px; }
-  .hero__word .a { top: 9%; }
-  .hero__word .b { top: 17%; }
-  .hero__mid { display: none; }
-  .hero__bottom { grid-template-columns: minmax(0,1fr); gap: var(--s4); }
-  .hero__veil { background: linear-gradient(180deg, rgba(13,20,34,.58) 0 5%, rgba(13,20,34,.34) 22%, transparent 44%), linear-gradient(0deg, rgba(13,20,34,.8) 0 34%, transparent 66%); }
-  .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .stat { width: auto; padding: var(--s3); }
-  .stat b { font-size: 1.625rem; }
+  .hero__body { grid-template-columns: minmax(0,1fr); gap: var(--s6); align-items: start; }
+  .hero__row { margin-top: var(--s6); }
+  .facts { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .fact { padding-right: var(--s4); }
+  .fact:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
   .wall__grid { grid-template-columns: minmax(0,1fr); }
   .wall__l1 { margin-left: 8%; }
-  .wall__shot { aspect-ratio: 4/3; }
+  .wall__fig { max-width: none; }
+  .built__grid { grid-template-columns: minmax(0,1fr); gap: var(--s7); }
+  .qa > summary { font-size: var(--lead); }
   .layer { grid-template-columns: 28px minmax(0,1fr); }
   .layer span { grid-column: 2; text-align: left; }
   .tbl thead { display: none; }
@@ -351,58 +397,65 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 
 <!-- 1 · Hero -->
 <header class="hero" id="top">
-  <img class="hero__photo" src="img/house.webp" alt="" width="1248" height="832" fetchpriority="high">
-  <div class="hero__word" aria-hidden="true"><span class="a">Sferi</span><span class="b">Home</span></div>
-  <div class="hero__veil"></div>
+  <nav class="nav" aria-label="Основная навигация" data-i18n-aria="nav.label">
+    <a class="brand" href="#top" aria-label="SFERIHOME">
+      <svg viewBox="0 0 30 30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="15" cy="15" r="13.2"/><path d="M3 11.5h24M3 18.5h24M15 2v26"/></svg>
+      <span>SFERIHOME</span>
+    </a>
+    <div class="nav__links">
+      <a href="#wall" data-i18n="nav.wall">Стена</a>
+      <a href="#warm" data-i18n="nav.warm">Тепло</a>
+      <a href="#stages" data-i18n="nav.stages">Как строим</a>
+      <a href="#built" data-i18n="nav.built">Построено</a>
+      <a href="#kits" data-i18n="nav.kits">Комплекты</a>
+      <a href="#faq" data-i18n="nav.faq">Вопросы</a>
+    </div>
+    <div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang">
+      <button type="button" data-lang="me" aria-pressed="false">ME</button>
+      <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="pill pill--solid nav__cta" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="o" d="M4 9h16M4 15h16"/><path class="x" d="M6 6l12 12M18 6L6 18"/></svg>
+      <span class="sr" data-i18n="nav.menu">Меню</span>
+    </button>
+  </nav>
 
-  <div class="hero__ui">
-    <nav class="nav" aria-label="Основная навигация" data-i18n-aria="nav.label">
-      <a class="brand" href="#top" aria-label="SFERIHOME">
-        <svg viewBox="0 0 30 30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="15" cy="15" r="13.2"/><path d="M3 11.5h24M3 18.5h24M15 2v26"/></svg>
-        <span>SFERIHOME</span>
-      </a>
-      <div class="nav__links">
-        <a href="#wall" data-i18n="nav.wall">Стена</a>
-        <a href="#warm" data-i18n="nav.warm">Тепло</a>
-        <a href="#stages" data-i18n="nav.stages">Как строим</a>
-        <a href="#where" data-i18n="nav.where">Участок</a>
-        <a href="#projects" data-i18n="nav.projects">Проекты</a>
-      </div>
-      <div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang">
-        <button type="button" data-lang="me" aria-pressed="false">ME</button>
-        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
-      </div>
-      <a class="pill pill--light nav__cta" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
-      <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="drawer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="o" d="M4 9h16M4 15h16"/><path class="x" d="M6 6l12 12M18 6L6 18"/></svg>
-        <span class="sr" data-i18n="nav.menu">Меню</span>
-      </button>
-    </nav>
-
-    <p class="hero__mid micro" data-i18n="hero.mid">Дома из соломенных панелей. Производство — Цетине, Черногория</p>
-
-    <div class="hero__bottom">
-      <div>
-        <h1 class="hero__claim" data-i18n="hero.claim">Дом, который держит тепло сам</h1>
-        <div class="hero__row">
-          <a class="pill pill--light" href="#projects"><span data-i18n="hero.cta">Смотреть проекты</span><span class="dot"></span></a>
-          <p class="micro" data-i18n="hero.meta">Панели с фабрики · сборка 3–5 дней</p>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="stat"><b class="num" data-i18n="hero.s1n">40 кг</b><p data-i18n="hero.s1">весит м² стены — в 15 раз легче кирпичной</p></div>
-        <div class="stat"><b class="num" data-i18n="hero.s2n">×7</b><p data-i18n="hero.s2">во столько раз солома теплее кирпича</p></div>
+  <div class="hero__body">
+    <div>
+      <p class="micro hero__kick" data-i18n="hero.kick">Соломенные панели и кровля. Производство — Цетине, Черногория</p>
+      <h1 class="hero__claim">
+        <span class="ln" data-i18n="hero.h1">Стена из соломы</span>
+        <span class="ln hero__ghost" data-i18n="hero.h2">/ 40 кг вместо 600</span>
+      </h1>
+      <div class="hero__row">
+        <a class="pill pill--solid" href="#kits" data-i18n="hero.cta">Смотреть комплекты</a>
+        <a class="pill pill--line" href="#built" data-i18n="hero.cta2">Построенные дома</a>
       </div>
     </div>
+    <figure class="hero__fig">
+      <div class="shot hero__shot"><img src="img/sphere.webp" alt="" width="472" height="315" fetchpriority="high" data-i18n-alt="alt.b2"></div>
+      <figcaption class="hero__cap" data-i18n="hero.cap">Настоящее фото: сферический дом, соломенная кровля спускается до земли</figcaption>
+    </figure>
   </div>
+
+  <dl class="facts">
+    <div class="fact"><dt class="num" data-i18n="hero.s1n">40 кг</dt><dd data-i18n="hero.s1">весит м² стены — в 15 раз легче кирпичной</dd></div>
+    <div class="fact"><dt class="num" data-i18n="hero.s2n">×7</dt><dd data-i18n="hero.s2">во столько раз солома теплее кирпича</dd></div>
+    <div class="fact"><dt class="num" data-i18n="hero.s3n">3–5 дней</dt><dd data-i18n="hero.s3">сборка коробки бригадой из нескольких человек</dd></div>
+    <div class="fact"><dt class="num" data-i18n="hero.s4n">100 лет</dt><dd data-i18n="hero.s4">расчётный срок службы деревянного каркаса</dd></div>
+  </dl>
 
   <div class="drawer" id="drawer" hidden>
     <a href="#wall" data-i18n="nav.wall">Стена</a>
     <a href="#warm" data-i18n="nav.warm">Тепло</a>
     <a href="#stages" data-i18n="nav.stages">Как строим</a>
     <a href="#where" data-i18n="nav.where">Участок</a>
+    <a href="#built" data-i18n="nav.built">Построено</a>
     <a href="#projects" data-i18n="nav.projects">Проекты</a>
+    <a href="#kits" data-i18n="nav.kits">Комплекты</a>
+    <a href="#faq" data-i18n="nav.faq">Вопросы</a>
     <a class="pill pill--solid" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
   </div>
 </header>
@@ -424,7 +477,10 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         <div class="layer"><i style="background:radial-gradient(circle at 30% 30%,#EDEAE1,#DBD7CC)"></i><b data-i18n="wall.lc">Глиняный раствор</b><span data-i18n="wall.lcd">снаружи и внутри, входит в комплект</span></div>
       </dl>
     </div>
-    <figure class="shot wall__shot"><img src="img/panel.webp" alt="" width="1184" height="896" data-i18n-alt="alt.panel"></figure>
+    <figure class="wall__fig">
+      <div class="shot wall__shot"><img src="img/wall-real.webp" alt="" width="560" height="400" data-i18n-alt="alt.panel"></div>
+      <figcaption class="wall__cap" data-i18n="wall.cap">Настоящее фото: стена до штукатурки — каркас и солома</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -530,7 +586,31 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   </div>
 </section>
 
-<!-- 6 · Projects -->
+<!-- 6 · Built -->
+<section class="sec" id="built" aria-labelledby="built-h">
+  <div class="grid12">
+    <div class="built__head">
+      <h2 class="h2" id="built-h" data-i18n="built.title">Построенные дома</h2>
+      <p class="lead" data-i18n="built.lead">Настоящие фотографии объектов. Остальные изображения на странице — визуализации.</p>
+    </div>
+    <div class="built__grid">
+      <figure class="built__item">
+        <div class="shot"><img src="img/slope.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b1"></div>
+        <figcaption class="built__cap"><b data-i18n="built.t1">Два дома на склоне</b><span data-i18n="built.d1">Соломенная кровля и деревянный каркас, участок по горному склону</span></figcaption>
+      </figure>
+      <figure class="built__item">
+        <div class="shot"><img src="img/stilts.webp" alt="" width="472" height="315" loading="lazy" data-i18n-alt="alt.b3"></div>
+        <figcaption class="built__cap"><b data-i18n="built.t3">Дом на сваях</b><span data-i18n="built.d3">Белая штукатурка и соломенная кровля, крутой горный склон</span></figcaption>
+      </figure>
+      <figure class="built__item">
+        <div class="shot"><img src="img/flat.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b4"></div>
+        <figcaption class="built__cap"><b data-i18n="built.t4">Плоская кровля</b><span data-i18n="built.d4">Серая глиняная штукатурка и тёмное дерево, ровный участок</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Projects -->
 <section class="sec" id="projects" aria-labelledby="proj-h">
   <div class="grid12">
     <div class="proj__head">
@@ -558,13 +638,74 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   </div>
 </section>
 
-<!-- 7 · Request -->
+<!-- 8 · Kits -->
+<section class="sec" id="kits" aria-labelledby="kits-h">
+  <div class="grid12">
+    <div class="kits__head">
+      <h2 class="h2" id="kits-h" data-i18n="kits.title">Три домокомплекта</h2>
+      <p class="lead" data-i18n="kits.lead">Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.</p>
+    </div>
+    <div class="kits__wrap">
+      <p class="kits__hint" data-i18n="kits.hint">Таблица прокручивается вбок</p>
+      <div class="kits__box">
+      <div class="kits__scroll" tabindex="0" role="region" aria-labelledby="kits-h">
+      <table class="kits">
+        <caption class="sr" data-i18n="kits.cap">Что входит в каждый из трёх домокомплектов</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="c what"><span class="sr" data-i18n="kits.what">Что входит</span></th>
+            <th scope="col" class="c"><span class="kn" data-i18n="kits.k1n">Комплект 1</span><span class="kt" data-i18n="kits.k1t">Без сборки</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
+            <th scope="col" class="c"><span class="kn" data-i18n="kits.k2n">Комплект 2</span><span class="kt" data-i18n="kits.k2t">Со сборкой и штукатуркой</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
+            <th scope="col" class="c is-full"><span class="kn" data-i18n="kits.k3n">Комплект 3</span><span class="kt" data-i18n="kits.k3t">Под чистовую отделку</span><span class="kp" data-i18n="kits.price">Цена по запросу</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr><th scope="row"><span data-i18n="kits.r1">Стеновые соломенные панели</span><span data-i18n="kits.n1">с надоконными и подоконными перемычками, утеплитель — солома</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r2">Нижний и верхний обвязочный брус</span><span data-i18n="kits.n2">стен и перегородок</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r3">Деревянный каркас перегородок</span><span data-i18n="kits.n3">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r4">Деревянные фермы межэтажного перекрытия</span><span data-i18n="kits.n4">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r5">Деревянные стропила или фермы крыши</span><span data-i18n="kits.n5">без утеплителя и звукоизоляции</span></th><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r6">Сборка домокомплекта</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r7">Глиняная штукатурка стен</span><span data-i18n="kits.n7">снаружи и внутри</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r8">Доставка на участок</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        <tr><th scope="row"><span data-i18n="kits.r9">Инженерные системы</span><span data-i18n="kits.n9">электрика, вода и канализация, отопление с котлом — с материалами</span></th><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td><i class="no" aria-hidden="true"></i><span class="sr" data-i18n="kits.no">не входит</span></td><td class="is-full"><i class="yes" aria-hidden="true"></i><span class="sr" data-i18n="kits.yes">входит</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+    </div>
+    <p class="kits__note" data-i18n="kits.note">Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции. Котёл в третьем комплекте — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно. Состав комплектов взят с текущего сайта и требует подтверждения компанией.</p>
+  </div>
+</section>
+
+<!-- 9 · Questions -->
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="grid12">
+    <div class="faq__head">
+      <h2 class="h2" id="faq-h" data-i18n="faq.title">Вопросы</h2>
+      <p class="lead" data-i18n="faq.lead">О соломенном доме спрашивают примерно одно и то же. Ответы собраны из открытых материалов о технологии и требуют подтверждения компанией.</p>
+    </div>
+    <div class="faq__list">
+      <details class="qa"><summary><span data-i18n="faq.q1">Солома горит?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a1">Солому в панели прессуют так плотно, что открытому пламени не хватает кислорода, а снаружи и внутри стена закрыта глиняной штукатуркой. Точные показатели огнестойкости и протоколы испытаний запрашивайте у компании — здесь их нет.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q2">Заведутся ли в стене грызуны или насекомые?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a2">В панель идёт солома, очищенная от зерна и спрессованная в плотный блок под слоем глины. Еды в ней нет, а ход в такой плотности не проложить.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q3">Что будет от влаги?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a3">Глина пропускает пар и отдаёт влагу наружу, поэтому стена не запирает воду внутри. Важнее другое: вынос кровли и отрыв стены от земли — за этим дом и ставят на сваи или на цоколь.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q4">Какой нужен фундамент?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a4">Квадратный метр стены весит около 40 кг без раствора — примерно в 15 раз меньше кирпичной. Отсюда лёгкий фундамент, в том числе винтовые сваи, и возможность строить на склоне и на труднодоступном участке.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q5">Сколько идёт сборка?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a5">Панели приезжают готовыми с фабрики в Цетине, на участке их только собирают: коробка — 3–5 дней бригадой из нескольких человек. Фундамент, кровля и отделка считаются отдельно.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q6">Сколько этажей можно?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a6">До трёх — это предел для деревянного каркаса. Расчётный срок службы самого каркаса — до 100 лет.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q7">Сколько это стоит?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a7">Цена считается по проекту и по выбранному домокомплекту — их три. Оставьте заявку внизу страницы: укажите этажность и участок, и вам посчитают.</p></details>
+      <details class="qa"><summary><span data-i18n="faq.q8">Остаётся ли мусор на участке?</span><i class="qa__x" aria-hidden="true"></i></summary><p class="qa__a" data-i18n="faq.a8">Панели делают на фабрике, на участок приезжает готовый комплект — строительного мусора от стен не остаётся.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Request -->
 <section class="req" id="request" aria-labelledby="req-h">
   <img class="req__photo" src="img/dusk.webp" alt="" width="1376" height="768" loading="lazy">
   <div class="req__veil"></div>
   <div class="req__lead">
     <h2 id="req-h" data-i18n="req.title">Расскажите об участке</h2>
     <p data-i18n="req.lead">Пришлём состав комплекта, сроки и цену под ваш проект.</p>
+    <p class="req__contacts"><a href="mailto:sferihomemne2024@gmail.com">sferihomemne2024@gmail.com</a><a href="tel:+38267807404">+382 67 807 404</a></p>
   </div>
   <div class="card">
     <form class="form" id="form" novalidate>
@@ -608,7 +749,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   <dl class="foot__grid">
     <div><dt data-i18n="foot.prod">Производство</dt><dd data-i18n="foot.prodV">Горни Обод, Цетине, Черногория</dd></div>
     <div><dt data-i18n="foot.office">Офис</dt><dd data-i18n="foot.officeV">Подгорица</dd></div>
-    <div><dt data-i18n="foot.contact">Контакты</dt><dd data-i18n="foot.contactV">Телефон и e-mail — уточняются</dd></div>
+    <div><dt data-i18n="foot.contact">Контакты</dt><dd class="foot__links"><a href="mailto:sferihomemne2024@gmail.com">sferihomemne2024@gmail.com</a><a href="tel:+38267807404">+382 67 807 404</a></dd></div>
     <div class="foot__lang">
       <dt data-i18n="foot.lang">Язык</dt>
       <dd><div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang">
@@ -631,9 +772,17 @@ const I18N = {
     _lang: "ru", _title: "SFERIHOME — дома из соломенных панелей",
     "nav.label": "Основная навигация", "nav.lang": "Язык", "nav.menu": "Меню", "nav.close": "Закрыть", "nav.skip": "К содержанию",
     "nav.wall": "Стена", "nav.warm": "Тепло", "nav.stages": "Как строим", "nav.where": "Участок", "nav.projects": "Проекты", "nav.cta": "Рассчитать дом",
-    "hero.mid": "Дома из соломенных панелей. Производство — Цетине, Черногория",
-    "hero.claim": "Дом, который держит тепло сам",
-    "hero.cta": "Смотреть проекты", "hero.meta": "Панели с фабрики · сборка 3–5 дней",
+    "hero.kick": "Соломенные панели и кровля. Производство — Цетине, Черногория",
+    "hero.h1": "Стена из соломы",
+    "hero.h2": "/ 40 кг вместо 600",
+    "hero.cta": "Смотреть комплекты",
+    "hero.cta2": "Построенные дома",
+    "hero.cap": "Настоящее фото: сферический дом, соломенная кровля спускается до земли",
+    "hero.s3n": "3–5 дней",
+    "hero.s3": "сборка коробки бригадой из нескольких человек",
+    "hero.s4n": "100 лет",
+    "hero.s4": "расчётный срок службы деревянного каркаса",
+   
     "hero.s1n": "40 кг", "hero.s1": "весит м² стены — в 15 раз легче кирпичной",
     "hero.s2n": "×7", "hero.s2": "во столько раз солома теплее кирпича",
     "wall.full": "Стена из прессованной соломы на деревянном каркасе",
@@ -664,22 +813,96 @@ const I18N = {
     "req.errServer": "Заявка не отправилась. Проверьте соединение и попробуйте ещё раз — введённое сохранено.",
     "req.okT": "Заявка отправлена", "req.okD": "Свяжемся с вами по контакту, который вы оставили.", "req.again": "Отправить ещё одну",
     "foot.prod": "Производство", "foot.prodV": "Горни Обод, Цетине, Черногория", "foot.office": "Офис", "foot.officeV": "Подгорица",
-    "foot.contact": "Контакты", "foot.contactV": "Телефон и e-mail — уточняются", "foot.lang": "Язык",
-    "foot.note": "Прототип редизайна. Фотографии сгенерированы и не показывают реальные объекты SFERIHOME. Цифры взяты из открытых публикаций и требуют подтверждения компанией.",
-    "alt.panel": "Стеновая панель в цехе: брус каркаса и плотно спрессованная солома",
+    "foot.contact": "Контакты", "foot.lang": "Язык",
+    "foot.note": "Прототип редизайна. Настоящие фотографии — стена в разделе «Стена» и все снимки в разделе «Построено»; остальные изображения сгенерированы. Состав комплектов взят с текущего сайта, цифры и ответы на вопросы — из открытых публикаций; всё это требует подтверждения компанией.",
+    "alt.panel": "Фронтон дома: деревянный каркас, заполненный прессованной соломой, окна вставлены, штукатурки ещё нет",
     "alt.factory": "Двое рабочих укладывают солому в деревянную раму панели",
     "alt.assembly": "Трое рабочих поднимают соломенную панель на каркас дома",
     "alt.piles": "Деревянное основание дома на винтовых сваях на каменистом склоне",
     "alt.roof": "Двое рабочих монтируют кровельную панель, за ними горы",
     "alt.aerial": "Вид сверху: дома в один, два и три этажа на склоне с оливами",
+    "nav.built": "Построено",
+    "nav.kits": "Комплекты",
+    "nav.faq": "Вопросы",
+    "wall.cap": "Настоящее фото: стена до штукатурки — каркас и солома",
+    "built.title": "Построенные дома",
+    "built.lead": "Настоящие фотографии объектов. Остальные изображения на странице — визуализации.",
+    "built.t1": "Два дома на склоне",
+    "built.d1": "Соломенная кровля и деревянный каркас, участок по горному склону",
+   
+   
+    "built.t3": "Дом на сваях",
+    "built.d3": "Белая штукатурка и соломенная кровля, крутой горный склон",
+    "built.t4": "Плоская кровля",
+    "built.d4": "Серая глиняная штукатурка и тёмное дерево, ровный участок",
+    "alt.b1": "Два дома с соломенными кровлями на зелёном склоне, за ними горы",
+    "alt.b2": "Дом-купол, целиком крытый соломой, с деревянной террасой в лесу",
+    "alt.b3": "Дом на деревянных сваях с белой штукатуркой и соломенной кровлей на склоне",
+    "alt.b4": "Одноэтажный дом с плоской кровлей, серой штукатуркой и деревянной обшивкой",
+    "kits.title": "Три домокомплекта",
+    "kits.lead": "Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.",
+    "kits.hint": "Таблица прокручивается вбок", "kits.cap": "Что входит в каждый из трёх домокомплектов",
+    "kits.what": "Что входит",
+    "kits.yes": "входит",
+    "kits.no": "не входит",
+    "kits.price": "Цена по запросу",
+    "kits.k1n": "Комплект 1",
+    "kits.k1t": "Без сборки",
+    "kits.k2n": "Комплект 2",
+    "kits.k2t": "Со сборкой и штукатуркой",
+    "kits.k3n": "Комплект 3",
+    "kits.k3t": "Под чистовую отделку",
+    "kits.r1": "Стеновые соломенные панели",
+    "kits.n1": "с надоконными и подоконными перемычками, утеплитель — солома",
+    "kits.r2": "Нижний и верхний обвязочный брус",
+    "kits.n2": "стен и перегородок",
+    "kits.r3": "Деревянный каркас перегородок",
+    "kits.n3": "без утеплителя и звукоизоляции",
+    "kits.r4": "Деревянные фермы межэтажного перекрытия",
+    "kits.n4": "без утеплителя и звукоизоляции",
+    "kits.r5": "Деревянные стропила или фермы крыши",
+    "kits.n5": "без утеплителя и звукоизоляции",
+    "kits.r6": "Сборка домокомплекта",
+    "kits.r7": "Глиняная штукатурка стен",
+    "kits.n7": "снаружи и внутри",
+    "kits.r8": "Доставка на участок",
+    "kits.r9": "Инженерные системы",
+    "kits.n9": "электрика, вода и канализация, отопление с котлом — с материалами",
+    "kits.note": "Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции. Котёл в третьем комплекте — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно. Состав комплектов взят с текущего сайта и требует подтверждения компанией.",
+    "faq.title": "Вопросы",
+    "faq.lead": "О соломенном доме спрашивают примерно одно и то же. Ответы собраны из открытых материалов о технологии и требуют подтверждения компанией.",
+    "faq.q1": "Солома горит?",
+    "faq.a1": "Солому в панели прессуют так плотно, что открытому пламени не хватает кислорода, а снаружи и внутри стена закрыта глиняной штукатуркой. Точные показатели огнестойкости и протоколы испытаний запрашивайте у компании — здесь их нет.",
+    "faq.q2": "Заведутся ли в стене грызуны или насекомые?",
+    "faq.a2": "В панель идёт солома, очищенная от зерна и спрессованная в плотный блок под слоем глины. Еды в ней нет, а ход в такой плотности не проложить.",
+    "faq.q3": "Что будет от влаги?",
+    "faq.a3": "Глина пропускает пар и отдаёт влагу наружу, поэтому стена не запирает воду внутри. Важнее другое: вынос кровли и отрыв стены от земли — за этим дом и ставят на сваи или на цоколь.",
+    "faq.q4": "Какой нужен фундамент?",
+    "faq.a4": "Квадратный метр стены весит около 40 кг без раствора — примерно в 15 раз меньше кирпичной. Отсюда лёгкий фундамент, в том числе винтовые сваи, и возможность строить на склоне и на труднодоступном участке.",
+    "faq.q5": "Сколько идёт сборка?",
+    "faq.a5": "Панели приезжают готовыми с фабрики в Цетине, на участке их только собирают: коробка — 3–5 дней бригадой из нескольких человек. Фундамент, кровля и отделка считаются отдельно.",
+    "faq.q6": "Сколько этажей можно?",
+    "faq.a6": "До трёх — это предел для деревянного каркаса. Расчётный срок службы самого каркаса — до 100 лет.",
+    "faq.q7": "Сколько это стоит?",
+    "faq.a7": "Цена считается по проекту и по выбранному домокомплекту — их три. Оставьте заявку внизу страницы: укажите этажность и участок, и вам посчитают.",
+    "faq.q8": "Остаётся ли мусор на участке?",
+    "faq.a8": "Панели делают на фабрике, на участок приезжает готовый комплект — строительного мусора от стен не остаётся.",
   },
   me: {
     _lang: "sr-Latn-ME", _title: "SFERIHOME — kuće od slamnatih panela",
     "nav.label": "Glavna navigacija", "nav.lang": "Jezik", "nav.menu": "Meni", "nav.close": "Zatvori", "nav.skip": "Na sadržaj",
     "nav.wall": "Zid", "nav.warm": "Toplota", "nav.stages": "Kako gradimo", "nav.where": "Plac", "nav.projects": "Projekti", "nav.cta": "Izračunajte kuću",
-    "hero.mid": "Kuće od slamnatih panela. Proizvodnja — Cetinje, Crna Gora",
-    "hero.claim": "Kuća koja sama drži toplotu",
-    "hero.cta": "Pogledajte projekte", "hero.meta": "Paneli iz fabrike · montaža 3–5 dana",
+    "hero.kick": "Slamnati paneli i krov. Proizvodnja — Cetinje, Crna Gora",
+    "hero.h1": "Zid od slame",
+    "hero.h2": "/ 40 kg umjesto 600",
+    "hero.cta": "Pogledajte komplete",
+    "hero.cta2": "Izgrađene kuće",
+    "hero.cap": "Prava fotografija: sferična kuća, slamnati krov se spušta do zemlje",
+    "hero.s3n": "3–5 dana",
+    "hero.s3": "montaža konstrukcije ekipom od nekoliko ljudi",
+    "hero.s4n": "100 godina",
+    "hero.s4": "računski vijek drvenog okvira",
+   
     "hero.s1n": "40 kg", "hero.s1": "teži m² zida — 15 puta lakši od cigle",
     "hero.s2n": "×7", "hero.s2": "toliko puta slama bolje drži toplotu od cigle",
     "wall.full": "Zid od presovane slame na drvenom okviru",
@@ -710,22 +933,96 @@ const I18N = {
     "req.errServer": "Zahtjev nije poslat. Provjerite vezu i pokušajte ponovo — upisano je sačuvano.",
     "req.okT": "Zahtjev je poslat", "req.okD": "Javićemo se na kontakt koji ste ostavili.", "req.again": "Pošaljite još jedan",
     "foot.prod": "Proizvodnja", "foot.prodV": "Gornji Obod, Cetinje, Crna Gora", "foot.office": "Kancelarija", "foot.officeV": "Podgorica",
-    "foot.contact": "Kontakt", "foot.contactV": "Telefon i e-mail — potvrđuje se", "foot.lang": "Jezik",
-    "foot.note": "Prototip redizajna. Fotografije su generisane i ne prikazuju stvarne objekte SFERIHOME. Brojke su iz javnih objava i treba da ih potvrdi kompanija.",
-    "alt.panel": "Zidni panel u hali: greda okvira i gusto presovana slama",
+    "foot.contact": "Kontakt", "foot.lang": "Jezik",
+    "foot.note": "Prototip redizajna. Prave fotografije su zid u odjeljku «Zid» i svi snimci u odjeljku «Izgrađeno»; ostale slike su generisane. Sastav kompleta preuzet je sa sadašnjeg sajta, brojke i odgovori na pitanja iz javnih objava; sve to treba da potvrdi kompanija.",
+    "alt.panel": "Zabat kuće: drveni okvir ispunjen presovanom slamom, prozori ugrađeni, još bez maltera",
     "alt.factory": "Dvoje radnika stavlja slamu u drveni okvir panela",
     "alt.assembly": "Tri radnika podižu slamnati panel na okvir kuće",
     "alt.piles": "Drvena osnova kuće na šrafovima na kamenitoj padini",
     "alt.roof": "Dva radnika montiraju krovni panel, iza njih planine",
     "alt.aerial": "Pogled odozgo: kuće od jednog, dva i tri sprata na padini sa maslinama",
+    "nav.built": "Izgrađeno",
+    "nav.kits": "Kompleti",
+    "nav.faq": "Pitanja",
+    "wall.cap": "Prava fotografija: zid prije maltera — okvir i slama",
+    "built.title": "Izgrađene kuće",
+    "built.lead": "Prave fotografije objekata. Ostale slike na stranici su vizualizacije.",
+    "built.t1": "Dvije kuće na padini",
+    "built.d1": "Slamnati krov i drveni okvir, plac na planinskoj padini",
+   
+   
+    "built.t3": "Kuća na šipovima",
+    "built.d3": "Bijeli malter i slamnati krov, strma planinska padina",
+    "built.t4": "Ravni krov",
+    "built.d4": "Sivi glineni malter i tamno drvo, ravan plac",
+    "alt.b1": "Dvije kuće sa slamnatim krovovima na zelenoj padini, iza njih planine",
+    "alt.b2": "Kuća-kupola potpuno pokrivena slamom, sa drvenom terasom u šumi",
+    "alt.b3": "Kuća na drvenim šipovima sa bijelim malterom i slamnatim krovom na padini",
+    "alt.b4": "Prizemna kuća sa ravnim krovom, sivim malterom i drvenom oblogom",
+    "kits.title": "Tri kompleta",
+    "kits.lead": "Razlika je samo u tome gdje se završava naš posao. Paneli, grede, okvir pregrada, međuspratna konstrukcija i rogovi ulaze u sva tri.",
+    "kits.hint": "Tabela se pomjera bočno", "kits.cap": "Šta ulazi u svaki od tri kompleta",
+    "kits.what": "Šta je uključeno",
+    "kits.yes": "uključeno",
+    "kits.no": "nije uključeno",
+    "kits.price": "Cijena na upit",
+    "kits.k1n": "Komplet 1",
+    "kits.k1t": "Bez montaže",
+    "kits.k2n": "Komplet 2",
+    "kits.k2t": "Sa montažom i malterom",
+    "kits.k3n": "Komplet 3",
+    "kits.k3t": "Za završnu obradu",
+    "kits.r1": "Slamnati zidni paneli",
+    "kits.n1": "sa nadprozornim i potprozornim gredama, izolacija — slama",
+    "kits.r2": "Donja i gornja vezna greda",
+    "kits.n2": "zidova i pregrada",
+    "kits.r3": "Drveni okvir pregrada",
+    "kits.n3": "bez izolacije i zvučne izolacije",
+    "kits.r4": "Drvene grede međuspratne konstrukcije",
+    "kits.n4": "bez izolacije i zvučne izolacije",
+    "kits.r5": "Drveni rogovi ili krovne grede",
+    "kits.n5": "bez izolacije i zvučne izolacije",
+    "kits.r6": "Montaža kompleta",
+    "kits.r7": "Glineni malter zidova",
+    "kits.n7": "spolja i iznutra",
+    "kits.r8": "Dostava na plac",
+    "kits.r9": "Instalacije",
+    "kits.n9": "struja, voda i kanalizacija, grijanje sa kotlom — sa materijalom",
+    "kits.note": "Međuspratna konstrukcija, pregrade i rogovi idu bez izolacije i zvučne izolacije. Kotao u trećem kompletu je osnovni, dvokružni, srednje cijene. Ventilacija sa rekuperacijom plaća se posebno. Sastav kompleta preuzet je sa sadašnjeg sajta i treba da ga potvrdi kompanija.",
+    "faq.title": "Pitanja",
+    "faq.lead": "O slamnatoj kući pitaju otprilike isto. Odgovori su sastavljeni iz javnih materijala o tehnologiji i treba da ih potvrdi kompanija.",
+    "faq.q1": "Da li slama gori?",
+    "faq.a1": "Slama u panelu je presovana toliko gusto da otvorenom plamenu nedostaje kiseonika, a zid je spolja i iznutra zatvoren glinenim malterom. Tačne pokazatelje vatrootpornosti i protokole ispitivanja tražite od kompanije — ovdje ih nema.",
+    "faq.q2": "Da li se u zidu zavode glodari ili insekti?",
+    "faq.a2": "U panel ide slama očišćena od zrna i presovana u gust blok pod slojem gline. Hrane u njoj nema, a kroz takvu gustinu se hodnik ne probija.",
+    "faq.q3": "Šta se dešava sa vlagom?",
+    "faq.a3": "Glina propušta paru i otpušta vlagu napolje, pa zid ne zatvara vodu u sebi. Važnije je drugo: prepust krova i odvajanje zida od tla — zato kuća stoji na šipovima ili na soklu.",
+    "faq.q4": "Kakav temelj je potreban?",
+    "faq.a4": "Kvadratni metar zida teži oko 40 kg bez maltera — otprilike 15 puta manje od zidanog. Otuda lagani temelj, uključujući šrafne šipove, i mogućnost gradnje na padini i na teško pristupačnom placu.",
+    "faq.q5": "Koliko traje montaža?",
+    "faq.a5": "Paneli dolaze gotovi iz fabrike u Cetinju, na placu se samo sklapaju: konstrukcija — 3–5 dana ekipom od nekoliko ljudi. Temelj, krov i završna obrada računaju se posebno.",
+    "faq.q6": "Koliko spratova je moguće?",
+    "faq.a6": "Do tri — to je granica za drveni okvir. Računski vijek samog okvira je do 100 godina.",
+    "faq.q7": "Koliko to košta?",
+    "faq.a7": "Cijena se računa prema projektu i izabranom kompletu — ima ih tri. Ostavite upit na dnu stranice: navedite spratnost i plac, i dobićete proračun.",
+    "faq.q8": "Ostaje li otpad na placu?",
+    "faq.a8": "Paneli se prave u fabrici, na plac dolazi gotov komplet — građevinskog otpada od zidova nema.",
   },
   en: {
     _lang: "en", _title: "SFERIHOME — straw-panel houses",
     "nav.label": "Main navigation", "nav.lang": "Language", "nav.menu": "Menu", "nav.close": "Close", "nav.skip": "Skip to content",
     "nav.wall": "The wall", "nav.warm": "Warmth", "nav.stages": "How we build", "nav.where": "Your plot", "nav.projects": "Projects", "nav.cta": "Price a house",
-    "hero.mid": "Straw-panel houses. Made in Cetinje, Montenegro",
-    "hero.claim": "A house that holds its own warmth",
-    "hero.cta": "See the projects", "hero.meta": "Factory-made panels · 3–5 days on site",
+    "hero.kick": "Straw panels and roofing. Made in Cetinje, Montenegro",
+    "hero.h1": "A wall of straw",
+    "hero.h2": "/ 40 kg, not 600",
+    "hero.cta": "See the kits",
+    "hero.cta2": "Houses already built",
+    "hero.cap": "Real photograph: a spherical house, its thatched roof running to the ground",
+    "hero.s3n": "3–5 days",
+    "hero.s3": "assembling the shell with a crew of a few people",
+    "hero.s4n": "100 years",
+    "hero.s4": "the timber frame's design life",
+   
     "hero.s1n": "40 kg", "hero.s1": "per m² of wall — 15 times lighter than brick",
     "hero.s2n": "×7", "hero.s2": "how much better straw holds heat than brick",
     "wall.full": "A wall of pressed straw in a timber frame",
@@ -756,14 +1053,80 @@ const I18N = {
     "req.errServer": "The request didn't go through. Check your connection and try again — what you entered is kept.",
     "req.okT": "Request sent", "req.okD": "We will get back to you at the contact you left.", "req.again": "Send another",
     "foot.prod": "Production", "foot.prodV": "Gornji Obod, Cetinje, Montenegro", "foot.office": "Office", "foot.officeV": "Podgorica",
-    "foot.contact": "Contact", "foot.contactV": "Phone and email — to be confirmed", "foot.lang": "Language",
-    "foot.note": "Redesign prototype. The photographs are generated and do not show real SFERIHOME buildings. Figures come from public press coverage and need confirming by the company.",
-    "alt.panel": "A wall panel in the workshop: frame timber and densely pressed straw",
+    "foot.contact": "Contact", "foot.lang": "Language",
+    "foot.note": "Redesign prototype. The real photographs are the wall in The wall and every image in Built; every other image is generated. The kit contents come from the current site, the figures and answers from public coverage — all of it needs confirming by the company.",
+    "alt.panel": "A house gable: a timber frame packed with pressed straw, windows fitted, not yet rendered",
     "alt.factory": "Two workers laying straw into the timber frame of a panel",
     "alt.assembly": "Three workers lifting a straw panel onto a house frame",
     "alt.piles": "A timber house base on screw piles on a rocky slope",
     "alt.roof": "Two workers fitting a roof panel, mountains behind them",
     "alt.aerial": "Aerial view: one, two and three storey houses on a slope with olive trees",
+    "nav.built": "Built",
+    "nav.kits": "Kits",
+    "nav.faq": "Questions",
+    "wall.cap": "Real photograph: the wall before rendering — frame and straw",
+    "built.title": "Houses already built",
+    "built.lead": "Real photographs of finished buildings. Every other image on this page is a rendering.",
+    "built.t1": "Two houses on a slope",
+    "built.d1": "Thatched roof and timber frame, a plot on a mountainside",
+   
+   
+    "built.t3": "A house on piles",
+    "built.d3": "White render and a thatched roof, a steep mountain slope",
+    "built.t4": "Flat roof",
+    "built.d4": "Grey clay render and dark timber, a level plot",
+    "alt.b1": "Two houses with thatched roofs on a green slope, mountains behind them",
+    "alt.b2": "A dome house fully covered in thatch, with a timber deck in the woods",
+    "alt.b3": "A house on timber piles with white render and a thatched roof on a slope",
+    "alt.b4": "A single-storey house with a flat roof, grey render and timber cladding",
+    "kits.title": "Three kits",
+    "kits.lead": "They differ only in where our work stops. Panels, wall plates, partition frames, floor structure and rafters are in all three.",
+    "kits.hint": "The table scrolls sideways", "kits.cap": "What each of the three kits includes",
+    "kits.what": "What is included",
+    "kits.yes": "included",
+    "kits.no": "not included",
+    "kits.price": "Price on request",
+    "kits.k1n": "Kit 1",
+    "kits.k1t": "Without assembly",
+    "kits.k2n": "Kit 2",
+    "kits.k2t": "Assembly and clay render",
+    "kits.k3n": "Kit 3",
+    "kits.k3t": "Ready for finishing",
+    "kits.r1": "Straw wall panels",
+    "kits.n1": "with lintels above and below the windows, straw insulation",
+    "kits.r2": "Bottom and top wall plates",
+    "kits.n2": "for walls and partitions",
+    "kits.r3": "Timber frame for partitions",
+    "kits.n3": "without insulation or soundproofing",
+    "kits.r4": "Timber floor trusses",
+    "kits.n4": "without insulation or soundproofing",
+    "kits.r5": "Timber rafters or roof trusses",
+    "kits.n5": "without insulation or soundproofing",
+    "kits.r6": "Assembly of the kit",
+    "kits.r7": "Clay render on the walls",
+    "kits.n7": "inside and out",
+    "kits.r8": "Delivery to the plot",
+    "kits.r9": "Building services",
+    "kits.n9": "wiring, water and drainage, heating with a boiler — materials included",
+    "kits.note": "Floor structure, partitions and rafters come without insulation or soundproofing. The boiler in the third kit is a basic mid-range combi. Supply ventilation with heat recovery is charged separately. The contents of the kits are taken from the current site and need confirming by the company.",
+    "faq.title": "Questions",
+    "faq.lead": "People ask much the same things about a straw house. The answers are drawn from public material about the technology and need confirming by the company.",
+    "faq.q1": "Does straw burn?",
+    "faq.a1": "The straw in a panel is pressed so densely that an open flame has no oxygen to work with, and the wall is closed on both sides by clay render. Ask the company for the fire-resistance figures and test reports — they are not published here.",
+    "faq.q2": "Will rodents or insects get into the wall?",
+    "faq.a2": "A panel is filled with straw cleaned of grain and pressed into a dense block under a layer of clay. There is nothing in it to eat and no way to tunnel through that density.",
+    "faq.q3": "What about damp?",
+    "faq.a3": "Clay is vapour-open and releases moisture outward, so the wall does not trap water. What matters more is the roof overhang and keeping the wall off the ground — which is why the house sits on piles or a plinth.",
+    "faq.q4": "What kind of foundation does it need?",
+    "faq.a4": "A square metre of wall weighs about 40 kg before render — roughly fifteen times less than brick. That allows a light foundation, screw piles included, and building on a slope or a plot that is hard to reach.",
+    "faq.q5": "How long does assembly take?",
+    "faq.a5": "Panels arrive finished from the Cetinje factory and are only assembled on site: the shell takes 3–5 days with a crew of a few people. Foundation, roof and finishing are counted separately.",
+    "faq.q6": "How many storeys are possible?",
+    "faq.a6": "Up to three — the limit for a timber frame. The frame's own design life is up to 100 years.",
+    "faq.q7": "What does it cost?",
+    "faq.a7": "The price depends on the project and on which of the three kits you choose. Leave a request at the bottom of the page with the number of storeys and your plot, and you will get a quote.",
+    "faq.q8": "Is there building waste on site?",
+    "faq.a8": "Panels are made in the factory and arrive as a finished kit, so the walls leave no construction waste behind.",
   },
 };
 
@@ -826,6 +1189,16 @@ if ("IntersectionObserver" in window && targets.length) {
     }
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((s) => spy.observe(s));
+}
+
+/* the kit table scrolls sideways on a narrow screen; drop the edge fade at the end */
+const ks = document.querySelector(".kits__scroll");
+if (ks) {
+  const box = ks.parentElement;
+  const upd = () => box.classList.toggle("is-end", ks.scrollWidth <= ks.clientWidth + 1 || ks.scrollLeft + ks.clientWidth >= ks.scrollWidth - 2);
+  ks.addEventListener("scroll", upd, { passive: true });
+  addEventListener("resize", upd);
+  upd();
 }
 
 /* a project row presets the storey field */
