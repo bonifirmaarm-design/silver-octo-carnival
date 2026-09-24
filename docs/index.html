@@ -162,74 +162,77 @@ button, input { font: inherit; color: inherit; }
 .drawer .pill { margin-top: var(--s4); width: 100%; justify-content: center; }
 
 /* ---------- shared ---------- */
-.sec { padding-top: var(--s10); }
+.sec { padding-top: clamp(var(--s8), 6.5vw, var(--s10)); }
+.sec--tight { padding-top: var(--s6); }
 .grid12 { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); column-gap: var(--s5); }
 .shot { border-radius: var(--r-lg); overflow: hidden; background: var(--line); }
 .shot img { width: 100%; height: 100%; object-fit: cover; }
+.sec__head { max-width: 48ch; }
+.sec__head .lead { margin-top: var(--s4); }
+.price { font-size: var(--small); font-weight: 700; color: var(--straw); }
 
-/* ---------- 2 · the wall ---------- */
-.wall__grid { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s8); align-items: center; }
-.wall__l1 { margin-left: 13%; }
-.wall__ghost { color: var(--ghost); }
-.wall__fig { max-width: 600px; margin-left: auto; }
-.wall__shot { aspect-ratio: 7/5; }
-.wall__cap { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); font-size: var(--micro); line-height: 1.55; color: var(--muted); }
-.wall__text { margin-top: var(--s7); }
-.wall__layers { margin-top: var(--s7); border-top: 1px solid var(--line); }
-.layer { display: grid; grid-template-columns: 28px minmax(0,1fr) auto; align-items: center; gap: var(--s4); padding-block: var(--s5); border-bottom: 1px solid var(--line); }
-.layer i { width: 26px; height: 26px; border-radius: 6px; }
-.layer b { font-weight: 600; font-size: var(--lead); letter-spacing: -.015em; }
-.layer span { font-size: var(--small); color: var(--muted); text-align: right; }
+/* ---------- 2 · the figures band ---------- */
+.band { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 2px; background: var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.band__c { margin: 0; padding: var(--s6) var(--s5); background: var(--paper); }
+.band__c:first-child { background: var(--olive); color: #fff; }
+.band__c:first-child .band__d { color: rgba(255,255,255,.76); }
+.band__n { font-size: clamp(1.5rem, 1rem + 1.7vw, 2.375rem); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+.band__d { display: block; margin: var(--s3) 0 0; font-size: var(--micro); line-height: 1.5; color: var(--muted); }
 
-/* ---------- 3 · warmth ---------- */
-.warm__head { grid-column: 1 / 6; }
-.warm__table { grid-column: 6 / 13; align-self: end; }
-.tbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.tbl caption { text-align: left; font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding-bottom: var(--s4); }
-.tbl th, .tbl td { text-align: left; padding: var(--s4) var(--s4) var(--s4) 0; border-top: 1px solid var(--line); vertical-align: middle; }
-.tbl tr:last-child > * { border-bottom: 1px solid var(--line); }
-.tbl thead th { font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border-top: 0; padding-block: var(--s2); }
-.tbl tbody th { font-size: var(--h3); font-weight: 700; letter-spacing: -.03em; width: 26%; }
-.tbl .is-straw th { font-size: calc(var(--h3) * 1.2); }
-.tbl .is-straw td { padding-block: var(--s5); }
-.tbl .v { width: 24%; font-weight: 600; white-space: nowrap; }
-.tbl .r { width: 18%; text-align: right; padding-right: 0; white-space: nowrap; font-size: var(--small); color: var(--muted); }
-.tbl .r b { font-weight: 600; color: var(--ink); }
-.bar { height: 10px; border-radius: 0 5px 5px 0; background: #B6B4AA; }
-.bar--straw { height: 14px; border-radius: 0 7px 7px 0; }
-.bar--straw { background: var(--straw-bar); box-shadow: 0 0 0 4px rgba(192,145,31,.14); }
-.is-straw th, .is-straw .v { color: var(--straw); }
-.warm__note { grid-column: 6 / 13; margin-top: var(--s5); font-size: var(--small); color: var(--muted); max-width: 52ch; }
+/* ---------- 3 · catalogue ---------- */
+.tiles { margin-top: var(--s7); display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--s5); }
+.tile { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); }
+.tile__shot { position: relative; aspect-ratio: 3/2; background: var(--line); }
+.tile__shot img { width: 100%; height: 100%; object-fit: cover; }
+.tile__badge { position: absolute; left: var(--s4); bottom: var(--s4); padding: 6px var(--s3); border-radius: var(--r-pill); background: rgba(251,250,247,.95); font-size: var(--micro); font-weight: 600; }
+.tile__body { display: flex; flex-direction: column; flex: 1; padding: var(--s5); }
+.tile__t { font-size: var(--lead); font-weight: 700; letter-spacing: -.025em; line-height: 1.2; }
+.tile__d { margin-top: var(--s3); font-size: var(--small); line-height: 1.5; color: var(--muted); }
+.tile__foot { margin-top: auto; padding-top: var(--s5); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); }
+.tile__foot .pill { min-height: 44px; padding: 0 var(--s4); }
 
-/* ---------- 4 · stages ---------- */
-.stages__head { grid-column: 1 / 7; }
-.stages__list { grid-column: 1 / 13; margin-top: var(--s8); }
-.stage { display: grid; grid-template-columns: 3.5rem minmax(0,1fr); gap: var(--s5); padding-block: var(--s7); border-top: 1px solid var(--line); align-items: start; }
-.stage:last-child { border-bottom: 1px solid var(--line); }
-.stage__n { font-size: var(--h2); font-weight: 800; line-height: .78; letter-spacing: -.05em; color: var(--ghost); }
-.stage__body { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: var(--s5) var(--s7); align-items: start; }
-.stage__t { font-size: var(--h3); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-.stage__d { color: var(--muted); max-width: 42ch; margin-top: var(--s3); }
-.stage__meta { font-size: var(--small); font-weight: 600; margin-top: var(--s4); }
-.stage__meta em { font-style: normal; color: var(--straw); }
-.stage__shot { aspect-ratio: 16/9; }
+/* ---------- 4 · technology ---------- */
+.tech { margin-top: var(--s7); display: grid; grid-template-columns: minmax(0,6fr) minmax(0,6fr); gap: var(--s7); align-items: start; }
+.tech__fig .shot { aspect-ratio: 7/5; }
+.tech__cap { margin-top: var(--s3); font-size: var(--micro); line-height: 1.55; color: var(--muted); }
+.layers { border-top: 1px solid var(--line); }
+.layer { display: grid; grid-template-columns: 30px minmax(0,1fr) auto; align-items: center; gap: var(--s4); padding-block: var(--s4); border-bottom: 1px solid var(--line); }
+.layer i { width: 28px; height: 28px; border-radius: 6px; }
+.layer b { font-weight: 600; font-size: var(--small); }
+.layer span { font-size: var(--micro); color: var(--muted); text-align: right; }
+.cond { margin-top: var(--s6); }
+.cond__cap { color: var(--muted); }
+.cond__r { display: grid; grid-template-columns: 6rem minmax(0,1fr) 4.5rem; align-items: center; gap: var(--s4); padding-block: var(--s3); }
+.cond__n { font-size: var(--small); font-weight: 700; }
+.cond__bar { height: 12px; border-radius: 6px; background: #C6C4BA; }
+.cond__v { font-size: var(--micro); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.is-straw .cond__n { color: var(--straw); }
+.is-straw .cond__bar { background: var(--straw-bar); box-shadow: 0 0 0 4px rgba(192,145,31,.16); }
+.cond__note { margin-top: var(--s5); font-size: var(--micro); line-height: 1.6; color: var(--muted); }
 
-/* ---------- 5 · where ---------- */
-.where__shot { grid-column: 1 / 9; aspect-ratio: 4/3; }
-.where__side { grid-column: 9 / 13; align-self: center; }
-.where__list { margin-top: var(--s6); border-top: 1px solid var(--line); }
-.where__list li { padding-block: var(--s4); border-bottom: 1px solid var(--line); font-size: var(--lead); font-weight: 600; letter-spacing: -.015em; }
+/* ---------- 5 · stages ---------- */
+.steps { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); }
+.step { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); }
+.step .shot { aspect-ratio: 16/10; border-radius: 0; }
+.step__b { padding: var(--s5); }
+.step__n { font-size: var(--micro); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--straw); }
+.step__t { margin-top: var(--s2); font-size: var(--lead); font-weight: 700; letter-spacing: -.025em; line-height: 1.2; }
+.step__d { margin-top: var(--s3); font-size: var(--small); line-height: 1.5; color: var(--muted); }
+.where { margin-top: var(--s7); }
+.where__cap { color: var(--muted); }
+.chips { margin-top: var(--s4); display: flex; flex-wrap: wrap; gap: var(--s3); }
+.chip { padding: 10px var(--s4); border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--paper); font-size: var(--small); font-weight: 600; }
 
-/* ---------- 6 · projects ---------- */
-.proj__head { grid-column: 1 / 13; margin-bottom: var(--s7); display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: var(--s6); align-items: end; }
-.proj__shot { grid-column: 1 / 7; aspect-ratio: 1; }
-.proj__list { grid-column: 7 / 13; align-self: start; }
-.prow { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: var(--s5); padding-block: var(--s6); border-top: 1px solid var(--line); transition: padding-left .2s var(--ease); }
-.prow:hover { padding-left: var(--s3); }
-.prow:last-child { border-bottom: 1px solid var(--line); }
-.prow__n { font-size: calc(var(--h3) * 1.35); font-weight: 800; letter-spacing: -.05em; line-height: .9; min-width: 1.2ch; }
-.prow__t b { display: block; font-weight: 600; font-size: var(--lead); letter-spacing: -.015em; }
-.prow__t span { display: block; font-size: var(--small); color: var(--muted); }
+/* ---------- the action never leaves the screen on a phone ---------- */
+.bar { position: fixed; z-index: 30; inset: auto 0 0; display: none; align-items: center; justify-content: space-between; gap: var(--s4);
+  padding: var(--s3) var(--gutter); padding-bottom: calc(var(--s3) + env(safe-area-inset-bottom, 0px));
+  background: rgba(251,250,247,.97); border-top: 1px solid var(--line); box-shadow: 0 -12px 30px -20px rgba(28,32,22,.55); }
+.bar__t { min-width: 0; }
+.bar__t b { display: block; font-size: var(--small); font-weight: 700; color: var(--straw); }
+.bar__t span { display: block; margin-top: 2px; font-size: var(--micro); line-height: 1.35; color: var(--muted); }
+.bar .pill { flex: none; }
+.bar.is-off { transform: translateY(115%); pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) { .bar { transition: transform .24s var(--ease); } }
 
 /* ---------- 7 · request ---------- */
 .req {
@@ -301,15 +304,6 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 }
 
-/* ---------- 6 · built ---------- */
-.built__head { grid-column: 1 / 9; }
-.built__grid { grid-column: 1 / 13; max-width: 1180px; margin-top: var(--s8); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--s8) var(--s6); }
-.built__item:nth-child(even) { margin-top: var(--s9); }
-.built__item .shot { aspect-ratio: 3/2; }
-.built__cap { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); }
-.built__cap b { display: block; font-weight: 700; font-size: var(--lead); letter-spacing: -.025em; }
-.built__cap span { display: block; margin-top: var(--s2); font-size: var(--small); line-height: 1.5; color: var(--muted); }
-
 /* ---------- 8 · kits ---------- */
 .kits__head { grid-column: 1 / 9; }
 .kits__grid { grid-column: 1 / 13; margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); align-items: start; }
@@ -352,36 +346,34 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .burger { display: grid; }
 }
 @media (max-width: 1100px) {
-  .wall__grid { gap: var(--s6); }
+  .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .steps { gap: var(--s4); }
+  .step__b { padding: var(--s4); }
   .kits__grid { gap: var(--s4); }
   .kit { padding: var(--s5) var(--s4); }
-  .built__item:nth-child(even) { margin-top: var(--s6); }
-  .built__head, .kits__head, .faq__head { grid-column: 1 / 13; }
+  .faq__head { grid-column: 1 / 13; }
   .faq__list { grid-column: 1 / 13; margin-top: var(--s7); }
-  .warm__head { grid-column: 1 / 13; margin-bottom: var(--s7); }
-  .warm__table, .warm__note { grid-column: 1 / 13; }
-  .stages__head { grid-column: 1 / 13; }
-  .stage__body { grid-template-columns: minmax(0,1fr); }
-  .stage__shot { order: -1; }
-  .where__shot { grid-column: 1 / 13; }
-  .where__side { grid-column: 1 / 13; margin-top: var(--s7); }
-  .proj__head { grid-template-columns: minmax(0,1fr); }
-  .proj__shot { grid-column: 1 / 13; }
-  .proj__list { grid-column: 1 / 13; margin-top: var(--s7); }
+  .kits__head { grid-column: 1 / 13; }
   .req { grid-template-columns: minmax(0,1fr); min-height: 0; }
   .req__lead { align-self: start; }
   .req__veil { background: linear-gradient(0deg, rgba(13,20,34,.86) 0 46%, rgba(13,20,34,.34)); }
   .foot__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 900px) {
-  .wall__grid { grid-template-columns: minmax(0,1fr); gap: var(--s7); }
-  .wall__fig { max-width: 600px; margin-left: 0; }
+  .band { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .band__c { padding: var(--s5) var(--s4); }
+  .tech { grid-template-columns: minmax(0,1fr); gap: var(--s6); }
+  .tech__fig { max-width: 600px; }
+  .steps { grid-template-columns: minmax(0,1fr); }
+  .step .shot { aspect-ratio: 2/1; }
 }
 @media (max-width: 780px) {
-  /* the drawer already carries the call to action */
+  /* the drawer and the fixed bar both carry the call to action */
   .nav__cta { display: none; }
   .nav { gap: var(--s3); }
   .lang { padding: 2px; }
+  .bar { display: flex; }
+  .foot { padding-bottom: 104px; }
 }
 @media (max-width: 700px) {
   .kits__grid { grid-template-columns: minmax(0,1fr); gap: var(--s5); }
@@ -397,37 +389,21 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
   .stat { width: auto; padding: var(--s3); }
   .stat b { font-size: 1.625rem; }
-  .wall__l1 { margin-left: 8%; }
-  .wall__fig { max-width: none; }
-  .built__grid { grid-template-columns: minmax(0,1fr); gap: var(--s7); }
-  .built__item:nth-child(even) { margin-top: 0; }
+  .tiles { grid-template-columns: minmax(0,1fr); }
+  .layer { grid-template-columns: 30px minmax(0,1fr); }
+  .layer span { grid-column: 2; text-align: left; margin-top: 2px; }
+  .cond__r { grid-template-columns: 4.75rem minmax(0,1fr) 3.5rem; gap: var(--s3); }
   .qa > summary { font-size: var(--lead); }
-  .layer { grid-template-columns: 28px minmax(0,1fr); }
-  .layer span { grid-column: 2; text-align: left; }
-  .tbl thead { display: none; }
-  .tbl tbody tr { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--s2) var(--s4); align-items: baseline; padding-block: var(--s4); border-top: 1px solid var(--line); }
-  .tbl tbody tr:last-child { border-bottom: 1px solid var(--line); }
-  .tbl tbody th, .tbl tbody td { width: auto; padding: 0; border: 0 !important; }
-  .tbl .s { grid-column: 1 / -1; order: 3; }
-  .tbl .r { grid-column: 1 / -1; order: 4; text-align: left; }
-  /* stacked, the straw row needs no extra air and its "—" says nothing */
-  .tbl .is-straw td { padding-block: 0; }
-  .tbl .is-straw .r { display: none; }
-  .stage { grid-template-columns: 2.25rem minmax(0,1fr); gap: var(--s3); padding-block: var(--s6); }
-  .prow { grid-template-columns: auto minmax(0,1fr); }
-  .prow .pill { grid-column: 1 / -1; justify-self: start; margin-top: var(--s2); }
   .foot__grid { grid-template-columns: minmax(0,1fr); }
 }
-/* four 44px language buttons and the wordmark will not both fit a narrow bar;
-   the language choice wins, and the hero carries the name in letters ten times this size */
 @media (max-width: 560px) {
   .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .brand { justify-content: center; }
+  .tile__foot { flex-direction: column; align-items: stretch; }
+  .tile__foot .pill { justify-content: center; }
 }
-/* a phone held sideways has no room for a 580px stage */
 @media (orientation: landscape) and (max-height: 560px) {
   .hero { height: 90vh; min-height: 320px; }
-  /* a short stage puts the headline higher up the frame, where the sky is */
   .hero__veil { background: linear-gradient(180deg, rgba(13,20,34,.74) 0 10%, rgba(13,20,34,.5) 30%, transparent 52%), linear-gradient(0deg, rgba(13,20,34,.8) 0 34%, rgba(13,20,34,.5) 56%, transparent 76%); }
   .hero__word { font-size: clamp(2.75rem, 9.5vw, 5.5rem); }
   .hero__mid { display: none; }
@@ -458,11 +434,10 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         <span>SFERIHOME</span>
       </a>
       <div class="nav__links">
-        <a href="#wall" data-i18n="nav.wall">Стена</a>
-        <a href="#warm" data-i18n="nav.warm">Тепло</a>
-        <a href="#stages" data-i18n="nav.stages">Как строим</a>
-        <a href="#built" data-i18n="nav.built">Построено</a>
+        <a href="#projects" data-i18n="nav.projects">Каталог</a>
         <a href="#kits" data-i18n="nav.kits">Комплекты</a>
+        <a href="#wall" data-i18n="nav.wall">Технология</a>
+        <a href="#stages" data-i18n="nav.stages">Как строим</a>
         <a href="#faq" data-i18n="nav.faq">Вопросы</a>
       </div>
       <div class="lang" role="group" aria-label="Язык" data-i18n-aria="nav.lang">
@@ -496,13 +471,10 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   </div>
 
   <div class="drawer" id="drawer" hidden>
-    <a href="#wall" data-i18n="nav.wall">Стена</a>
-    <a href="#warm" data-i18n="nav.warm">Тепло</a>
-    <a href="#stages" data-i18n="nav.stages">Как строим</a>
-    <a href="#where" data-i18n="nav.where">Участок</a>
-    <a href="#built" data-i18n="nav.built">Построено</a>
-    <a href="#projects" data-i18n="nav.projects">Проекты</a>
+    <a href="#projects" data-i18n="nav.projects">Каталог</a>
     <a href="#kits" data-i18n="nav.kits">Комплекты</a>
+    <a href="#wall" data-i18n="nav.wall">Технология</a>
+    <a href="#stages" data-i18n="nav.stages">Как строим</a>
     <a href="#faq" data-i18n="nav.faq">Вопросы</a>
     <a class="pill pill--solid" href="#request" data-i18n="nav.cta">Рассчитать дом</a>
   </div>
@@ -510,184 +482,57 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 
 <main id="main">
 
-<!-- 2 · The wall -->
-<section class="sec" id="wall" aria-labelledby="wall-h">
-  <h2 class="sr" id="wall-h" data-i18n="wall.full">Стена из прессованной соломы на деревянном каркасе</h2>
-  <div class="wall__grid">
-    <div>
-      <p class="display wall__l1" aria-hidden="true" data-i18n="wall.l1">Солома</p>
-      <p class="display" aria-hidden="true" data-i18n="wall.l2">в стене</p>
-      <p class="display wall__ghost" aria-hidden="true" data-i18n="wall.ghost">/ не в счёте</p>
-      <p class="lead wall__text" data-i18n="wall.text">Панель делают на фабрике: каркас из калиброванной сушёной древесины, внутри плотно спрессованная солома, снаружи и внутри глиняная штукатурка. На участок она приезжает готовой.</p>
-      <dl class="wall__layers">
-        <div class="layer"><i style="background:repeating-linear-gradient(58deg,#C0911F 0 3px,#D9B863 3px 5px,#A97C15 5px 7px)"></i><b data-i18n="wall.la">Прессованная солома</b><span data-i18n="wall.lad">утеплитель, 0,050–0,065 Вт/(м·К)</span></div>
-        <div class="layer"><i style="background:repeating-linear-gradient(90deg,#DFC79F 0 5px,#CDB185 5px 6px)"></i><b data-i18n="wall.lb">Сушёная древесина</b><span data-i18n="wall.lbd">каркас до 3 этажей, срок службы до 100 лет</span></div>
-        <div class="layer"><i style="background:radial-gradient(circle at 30% 30%,#EDEAE1,#DBD7CC)"></i><b data-i18n="wall.lc">Глиняный раствор</b><span data-i18n="wall.lcd">снаружи и внутри, входит в комплект</span></div>
-      </dl>
-    </div>
-    <figure class="wall__fig">
-      <div class="shot wall__shot"><img src="img/wall-real.webp" alt="" width="560" height="400" data-i18n-alt="alt.panel"></div>
-      <figcaption class="wall__cap" data-i18n="wall.cap">Настоящее фото: стена до штукатурки — каркас и солома</figcaption>
-    </figure>
-  </div>
+<!-- 2 · Figures -->
+<section class="sec sec--tight" id="figures" aria-label="Коротко о технологии" data-i18n-aria="band.label">
+  <dl class="band">
+    <div class="band__c"><dt class="band__n num" data-i18n="band.1n">·</dt><dd class="band__d" data-i18n="band.1">·</dd></div>
+    <div class="band__c"><dt class="band__n num" data-i18n="band.2n">·</dt><dd class="band__d" data-i18n="band.2">·</dd></div>
+    <div class="band__c"><dt class="band__n num" data-i18n="band.3n">·</dt><dd class="band__d" data-i18n="band.3">·</dd></div>
+    <div class="band__c"><dt class="band__n num" data-i18n="band.4n">·</dt><dd class="band__d" data-i18n="band.4">·</dd></div>
+  </dl>
 </section>
 
-<!-- 3 · Warmth -->
-<section class="sec" id="warm" aria-labelledby="warm-h">
-  <div class="grid12">
-    <div class="warm__head">
-      <h2 class="h2" id="warm-h" data-i18n="warm.title">Тепло остаётся в стене</h2>
-      <p class="lead" style="margin-top:var(--s5)" data-i18n="warm.lead">Теплопроводность показывает, сколько тепла уходит наружу. Чем меньше число, тем меньше вы платите зимой и тем прохладнее в доме летом.</p>
-    </div>
-    <div class="warm__table">
-      <table class="tbl">
-        <caption data-i18n="warm.cap">Теплопроводность, Вт/(м·К)</caption>
-        <thead><tr>
-          <th scope="col" data-i18n="warm.cm">Материал</th>
-          <th scope="col" data-i18n="warm.cv">Значение</th>
-          <th scope="col" data-i18n="warm.cs">Шкала 0–0,7</th>
-          <th scope="col" class="r" data-i18n="warm.cr">Солома лучше</th>
-        </tr></thead>
-        <tbody>
-          <tr class="is-straw">
-            <th scope="row" data-i18n="warm.straw">Солома</th>
-            <td class="v">0,050–0,065</td>
-            <td class="s" aria-hidden="true"><div class="bar bar--straw" style="width:9%"></div></td>
-            <td class="r">—</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="warm.wood">Дерево</th>
-            <td class="v">0,18–0,23</td>
-            <td class="s" aria-hidden="true"><div class="bar" style="width:33%"></div></td>
-            <td class="r"><b data-i18n="warm.w4">в 4 раза</b></td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="warm.brick">Кирпич</th>
-            <td class="v">0,56–0,70</td>
-            <td class="s" aria-hidden="true"><div class="bar" style="width:100%"></div></td>
-            <td class="r"><b data-i18n="warm.w7">в 7 раз</b></td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="warm__note" data-i18n="warm.note">Квадратный метр стены весит 40 кг без раствора — кирпичной около 600. Лёгкая стена означает лёгкий фундамент.</p>
-    </div>
+<!-- 3 · Catalogue -->
+<section class="sec" id="projects" aria-labelledby="cat-h">
+  <div class="sec__head">
+    <h2 class="h2" id="cat-h" data-i18n="built.title">·</h2>
+    <p class="lead" data-i18n="built.lead">·</p>
   </div>
-</section>
-
-<!-- 4 · Stages -->
-<section class="sec" id="stages" aria-labelledby="stages-h">
-  <div class="grid12">
-    <div class="stages__head">
-      <h2 class="h2" id="stages-h" data-i18n="stages.title">Три этапа</h2>
-      <p class="lead" style="margin-top:var(--s5)" data-i18n="stages.lead">Панели приходят готовыми. На участке их собирает бригада из нескольких человек.</p>
-    </div>
-    <ol class="stages__list">
-      <li class="stage">
-        <span class="stage__n num" aria-hidden="true">1</span>
-        <div class="stage__body">
-          <div>
-            <h3 class="stage__t" data-i18n="st1.t">Панели — на фабрике</h3>
-            <p class="stage__d" data-i18n="st1.d">Каркас собирают и набивают соломой в цехе. Точная геометрия, сухой материал и никакого строительного мусора на вашем участке.</p>
-            <p class="stage__meta" data-i18n="st1.m">Цетине · 6 267 м² цехов</p>
-          </div>
-          <figure class="shot stage__shot"><img src="img/factory.webp" alt="" width="1376" height="768" loading="lazy" data-i18n-alt="alt.factory"></figure>
+  <div class="tiles">
+      <article class="tile">
+        <div class="tile__shot"><img src="img/slope.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b1"><span class="tile__badge" data-i18n="cat.b1">·</span></div>
+        <div class="tile__body">
+          <h3 class="tile__t" data-i18n="built.t1">·</h3>
+          <p class="tile__d" data-i18n="built.d1">·</p>
+          <div class="tile__foot"><p class="price" data-i18n="kits.price">·</p><a class="pill pill--line" href="#request" data-i18n="cat.ask">·</a></div>
         </div>
-      </li>
-      <li class="stage">
-        <span class="stage__n num" aria-hidden="true">2</span>
-        <div class="stage__body">
-          <div>
-            <h3 class="stage__t" data-i18n="st2.t">Стены — на участке</h3>
-            <p class="stage__d" data-i18n="st2.d">Панель ставят на лёгкий каркас и крепят. Без кранов и мокрых работ: вес позволяет собирать вручную.</p>
-            <p class="stage__meta"><em data-i18n="st2.m">3–5 дней на коробку</em></p>
-          </div>
-          <figure class="shot stage__shot"><img src="img/assembly.webp" alt="" width="1376" height="768" loading="lazy" data-i18n-alt="alt.assembly"></figure>
+      </article>
+      <article class="tile">
+        <div class="tile__shot"><img src="img/sphere.webp" alt="" width="472" height="315" loading="lazy" data-i18n-alt="alt.b2"><span class="tile__badge" data-i18n="cat.b2">·</span></div>
+        <div class="tile__body">
+          <h3 class="tile__t" data-i18n="built.t2">·</h3>
+          <p class="tile__d" data-i18n="built.d2">·</p>
+          <div class="tile__foot"><p class="price" data-i18n="kits.price">·</p><a class="pill pill--line" href="#request" data-i18n="cat.ask">·</a></div>
         </div>
-      </li>
-      <li class="stage">
-        <span class="stage__n num" aria-hidden="true">3</span>
-        <div class="stage__body">
-          <div>
-            <h3 class="stage__t" data-i18n="st3.t">Кровля и отделка</h3>
-            <p class="stage__d" data-i18n="st3.d">Кровельная система нашего же производства, затем глиняная штукатурка снаружи и внутри.</p>
-            <p class="stage__meta" data-i18n="st3.m">По проекту</p>
-          </div>
-          <figure class="shot stage__shot"><img src="img/roof.webp" alt="" width="1184" height="896" loading="lazy" data-i18n-alt="alt.roof"></figure>
+      </article>
+      <article class="tile">
+        <div class="tile__shot"><img src="img/stilts.webp" alt="" width="472" height="315" loading="lazy" data-i18n-alt="alt.b3"><span class="tile__badge" data-i18n="cat.b3">·</span></div>
+        <div class="tile__body">
+          <h3 class="tile__t" data-i18n="built.t3">·</h3>
+          <p class="tile__d" data-i18n="built.d3">·</p>
+          <div class="tile__foot"><p class="price" data-i18n="kits.price">·</p><a class="pill pill--line" href="#request" data-i18n="cat.ask">·</a></div>
         </div>
-      </li>
-    </ol>
+      </article>
+      <article class="tile">
+        <div class="tile__shot"><img src="img/flat.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b4"><span class="tile__badge" data-i18n="cat.b4">·</span></div>
+        <div class="tile__body">
+          <h3 class="tile__t" data-i18n="built.t4">·</h3>
+          <p class="tile__d" data-i18n="built.d4">·</p>
+          <div class="tile__foot"><p class="price" data-i18n="kits.price">·</p><a class="pill pill--line" href="#request" data-i18n="cat.ask">·</a></div>
+        </div>
+      </article>
   </div>
-</section>
-
-<!-- 5 · Where -->
-<section class="sec" id="where" aria-labelledby="where-h">
-  <div class="grid12">
-    <figure class="shot where__shot"><img src="img/piles.webp" alt="" width="1184" height="896" loading="lazy" data-i18n-alt="alt.piles"></figure>
-    <div class="where__side">
-      <h2 class="h2" id="where-h" data-i18n="where.title">Там, где тяжёлый дом не встанет</h2>
-      <ul class="where__list">
-        <li data-i18n="where.1">Склон и сложный рельеф</li>
-        <li data-i18n="where.2">Винтовые сваи вместо плиты</li>
-        <li data-i18n="where.3">Участок без подъезда для техники</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- 6 · Built -->
-<section class="sec" id="built" aria-labelledby="built-h">
-  <div class="grid12">
-    <div class="built__head">
-      <h2 class="h2" id="built-h" data-i18n="built.title">Построенные дома</h2>
-      <p class="lead" data-i18n="built.lead">Настоящие фотографии объектов. Остальные изображения на странице — визуализации.</p>
-    </div>
-    <div class="built__grid">
-      <figure class="built__item">
-        <div class="shot"><img src="img/slope.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b1"></div>
-        <figcaption class="built__cap"><b data-i18n="built.t1">Два дома на склоне</b><span data-i18n="built.d1">Соломенная кровля и деревянный каркас, участок по горному склону</span></figcaption>
-      </figure>
-      <figure class="built__item">
-        <div class="shot"><img src="img/sphere.webp" alt="" width="472" height="315" loading="lazy" data-i18n-alt="alt.b2"></div>
-        <figcaption class="built__cap"><b data-i18n="built.t2">Сферический дом в лесу</b><span data-i18n="built.d2">Гнутый каркас под соломой, площадка и лестница на стальных опорах</span></figcaption>
-      </figure>
-      <figure class="built__item">
-        <div class="shot"><img src="img/stilts.webp" alt="" width="472" height="315" loading="lazy" data-i18n-alt="alt.b3"></div>
-        <figcaption class="built__cap"><b data-i18n="built.t3">Дом на сваях</b><span data-i18n="built.d3">Белая штукатурка и соломенная кровля, крутой горный склон</span></figcaption>
-      </figure>
-      <figure class="built__item">
-        <div class="shot"><img src="img/flat.webp" alt="" width="485" height="323" loading="lazy" data-i18n-alt="alt.b4"></div>
-        <figcaption class="built__cap"><b data-i18n="built.t4">Плоская кровля</b><span data-i18n="built.d4">Серая глиняная штукатурка и тёмное дерево, ровный участок</span></figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · Projects -->
-<section class="sec" id="projects" aria-labelledby="proj-h">
-  <div class="grid12">
-    <div class="proj__head">
-      <h2 class="h2" id="proj-h" data-i18n="proj.title">Один, два или три этажа</h2>
-      <p class="lead" data-i18n="proj.lead">Все проекты — на одном каркасе и одних панелях. Три этажа — предел для деревянного каркаса.</p>
-    </div>
-    <figure class="shot proj__shot"><img src="img/aerial.webp" alt="" width="1024" height="1024" loading="lazy" data-i18n-alt="alt.aerial"></figure>
-    <div class="proj__list">
-      <div class="prow">
-        <span class="prow__n num">1</span>
-        <p class="prow__t"><b data-i18n="proj.f1">этаж</b><span data-i18n="proj.p1">Компактный дом, всё на одном уровне</span></p>
-        <a class="pill pill--line" href="#request" data-floors="1" data-i18n="proj.ask">Запросить цену</a>
-      </div>
-      <div class="prow">
-        <span class="prow__n num">2</span>
-        <p class="prow__t"><b data-i18n="proj.f2">этажа</b><span data-i18n="proj.p2">Спальни наверху, общая зона внизу</span></p>
-        <a class="pill pill--line" href="#request" data-floors="2" data-i18n="proj.ask">Запросить цену</a>
-      </div>
-      <div class="prow">
-        <span class="prow__n num">3</span>
-        <p class="prow__t"><b data-i18n="proj.f2">этажа</b><span data-i18n="proj.p3">Максимум площади на узком участке</span></p>
-        <a class="pill pill--line" href="#request" data-floors="3" data-i18n="proj.ask">Запросить цену</a>
-      </div>
-    </div>
-  </div>
+  <p class="cond__note" data-i18n="cat.note">·</p>
 </section>
 
 <!-- 8 · Kits -->
@@ -751,6 +596,80 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   </div>
 </section>
 
+
+<!-- 5 · Technology -->
+<section class="sec" id="wall" aria-labelledby="wall-h">
+  <div class="sec__head">
+    <h2 class="h2" id="wall-h" data-i18n="tech.title">·</h2>
+    <p class="lead" data-i18n="wall.text">·</p>
+  </div>
+  <div class="tech">
+    <figure class="tech__fig">
+      <div class="shot"><img src="img/wall-real.webp" alt="" width="560" height="400" loading="lazy" data-i18n-alt="alt.panel"></div>
+      <figcaption class="tech__cap" data-i18n="wall.cap">·</figcaption>
+    </figure>
+    <div>
+      <dl class="layers">
+        <div class="layer"><i style="background:repeating-linear-gradient(58deg,#C0911F 0 3px,#D9B863 3px 5px,#A97C15 5px 7px)"></i><b data-i18n="wall.la">·</b><span data-i18n="wall.lad">·</span></div>
+        <div class="layer"><i style="background:repeating-linear-gradient(90deg,#DFC79F 0 5px,#CDB185 5px 6px)"></i><b data-i18n="wall.lb">·</b><span data-i18n="wall.lbd">·</span></div>
+        <div class="layer"><i style="background:radial-gradient(circle at 30% 30%,#EDEAE1,#DBD7CC)"></i><b data-i18n="wall.lc">·</b><span data-i18n="wall.lcd">·</span></div>
+      </dl>
+      <div class="cond">
+        <p class="micro cond__cap" data-i18n="warm.cap">·</p>
+        <div class="cond__r is-straw"><span class="cond__n" data-i18n="warm.straw">·</span><span class="cond__bar" style="width:9%"></span><span class="cond__v num">0,050–0,065</span></div>
+        <div class="cond__r"><span class="cond__n" data-i18n="warm.wood">·</span><span class="cond__bar" style="width:33%"></span><span class="cond__v num">0,18–0,23</span></div>
+        <div class="cond__r"><span class="cond__n" data-i18n="warm.brick">·</span><span class="cond__bar" style="width:100%"></span><span class="cond__v num">0,56–0,70</span></div>
+        <p class="cond__note" data-i18n="warm.note">·</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Stages -->
+<section class="sec" id="stages" aria-labelledby="st-h">
+  <div class="sec__head">
+    <h2 class="h2" id="st-h" data-i18n="stages.title">·</h2>
+    <p class="lead" data-i18n="stages.lead">·</p>
+  </div>
+  <div class="steps">
+      <article class="step">
+        <div class="shot"><img src="img/factory.webp" alt="" width="1376" height="768" loading="lazy" data-i18n-alt="alt.factory"></div>
+        <div class="step__b">
+          <p class="step__n">1</p>
+          <h3 class="step__t" data-i18n="st1.t">·</h3>
+          <p class="step__d" data-i18n="st1.d">·</p>
+          <p class="step__n" style="margin-top:var(--s4)" data-i18n="st1.m">·</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="shot"><img src="img/assembly.webp" alt="" width="1376" height="768" loading="lazy" data-i18n-alt="alt.assembly"></div>
+        <div class="step__b">
+          <p class="step__n">2</p>
+          <h3 class="step__t" data-i18n="st2.t">·</h3>
+          <p class="step__d" data-i18n="st2.d">·</p>
+          <p class="step__n" style="margin-top:var(--s4)" data-i18n="st2.m">·</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="shot"><img src="img/roof.webp" alt="" width="1184" height="896" loading="lazy" data-i18n-alt="alt.roof"></div>
+        <div class="step__b">
+          <p class="step__n">3</p>
+          <h3 class="step__t" data-i18n="st3.t">·</h3>
+          <p class="step__d" data-i18n="st3.d">·</p>
+          <p class="step__n" style="margin-top:var(--s4)" data-i18n="st3.m">·</p>
+        </div>
+      </article>
+  </div>
+  <div class="where">
+    <p class="micro where__cap" data-i18n="where.title">·</p>
+    <div class="chips">
+      <span class="chip" data-i18n="where.1">·</span>
+      <span class="chip" data-i18n="where.2">·</span>
+      <span class="chip" data-i18n="where.3">·</span>
+    </div>
+  </div>
+</section>
+
 <!-- 9 · Questions -->
 <section class="sec" id="faq" aria-labelledby="faq-h">
   <div class="grid12">
@@ -770,6 +689,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
     </div>
   </div>
 </section>
+
 
 <!-- 10 · Request -->
 <section class="req" id="request" aria-labelledby="req-h">
@@ -817,6 +737,11 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 </section>
 </main>
 
+<div class="bar">
+  <p class="bar__t"><b data-i18n="kits.price">·</b><span data-i18n="bar.d">·</span></p>
+  <a class="pill pill--solid" href="#request" data-i18n="nav.cta">·</a>
+</div>
+
 <footer class="foot">
   <p class="foot__word" aria-hidden="true">Sferihome</p>
   <dl class="foot__grid">
@@ -845,7 +770,24 @@ const I18N = {
   ru: {
     _lang: "ru", _title: "SFERIHOME — дома из соломенных панелей",
     "nav.label": "Основная навигация", "nav.lang": "Язык", "nav.menu": "Меню", "nav.close": "Закрыть", "nav.skip": "К содержанию",
-    "nav.wall": "Стена", "nav.warm": "Тепло", "nav.stages": "Как строим", "nav.where": "Участок", "nav.projects": "Проекты", "nav.cta": "Рассчитать дом",
+    "band.label": "Коротко о технологии",
+    "band.1n": "40 кг",
+    "band.1": "весит м² стены — в 15 раз легче кирпичной",
+    "band.2n": "3–5 дней",
+    "band.2": "сборка коробки на участке",
+    "band.3n": "100 лет",
+    "band.3": "расчётный срок службы каркаса",
+    "band.4n": "6 267 м²",
+    "band.4": "два цеха в Цетине, 25 человек",
+    "cat.b1": "Соломенная кровля",
+    "cat.b2": "Сферический каркас",
+    "cat.b3": "Дом на сваях",
+    "cat.b4": "Плоская кровля",
+    "cat.ask": "Запросить похожий",
+    "cat.note": "Фотографии настоящие. Цена считается по проекту и по выбранному домокомплекту — оставьте заявку внизу страницы.",
+    "tech.title": "Что внутри стены",
+    "bar.d": "комплект, сроки и цена под ваш проект",
+    "nav.wall": "Технология", "nav.stages": "Как строим", "nav.projects": "Каталог", "nav.cta": "Рассчитать дом",
    
     "hero.mid": "Дома из соломенных панелей. Производство — Цетине, Черногория",
     "hero.claim": "Дом, который держит тепло сам",
@@ -855,26 +797,19 @@ const I18N = {
     "built.d2": "Гнутый каркас под соломой, площадка и лестница на стальных опорах",
     "hero.s1n": "40 кг", "hero.s1": "весит м² стены — в 15 раз легче кирпичной",
     "hero.s2n": "×7", "hero.s2": "во столько раз солома теплее кирпича",
-    "wall.full": "Стена из прессованной соломы на деревянном каркасе",
-    "wall.l1": "Солома", "wall.l2": "в стене", "wall.ghost": "/ не в счёте",
     "wall.text": "Панель делают на фабрике: каркас из калиброванной сушёной древесины, внутри плотно спрессованная солома, снаружи и внутри глиняная штукатурка. На участок она приезжает готовой.",
     "wall.la": "Прессованная солома", "wall.lad": "утеплитель, 0,050–0,065 Вт/(м·К)",
     "wall.lb": "Сушёная древесина", "wall.lbd": "каркас до 3 этажей, срок службы до 100 лет",
     "wall.lc": "Глиняный раствор", "wall.lcd": "снаружи и внутри, входит в комплект",
-    "warm.title": "Тепло остаётся в стене",
-    "warm.lead": "Теплопроводность показывает, сколько тепла уходит наружу. Чем меньше число, тем меньше вы платите зимой и тем прохладнее в доме летом.",
-    "warm.cap": "Теплопроводность, Вт/(м·К)", "warm.cm": "Материал", "warm.cv": "Значение", "warm.cs": "Шкала 0–0,7", "warm.cr": "Солома лучше",
-    "warm.straw": "Солома", "warm.wood": "Дерево", "warm.brick": "Кирпич", "warm.w4": "в 4 раза", "warm.w7": "в 7 раз",
+    "warm.cap": "Теплопроводность, Вт/(м·К)",
+    "warm.straw": "Солома", "warm.wood": "Дерево", "warm.brick": "Кирпич",
     "warm.note": "Квадратный метр стены весит 40 кг без раствора — кирпичной около 600. Лёгкая стена означает лёгкий фундамент.",
     "stages.title": "Три этапа", "stages.lead": "Панели приходят готовыми. На участке их собирает бригада из нескольких человек.",
     "st1.t": "Панели — на фабрике", "st1.d": "Каркас собирают и набивают соломой в цехе. Точная геометрия, сухой материал и никакого строительного мусора на вашем участке.", "st1.m": "Цетине · 6 267 м² цехов",
     "st2.t": "Стены — на участке", "st2.d": "Панель ставят на лёгкий каркас и крепят. Без кранов и мокрых работ: вес позволяет собирать вручную.", "st2.m": "3–5 дней на коробку",
     "st3.t": "Кровля и отделка", "st3.d": "Кровельная система нашего же производства, затем глиняная штукатурка снаружи и внутри.", "st3.m": "По проекту",
     "where.title": "Там, где тяжёлый дом не встанет",
-    "where.1": "Склон и сложный рельеф", "where.2": "Винтовые сваи вместо плиты", "where.3": "Участок без подъезда для техники",
-    "proj.title": "Один, два или три этажа", "proj.lead": "Все проекты — на одном каркасе и одних панелях. Три этажа — предел для деревянного каркаса.",
-    "proj.f1": "этаж", "proj.f2": "этажа", "proj.ask": "Запросить цену",
-    "proj.p1": "Компактный дом, всё на одном уровне", "proj.p2": "Спальни наверху, общая зона внизу", "proj.p3": "Максимум площади на узком участке",
+    "where.1": "Склон и сложный рельеф", "where.2": "Винтовые сваи вместо плиты", "where.3": "Участок без подъезда для техники", "proj.ask": "Запросить цену",
     "req.title": "Расскажите об участке", "req.lead": "Пришлём состав комплекта, сроки и цену под ваш проект.",
     "req.name": "Имя", "req.contact": "Телефон или e-mail", "req.place": "Где участок", "req.opt": "необязательно", "req.floors": "Этажей",
     "req.send": "Отправить заявку", "req.sending": "Отправляем…",
@@ -884,14 +819,11 @@ const I18N = {
     "req.okT": "Заявка отправлена", "req.okD": "Свяжемся с вами по контакту, который вы оставили.", "req.again": "Отправить ещё одну",
     "foot.prod": "Производство", "foot.prodV": "Горни Обод, Цетине, Черногория", "foot.office": "Офис", "foot.officeV": "Подгорица",
     "foot.contact": "Контакты", "foot.lang": "Язык",
-    "foot.note": "Прототип редизайна. Настоящие фотографии — стена в разделе «Стена» и все снимки в разделе «Построено»; остальные изображения сгенерированы. Состав комплектов взят с текущего сайта, цифры и ответы на вопросы — из открытых публикаций; всё это требует подтверждения компанией.",
+    "foot.note": "Прототип редизайна. Настоящие фотографии — в каталоге и в разделе «Технология»; первый экран и снимки этапов сборки сгенерированы. Состав комплектов взят с текущего сайта, цифры и ответы на вопросы — из открытых публикаций; всё это требует подтверждения компанией.",
     "alt.panel": "Фронтон дома: деревянный каркас, заполненный прессованной соломой, окна вставлены, штукатурки ещё нет",
     "alt.factory": "Двое рабочих укладывают солому в деревянную раму панели",
     "alt.assembly": "Трое рабочих поднимают соломенную панель на каркас дома",
-    "alt.piles": "Деревянное основание дома на винтовых сваях на каменистом склоне",
     "alt.roof": "Двое рабочих монтируют кровельную панель, за ними горы",
-    "alt.aerial": "Вид сверху: дома в один, два и три этажа на склоне с оливами",
-    "nav.built": "Построено",
     "nav.kits": "Комплекты",
     "nav.faq": "Вопросы",
     "wall.cap": "Настоящее фото: стена до штукатурки — каркас и солома",
@@ -965,7 +897,24 @@ const I18N = {
   me: {
     _lang: "sr-Latn-ME", _title: "SFERIHOME — kuće od slamnatih panela",
     "nav.label": "Glavna navigacija", "nav.lang": "Jezik", "nav.menu": "Meni", "nav.close": "Zatvori", "nav.skip": "Na sadržaj",
-    "nav.wall": "Zid", "nav.warm": "Toplota", "nav.stages": "Kako gradimo", "nav.where": "Plac", "nav.projects": "Projekti", "nav.cta": "Izračunajte kuću",
+    "band.label": "Ukratko o tehnologiji",
+    "band.1n": "40 kg",
+    "band.1": "teži m² zida — 15 puta lakše od zidanog",
+    "band.2n": "3–5 dana",
+    "band.2": "montaža konstrukcije na placu",
+    "band.3n": "100 godina",
+    "band.3": "računski vijek okvira",
+    "band.4n": "6 267 m²",
+    "band.4": "dvije hale u Cetinju, 25 ljudi",
+    "cat.b1": "Slamnati krov",
+    "cat.b2": "Sferični okvir",
+    "cat.b3": "Kuća na šipovima",
+    "cat.b4": "Ravni krov",
+    "cat.ask": "Upit za sličnu",
+    "cat.note": "Fotografije su prave. Cijena se računa prema projektu i izabranom kompletu — ostavite upit na dnu stranice.",
+    "tech.title": "Šta je unutar zida",
+    "bar.d": "komplet, rokovi i cijena za vaš projekat",
+    "nav.wall": "Tehnologija", "nav.stages": "Kako gradimo", "nav.projects": "Katalog", "nav.cta": "Izračunajte kuću",
    
     "hero.mid": "Kuće od slamnatih panela. Proizvodnja — Cetinje, Crna Gora",
     "hero.claim": "Kuća koja sama drži toplotu",
@@ -975,26 +924,19 @@ const I18N = {
     "built.d2": "Savijeni okvir pod slamom, platforma i stepenice na čeličnim nosačima",
     "hero.s1n": "40 kg", "hero.s1": "teži m² zida — 15 puta lakši od cigle",
     "hero.s2n": "×7", "hero.s2": "toliko puta slama bolje drži toplotu od cigle",
-    "wall.full": "Zid od presovane slame na drvenom okviru",
-    "wall.l1": "Slama", "wall.l2": "u zidu", "wall.ghost": "/ ne na računu",
     "wall.text": "Panel se pravi u fabrici: okvir od kalibrisanog sušenog drveta, unutra gusto presovana slama, spolja i iznutra glineni malter. Na plac stiže gotov.",
     "wall.la": "Presovana slama", "wall.lad": "izolacija, 0,050–0,065 W/(m·K)",
     "wall.lb": "Sušeno drvo", "wall.lbd": "okvir do 3 sprata, vijek do 100 godina",
     "wall.lc": "Glineni malter", "wall.lcd": "spolja i iznutra, ulazi u komplet",
-    "warm.title": "Toplota ostaje u zidu",
-    "warm.lead": "Toplotna provodljivost pokazuje koliko toplote izlazi napolje. Što je broj manji, to manje plaćate zimi i to je kuća hladnija ljeti.",
-    "warm.cap": "Toplotna provodljivost, W/(m·K)", "warm.cm": "Materijal", "warm.cv": "Vrijednost", "warm.cs": "Skala 0–0,7", "warm.cr": "Slama je bolja",
-    "warm.straw": "Slama", "warm.wood": "Drvo", "warm.brick": "Cigla", "warm.w4": "4 puta", "warm.w7": "7 puta",
+    "warm.cap": "Toplotna provodljivost, W/(m·K)",
+    "warm.straw": "Slama", "warm.wood": "Drvo", "warm.brick": "Cigla",
     "warm.note": "Kvadratni metar zida teži 40 kg bez maltera — onaj od cigle oko 600. Lakši zid znači lakši temelj.",
     "stages.title": "Tri faze", "stages.lead": "Paneli stižu gotovi. Na placu ih sklapa ekipa od nekoliko ljudi.",
     "st1.t": "Paneli — u fabrici", "st1.d": "Okvir se sklapa i puni slamom u hali. Tačna geometrija, suv materijal i nikakav građevinski otpad na vašem placu.", "st1.m": "Cetinje · 6 267 m² hala",
     "st2.t": "Zidovi — na placu", "st2.d": "Panel se postavlja na lagan okvir i pričvršćuje. Bez dizalica i mokrih radova: težina dozvoljava ručnu montažu.", "st2.m": "3–5 dana za grubu gradnju",
     "st3.t": "Krov i završni radovi", "st3.d": "Krovni sistem iz naše proizvodnje, zatim glineni malter spolja i iznutra.", "st3.m": "Prema projektu",
     "where.title": "Tamo gdje teška kuća ne može",
-    "where.1": "Padina i složen teren", "where.2": "Šrafovi umjesto betonske ploče", "where.3": "Plac bez prilaza za mehanizaciju",
-    "proj.title": "Jedan, dva ili tri sprata", "proj.lead": "Svi projekti su na istom okviru i istim panelima. Tri sprata su granica za drveni okvir.",
-    "proj.f1": "sprat", "proj.f2": "sprata", "proj.ask": "Zatražite cijenu",
-    "proj.p1": "Kompaktna kuća, sve na jednom nivou", "proj.p2": "Spavaće sobe gore, dnevni dio dolje", "proj.p3": "Najviše površine na uskom placu",
+    "where.1": "Padina i složen teren", "where.2": "Šrafovi umjesto betonske ploče", "where.3": "Plac bez prilaza za mehanizaciju", "proj.ask": "Zatražite cijenu",
     "req.title": "Opišite nam plac", "req.lead": "Poslaćemo sastav kompleta, rokove i cijenu za vaš projekat.",
     "req.name": "Ime", "req.contact": "Telefon ili e-mail", "req.place": "Gdje je plac", "req.opt": "neobavezno", "req.floors": "Spratova",
     "req.send": "Pošaljite zahtjev", "req.sending": "Šaljemo…",
@@ -1004,14 +946,11 @@ const I18N = {
     "req.okT": "Zahtjev je poslat", "req.okD": "Javićemo se na kontakt koji ste ostavili.", "req.again": "Pošaljite još jedan",
     "foot.prod": "Proizvodnja", "foot.prodV": "Gornji Obod, Cetinje, Crna Gora", "foot.office": "Kancelarija", "foot.officeV": "Podgorica",
     "foot.contact": "Kontakt", "foot.lang": "Jezik",
-    "foot.note": "Prototip redizajna. Prave fotografije su zid u odjeljku «Zid» i svi snimci u odjeljku «Izgrađeno»; ostale slike su generisane. Sastav kompleta preuzet je sa sadašnjeg sajta, brojke i odgovori na pitanja iz javnih objava; sve to treba da potvrdi kompanija.",
+    "foot.note": "Prototip redizajna. Prave fotografije su u katalogu i u odjeljku «Tehnologija»; prvi ekran i snimci faza montaže su generisani. Sastav kompleta preuzet je sa sadašnjeg sajta, brojke i odgovori na pitanja iz javnih objava; sve to treba da potvrdi kompanija.",
     "alt.panel": "Zabat kuće: drveni okvir ispunjen presovanom slamom, prozori ugrađeni, još bez maltera",
     "alt.factory": "Dvoje radnika stavlja slamu u drveni okvir panela",
     "alt.assembly": "Tri radnika podižu slamnati panel na okvir kuće",
-    "alt.piles": "Drvena osnova kuće na šrafovima na kamenitoj padini",
     "alt.roof": "Dva radnika montiraju krovni panel, iza njih planine",
-    "alt.aerial": "Pogled odozgo: kuće od jednog, dva i tri sprata na padini sa maslinama",
-    "nav.built": "Izgrađeno",
     "nav.kits": "Kompleti",
     "nav.faq": "Pitanja",
     "wall.cap": "Prava fotografija: zid prije maltera — okvir i slama",
@@ -1085,7 +1024,24 @@ const I18N = {
   en: {
     _lang: "en", _title: "SFERIHOME — straw-panel houses",
     "nav.label": "Main navigation", "nav.lang": "Language", "nav.menu": "Menu", "nav.close": "Close", "nav.skip": "Skip to content",
-    "nav.wall": "The wall", "nav.warm": "Warmth", "nav.stages": "How we build", "nav.where": "Your plot", "nav.projects": "Projects", "nav.cta": "Price a house",
+    "band.label": "The technology in short",
+    "band.1n": "40 kg",
+    "band.1": "per m² of wall — 15 times lighter than brick",
+    "band.2n": "3–5 days",
+    "band.2": "assembling the shell on site",
+    "band.3n": "100 years",
+    "band.3": "the timber frame's design life",
+    "band.4n": "6,267 m²",
+    "band.4": "two halls in Cetinje, 25 people",
+    "cat.b1": "Thatched roof",
+    "cat.b2": "Spherical frame",
+    "cat.b3": "On piles",
+    "cat.b4": "Flat roof",
+    "cat.ask": "Ask about this one",
+    "cat.note": "These photographs are real. The price depends on the project and the kit you choose — leave a request at the bottom of the page.",
+    "tech.title": "What is inside the wall",
+    "bar.d": "kit, timing and price for your project",
+    "nav.wall": "Technology", "nav.stages": "How we build", "nav.projects": "Catalogue", "nav.cta": "Price a house",
    
     "hero.mid": "Straw-panel houses. Made in Cetinje, Montenegro",
     "hero.claim": "A house that holds its own warmth",
@@ -1095,26 +1051,19 @@ const I18N = {
     "built.d2": "A curved frame under thatch, deck and stair on steel legs",
     "hero.s1n": "40 kg", "hero.s1": "per m² of wall — 15 times lighter than brick",
     "hero.s2n": "×7", "hero.s2": "how much better straw holds heat than brick",
-    "wall.full": "A wall of pressed straw in a timber frame",
-    "wall.l1": "Straw", "wall.l2": "in the wall", "wall.ghost": "/ not in the bill",
     "wall.text": "The panel is made in the factory: a frame of calibrated kiln-dried timber, densely pressed straw inside, clay plaster on both faces. It arrives on your plot finished.",
     "wall.la": "Pressed straw", "wall.lad": "insulation, 0.050–0.065 W/(m·K)",
     "wall.lb": "Kiln-dried timber", "wall.lbd": "frame up to 3 storeys, rated for 100 years",
     "wall.lc": "Clay mortar", "wall.lcd": "inside and out, included in the kit",
-    "warm.title": "Warmth stays in the wall",
-    "warm.lead": "Thermal conductivity is how much heat escapes through a material. The lower the number, the less you pay in winter and the cooler the house stays in summer.",
-    "warm.cap": "Thermal conductivity, W/(m·K)", "warm.cm": "Material", "warm.cv": "Value", "warm.cs": "Scale 0–0.7", "warm.cr": "Straw is better by",
-    "warm.straw": "Straw", "warm.wood": "Timber", "warm.brick": "Brick", "warm.w4": "4×", "warm.w7": "7×",
+    "warm.cap": "Thermal conductivity, W/(m·K)",
+    "warm.straw": "Straw", "warm.wood": "Timber", "warm.brick": "Brick",
     "warm.note": "A square metre of wall weighs 40 kg without mortar; a brick wall is about 600. A lighter wall means a lighter foundation.",
     "stages.title": "Three stages", "stages.lead": "Panels arrive finished. A crew of a few people puts them together on site.",
     "st1.t": "Panels — in the factory", "st1.d": "The frame is assembled and packed with straw in the hall. Exact geometry, dry material and no construction waste on your plot.", "st1.m": "Cetinje · 6,267 m² of floor",
     "st2.t": "Walls — on your plot", "st2.d": "A panel is lifted onto the light frame and fixed. No cranes, no wet work: the weight allows hand assembly.", "st2.m": "3–5 days to a closed shell",
     "st3.t": "Roof and finishing", "st3.d": "A roof system from our own production, then clay plaster inside and out.", "st3.m": "Per project",
     "where.title": "Where a heavy house cannot go",
-    "where.1": "Slopes and difficult ground", "where.2": "Screw piles instead of a slab", "where.3": "Plots with no access for machinery",
-    "proj.title": "One, two or three storeys", "proj.lead": "Every project uses the same frame and the same panels. Three storeys is the limit for a timber frame.",
-    "proj.f1": "storey", "proj.f2": "storeys", "proj.ask": "Ask for a price",
-    "proj.p1": "A compact house, everything on one level", "proj.p2": "Bedrooms upstairs, living space below", "proj.p3": "Most floor area on a narrow plot",
+    "where.1": "Slopes and difficult ground", "where.2": "Screw piles instead of a slab", "where.3": "Plots with no access for machinery", "proj.ask": "Ask for a price",
     "req.title": "Tell us about the plot", "req.lead": "We will send what the kit contains, how long it takes and what it costs.",
     "req.name": "Name", "req.contact": "Phone or email", "req.place": "Where is the plot", "req.opt": "optional", "req.floors": "Storeys",
     "req.send": "Send request", "req.sending": "Sending…",
@@ -1124,14 +1073,11 @@ const I18N = {
     "req.okT": "Request sent", "req.okD": "We will get back to you at the contact you left.", "req.again": "Send another",
     "foot.prod": "Production", "foot.prodV": "Gornji Obod, Cetinje, Montenegro", "foot.office": "Office", "foot.officeV": "Podgorica",
     "foot.contact": "Contact", "foot.lang": "Language",
-    "foot.note": "Redesign prototype. The real photographs are the wall in The wall and every image in Built; every other image is generated. The kit contents come from the current site, the figures and answers from public coverage — all of it needs confirming by the company.",
+    "foot.note": "Redesign prototype. The real photographs are the ones in the catalogue and in Technology; the first screen and the three assembly stages are generated. The kit contents come from the current site, the figures and answers from public coverage — all of it needs confirming by the company.",
     "alt.panel": "A house gable: a timber frame packed with pressed straw, windows fitted, not yet rendered",
     "alt.factory": "Two workers laying straw into the timber frame of a panel",
     "alt.assembly": "Three workers lifting a straw panel onto a house frame",
-    "alt.piles": "A timber house base on screw piles on a rocky slope",
     "alt.roof": "Two workers fitting a roof panel, mountains behind them",
-    "alt.aerial": "Aerial view: one, two and three storey houses on a slope with olive trees",
-    "nav.built": "Built",
     "nav.kits": "Kits",
     "nav.faq": "Questions",
     "wall.cap": "Real photograph: the wall before rendering — frame and straw",
@@ -1211,13 +1157,27 @@ const I18N = {
     "nav.menu": "Menu",
     "nav.close": "Fermer",
     "nav.skip": "Aller au contenu",
-    "nav.wall": "Le mur",
-    "nav.warm": "Chaleur",
+    "band.label": "La technique en bref",
+    "band.1n": "40 kg",
+    "band.1": "le m² de mur — 15 fois plus léger que la brique",
+    "band.2n": "3–5 jours",
+    "band.2": "montage de la structure sur le terrain",
+    "band.3n": "100 ans",
+    "band.3": "durée de vie calculée de l'ossature",
+    "band.4n": "6 267 m²",
+    "band.4": "deux ateliers à Cetinje, 25 personnes",
+    "cat.b1": "Toit de chaume",
+    "cat.b2": "Ossature sphérique",
+    "cat.b3": "Sur pieux",
+    "cat.b4": "Toit plat",
+    "cat.ask": "Demander la même",
+    "cat.note": "Ces photos sont réelles. Le prix dépend du projet et du kit choisi — laissez une demande en bas de page.",
+    "tech.title": "Ce qu'il y a dans le mur",
+    "bar.d": "kit, délais et prix pour votre projet",
+    "nav.wall": "Technique",
     "nav.stages": "Comment on construit",
-    "nav.where": "Votre terrain",
-    "nav.projects": "Projets",
+    "nav.projects": "Catalogue",
     "nav.cta": "Chiffrer ma maison",
-    "nav.built": "Réalisations",
     "nav.kits": "Kits",
     "nav.faq": "Questions",
     "hero.mid": "Maisons en panneaux de paille. Fabrication — Cetinje, Monténégro",
@@ -1228,10 +1188,6 @@ const I18N = {
     "hero.s1": "le m² de mur — 15 fois plus léger que la brique",
     "hero.s2n": "×7",
     "hero.s2": "la paille garde la chaleur bien mieux que la brique",
-    "wall.full": "Un mur de paille compressée sur ossature bois",
-    "wall.l1": "La paille",
-    "wall.l2": "dans le mur",
-    "wall.ghost": "/ pas dans la facture",
     "wall.text": "Le panneau est fabriqué en usine : une ossature en bois séché et calibré, de la paille fortement compressée à l'intérieur, un enduit de terre crue sur les deux faces. Il arrive fini sur le terrain.",
     "wall.la": "Paille compressée",
     "wall.lad": "isolant, 0,050–0,065 W/(m·K)",
@@ -1240,18 +1196,10 @@ const I18N = {
     "wall.lc": "Enduit de terre",
     "wall.lcd": "intérieur et extérieur, compris dans le kit",
     "wall.cap": "Photo réelle : le mur avant enduit — ossature et paille",
-    "warm.title": "La chaleur reste dans le mur",
-    "warm.lead": "La conductivité thermique mesure la chaleur qui s'échappe vers l'extérieur. Plus le chiffre est bas, moins vous payez l'hiver et plus la maison reste fraîche l'été.",
     "warm.cap": "Conductivité thermique, W/(m·K)",
-    "warm.cm": "Matériau",
-    "warm.cv": "Valeur",
-    "warm.cs": "Échelle 0–0,7",
-    "warm.cr": "La paille fait mieux de",
     "warm.straw": "Paille",
     "warm.wood": "Bois",
     "warm.brick": "Brique",
-    "warm.w4": "4×",
-    "warm.w7": "7×",
     "warm.note": "Un mètre carré de mur pèse 40 kg sans enduit ; un mur de brique, environ 600. Un mur léger, ce sont des fondations légères.",
     "stages.title": "Trois étapes",
     "stages.lead": "Les panneaux arrivent finis. Une équipe de quelques personnes les assemble sur place.",
@@ -1268,14 +1216,7 @@ const I18N = {
     "where.1": "Pente et terrain difficile",
     "where.2": "Pieux vissés au lieu d'une dalle",
     "where.3": "Terrain sans accès pour les engins",
-    "proj.title": "Un, deux ou trois niveaux",
-    "proj.lead": "Tous les projets utilisent la même ossature et les mêmes panneaux. Trois niveaux, c'est la limite d'une ossature bois.",
-    "proj.f1": "niveau",
-    "proj.f2": "niveaux",
     "proj.ask": "Demander le prix",
-    "proj.p1": "Maison compacte, tout de plain-pied",
-    "proj.p2": "Chambres à l'étage, séjour en bas",
-    "proj.p3": "Le maximum de surface sur un terrain étroit",
     "built.title": "Maisons déjà construites",
     "built.lead": "Photos réelles de réalisations. Toutes les autres images de la page sont des visualisations.",
     "built.t1": "Deux maisons sur une pente",
@@ -1361,13 +1302,11 @@ const I18N = {
     "foot.officeV": "Podgorica",
     "foot.contact": "Contact",
     "foot.lang": "Langue",
-    "foot.note": "Prototype de refonte. Les photos réelles sont le mur dans « Le mur » et toutes les images de « Réalisations » ; toutes les autres images sont générées. Le contenu des kits provient du site actuel, les chiffres et les réponses de publications ouvertes — tout cela doit être confirmé par l'entreprise.",
+    "foot.note": "Prototype de refonte. Les photos réelles sont celles du catalogue et de la section « Technique » ; le premier écran et les trois étapes de montage sont générés. Le contenu des kits provient du site actuel, les chiffres et les réponses de publications ouvertes — tout cela doit être confirmé par l'entreprise.",
     "alt.panel": "Pignon de maison : ossature bois remplie de paille compressée, fenêtres posées, pas encore enduit",
     "alt.factory": "Deux ouvriers disposent de la paille dans le cadre bois d'un panneau",
     "alt.assembly": "Trois ouvriers lèvent un panneau de paille sur l'ossature d'une maison",
-    "alt.piles": "Soubassement bois d'une maison sur pieux vissés, pente rocheuse",
     "alt.roof": "Deux ouvriers posent un panneau de toiture, montagnes derrière eux",
-    "alt.aerial": "Vue aérienne : maisons d'un, deux et trois niveaux sur une pente plantée d'oliviers",
     "alt.b1": "Deux maisons à toit de chaume sur une pente verte, montagnes derrière",
     "alt.b2": "Maison-dôme entièrement couverte de chaume, terrasse bois en forêt",
     "alt.b3": "Maison sur pieux bois, enduit blanc et toit de chaume, sur une pente",
@@ -1437,6 +1376,17 @@ if ("IntersectionObserver" in window && targets.length) {
     }
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((s) => spy.observe(s));
+}
+
+/* the fixed bar steps aside once the form or the footer is on screen */
+const bar = document.querySelector(".bar");
+if (bar && "IntersectionObserver" in window) {
+  const seen = new Set();
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) e.isIntersecting ? seen.add(e.target) : seen.delete(e.target);
+    bar.classList.toggle("is-off", seen.size > 0);
+  }, { threshold: 0 });
+  [document.getElementById("request"), document.querySelector(".foot")].forEach((el) => el && io.observe(el));
 }
 
 /* a project row presets the storey field */
