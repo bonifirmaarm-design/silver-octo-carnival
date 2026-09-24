@@ -151,13 +151,13 @@ button, input { font: inherit; color: inherit; }
 .drawer .pill { margin-top: var(--s4); width: 100%; justify-content: center; }
 
 /* ---------- shared ---------- */
-.sec { padding-top: clamp(var(--s8), 6.5vw, var(--s10)); }
+.sec { padding-top: clamp(var(--s7), 5vw, var(--s9)); }
 .sec--tight { padding-top: var(--s6); }
 .grid12 { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); column-gap: var(--s5); }
 .shot { border-radius: var(--r-lg); overflow: hidden; background: var(--line); }
 .shot img { width: 100%; height: 100%; object-fit: cover; }
-.sec__head { max-width: 48ch; }
-.sec__head .lead { margin-top: var(--s4); }
+.sec__head { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: var(--s6) var(--s7); align-items: end; }
+.sec__head .lead { max-width: 54ch; }
 .price { font-size: var(--small); font-weight: 700; color: var(--straw); }
 
 /* ---------- 2 · the figures band ---------- */
@@ -181,23 +181,29 @@ button, input { font: inherit; color: inherit; }
 .tile__foot .pill { min-height: 44px; padding: 0 var(--s4); }
 
 /* ---------- 4 · technology ---------- */
-.tech { margin-top: var(--s7); display: grid; grid-template-columns: minmax(0,6fr) minmax(0,6fr); gap: var(--s7); align-items: start; }
-.tech__fig .shot { aspect-ratio: 7/5; }
+.tech { margin-top: var(--s7); display: grid; grid-template-columns: minmax(0,4fr) minmax(0,8fr); gap: var(--s7); align-items: start; }
+.tech__fig .shot { aspect-ratio: 4/3; }
 .tech__cap { margin-top: var(--s3); font-size: var(--micro); line-height: 1.55; color: var(--muted); }
-.layers { border-top: 1px solid var(--line); }
-.layer { display: grid; grid-template-columns: 30px minmax(0,1fr) auto; align-items: center; gap: var(--s4); padding-block: var(--s4); border-bottom: 1px solid var(--line); }
-.layer i { width: 28px; height: 28px; border-radius: 6px; }
-.layer b { font-weight: 600; font-size: var(--small); }
-.layer span { font-size: var(--micro); color: var(--muted); text-align: right; }
-.cond { margin-top: var(--s6); }
 .cond__cap { color: var(--muted); }
-.cond__r { display: grid; grid-template-columns: 6rem minmax(0,1fr) 4.5rem; align-items: center; gap: var(--s4); padding-block: var(--s3); }
-.cond__n { font-size: var(--small); font-weight: 700; }
-.cond__bar { height: 12px; border-radius: 6px; background: #C6C4BA; }
-.cond__v { font-size: var(--micro); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
-.is-straw .cond__n { color: var(--straw); }
-.is-straw .cond__bar { background: var(--straw-bar); box-shadow: 0 0 0 4px rgba(192,145,31,.16); }
+.cond__r { display: grid; grid-template-columns: 6.5rem minmax(0,1fr) 6.5rem 7.5rem; align-items: center; gap: var(--s4); padding-block: var(--s5); border-bottom: 1px solid var(--line); }
+.cond__r:first-of-type { border-top: 1px solid var(--line); }
+.cond__n { font-size: var(--lead); font-weight: 700; letter-spacing: -.02em; }
+.cond__track { display: block; height: 18px; border-radius: 9px; background: #E2E0D8; overflow: hidden; }
+.cond__bar { display: block; height: 100%; border-radius: 9px; background: #9C998D; }
+.cond__v { font-size: var(--small); font-weight: 600; font-variant-numeric: tabular-nums; }
+.cond__f { font-size: var(--micro); color: var(--muted); text-align: right; }
+.is-straw .cond__n, .is-straw .cond__v { color: var(--straw); }
+.is-straw .cond__bar { background: var(--straw-bar); }
+.is-straw .cond__f { color: var(--straw); font-weight: 600; }
 .cond__note { margin-top: var(--s5); font-size: var(--micro); line-height: 1.6; color: var(--muted); }
+
+.cut { margin-top: var(--s8); }
+.cut svg { display: block; width: 100%; height: auto; border-radius: var(--r-lg); }
+.keys { margin-top: var(--s5); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); border-top: 1px solid var(--line); }
+.key { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: var(--s4); padding-top: var(--s5); }
+.key__n { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; font-size: var(--micro); font-weight: 700; }
+.key b { display: block; font-size: var(--small); font-weight: 700; }
+.key span { display: block; margin-top: 4px; font-size: var(--micro); line-height: 1.55; color: var(--muted); }
 
 /* ---------- 5 · stages ---------- */
 .steps { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); }
@@ -294,14 +300,22 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 }
 
 /* ---------- 8 · kits ---------- */
-.kits__head { grid-column: 1 / 9; }
-.kits__grid { grid-column: 1 / 13; margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); align-items: start; }
-.kit { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--r-lg); padding: clamp(20px, 2vw, 30px); box-shadow: var(--shadow); }
+.kits__head { grid-column: 1 / 13; }
+.kits__legend { grid-column: 1 / 13; margin-top: var(--s7); color: var(--muted); }
+.kits__grid { grid-column: 1 / 13; margin-top: var(--s4); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--s5); align-items: start; }
+.kit { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); }
+.kit__in { display: flex; flex-direction: column; flex: 1; padding: clamp(20px, 2vw, 30px); }
+.kit__cap { display: grid; grid-template-columns: repeat(3, 1fr); height: 92px; }
+.mat { background: #E4E2DB; }
+.mat.on.mat--straw { background: repeating-linear-gradient(58deg,#C0911F 0 4px,#D9B863 4px 7px,#A97C15 7px 10px); }
+.mat.on.mat--clay { background: radial-gradient(circle at 30% 25%,#EDEAE1,#D4D0C4); }
+.mat.on.mat--serv { background: var(--olive); }
 .kit--full { box-shadow: inset 0 0 0 2px var(--straw-bar), var(--shadow); }
+.kit__p { font-size: var(--lead); }
 .kit__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); color: var(--muted); }
 .kit__badge { padding: 3px var(--s3); border-radius: var(--r-pill); background: var(--straw-bar); color: #241A00; font-size: var(--micro); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 .kit__t { margin-top: var(--s3); font-size: var(--h3); font-weight: 800; letter-spacing: -.035em; line-height: 1.06; text-wrap: balance; }
-.kit__p { margin-top: var(--s3); font-size: var(--small); font-weight: 600; color: var(--straw); }
+.kit__p { margin-top: var(--s3); font-weight: 700; color: var(--straw); }
 .kit__intro { margin-top: var(--s6); padding-bottom: var(--s3); font-size: var(--micro); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
 .kit__list { border-top: 1px solid var(--line); }
 .kit__list > li { padding-block: var(--s4); border-bottom: 1px solid var(--line); }
@@ -315,8 +329,11 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .kits__note { grid-column: 1 / 13; margin-top: var(--s6); font-size: var(--small); line-height: 1.55; color: var(--muted); max-width: 66ch; }
 
 /* ---------- 9 · questions ---------- */
-.faq__head { grid-column: 1 / 5; }
-.faq__list { grid-column: 6 / 13; border-top: 1px solid var(--line); }
+.faq__head { grid-column: 1 / 13; }
+.kits__head, .faq__head { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: var(--s6) var(--s7); align-items: end; }
+.kits__head .lead, .faq__head .lead { max-width: 54ch; }
+.faq__list { grid-column: 1 / 13; margin-top: var(--s7); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: var(--s8); }
+.qa:nth-child(-n+2) { border-top: 1px solid var(--line); }
 .qa { border-bottom: 1px solid var(--line); }
 .qa > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0,1fr) 26px; align-items: start; gap: var(--s4); padding-block: var(--s5); font-size: var(--h3); font-weight: 700; letter-spacing: -.03em; line-height: 1.16; }
 .qa > summary::-webkit-details-marker { display: none; }
@@ -349,10 +366,18 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .foot__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 900px) {
+  .sec__head, .kits__head, .faq__head { grid-template-columns: minmax(0,1fr); gap: var(--s4); align-items: start; }
+  .faq__list { grid-template-columns: minmax(0,1fr); }
+  .qa:nth-child(2) { border-top: 0; }
+  .keys { grid-template-columns: minmax(0,1fr); gap: 0; }
+  .key { padding-block: var(--s4); border-bottom: 1px solid var(--line); }
+  .key:first-child { padding-top: var(--s4); }
   .band { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .band__c { padding: var(--s5) var(--s4); }
   .tech { grid-template-columns: minmax(0,1fr); gap: var(--s6); }
   .tech__fig { max-width: 600px; }
+  .cond__r { grid-template-columns: 5.5rem minmax(0,1fr) 5.5rem; }
+  .cond__f { grid-column: 2 / -1; text-align: left; margin-top: 2px; }
   .steps { grid-template-columns: minmax(0,1fr); }
   .step .shot { aspect-ratio: 2/1; }
 }
@@ -381,7 +406,9 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   .tiles { grid-template-columns: minmax(0,1fr); }
   .layer { grid-template-columns: 30px minmax(0,1fr); }
   .layer span { grid-column: 2; text-align: left; margin-top: 2px; }
-  .cond__r { grid-template-columns: 4.75rem minmax(0,1fr) 3.5rem; gap: var(--s3); }
+  .cond__r { grid-template-columns: 4.5rem minmax(0,1fr); gap: var(--s2) var(--s3); }
+  .cond__v { grid-column: 2; text-align: left; }
+  .cond__f { grid-column: 2; }
   .qa > summary { font-size: var(--lead); }
   .foot__grid { grid-template-columns: minmax(0,1fr); }
 }
@@ -529,9 +556,12 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
       <h2 class="h2" id="kits-h" data-i18n="kits.title">Три домокомплекта</h2>
       <p class="lead" data-i18n="kits.lead">Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.</p>
     </div>
+    <p class="micro kits__legend" data-i18n="kits.strip">·</p>
     <div class="kits__grid">
 
       <article class="kit">
+        <div class="kit__cap" aria-hidden="true"><i class="mat mat--straw on"></i><i class="mat mat--clay"></i><i class="mat mat--serv"></i></div>
+        <div class="kit__in">
         <div class="kit__top"><p class="micro" data-i18n="kits.k1n">Комплект 1</p></div>
         <h3 class="kit__t" data-i18n="kits.k1t">Без сборки</h3>
         <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
@@ -545,9 +575,12 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         </ul>
         <p class="kit__note" data-i18n="kits.note1">Перекрытия, перегородки и стропила идут без утеплителя и звукоизоляции.</p>
         <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+        </div>
       </article>
 
       <article class="kit">
+        <div class="kit__cap" aria-hidden="true"><i class="mat mat--straw on"></i><i class="mat mat--clay on"></i><i class="mat mat--serv"></i></div>
+        <div class="kit__in">
         <div class="kit__top"><p class="micro" data-i18n="kits.k2n">Комплект 2</p></div>
         <h3 class="kit__t" data-i18n="kits.k2t">Со сборкой и штукатуркой</h3>
         <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
@@ -557,9 +590,12 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
           <li><b data-i18n="kits.r7">·</b><span data-i18n="kits.n7">·</span></li>
         </ul>
         <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+        </div>
       </article>
 
       <article class="kit kit--full">
+        <div class="kit__cap" aria-hidden="true"><i class="mat mat--straw on"></i><i class="mat mat--clay on"></i><i class="mat mat--serv on"></i></div>
+        <div class="kit__in">
         <div class="kit__top"><p class="micro" data-i18n="kits.k3n">Комплект 3</p><span class="kit__badge" data-i18n="kits.full">Полный</span></div>
         <h3 class="kit__t" data-i18n="kits.k3t">Под чистовую отделку</h3>
         <p class="kit__p" data-i18n="kits.price">Цена по запросу</p>
@@ -575,7 +611,8 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
           </li>
         </ul>
         <p class="kit__note" data-i18n="kits.note3">Котёл — базовый двухконтурный средней стоимости. Приточная вентиляция с рекуперацией оплачивается отдельно.</p>
-        <div class="kit__foot"><a class="pill pill--line" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+        <div class="kit__foot"><a class="pill pill--solid" href="#request" data-i18n="proj.ask">Запросить цену</a></div>
+        </div>
       </article>
 
     </div>
@@ -595,21 +632,70 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
       <div class="shot"><img src="img/wall-real.webp" alt="" width="560" height="400" loading="lazy" data-i18n-alt="alt.panel"></div>
       <figcaption class="tech__cap" data-i18n="wall.cap">·</figcaption>
     </figure>
-    <div>
-      <dl class="layers">
-        <div class="layer"><i style="background:repeating-linear-gradient(58deg,#C0911F 0 3px,#D9B863 3px 5px,#A97C15 5px 7px)"></i><b data-i18n="wall.la">·</b><span data-i18n="wall.lad">·</span></div>
-        <div class="layer"><i style="background:repeating-linear-gradient(90deg,#DFC79F 0 5px,#CDB185 5px 6px)"></i><b data-i18n="wall.lb">·</b><span data-i18n="wall.lbd">·</span></div>
-        <div class="layer"><i style="background:radial-gradient(circle at 30% 30%,#EDEAE1,#DBD7CC)"></i><b data-i18n="wall.lc">·</b><span data-i18n="wall.lcd">·</span></div>
-      </dl>
-      <div class="cond">
-        <p class="micro cond__cap" data-i18n="warm.cap">·</p>
-        <div class="cond__r is-straw"><span class="cond__n" data-i18n="warm.straw">·</span><span class="cond__bar" style="width:9%"></span><span class="cond__v num">0,050–0,065</span></div>
-        <div class="cond__r"><span class="cond__n" data-i18n="warm.wood">·</span><span class="cond__bar" style="width:33%"></span><span class="cond__v num">0,18–0,23</span></div>
-        <div class="cond__r"><span class="cond__n" data-i18n="warm.brick">·</span><span class="cond__bar" style="width:100%"></span><span class="cond__v num">0,56–0,70</span></div>
-        <p class="cond__note" data-i18n="warm.note">·</p>
+    <div class="cond">
+      <p class="micro cond__cap" data-i18n="warm.cap">·</p>
+      <div class="cond__r is-straw">
+        <span class="cond__n" data-i18n="warm.straw">·</span>
+        <span class="cond__track"><span class="cond__bar" style="width:9%"></span></span>
+        <span class="cond__v num">0,050–0,065</span>
+        <span class="cond__f" data-i18n="warm.best">·</span>
       </div>
+      <div class="cond__r">
+        <span class="cond__n" data-i18n="warm.wood">·</span>
+        <span class="cond__track"><span class="cond__bar" style="width:33%"></span></span>
+        <span class="cond__v num">0,18–0,23</span>
+        <span class="cond__f" data-i18n="warm.w4">·</span>
+      </div>
+      <div class="cond__r">
+        <span class="cond__n" data-i18n="warm.brick">·</span>
+        <span class="cond__track"><span class="cond__bar" style="width:100%"></span></span>
+        <span class="cond__v num">0,56–0,70</span>
+        <span class="cond__f" data-i18n="warm.w7">·</span>
+      </div>
+      <p class="cond__note" data-i18n="warm.note">·</p>
     </div>
   </div>
+
+  <figure class="cut">
+    <svg viewBox="0 0 1000 250" role="img" aria-labelledby="cut-t">
+      <title id="cut-t" data-i18n="cut.alt">·</title>
+      <defs>
+        <pattern id="pStraw" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(58)">
+          <rect width="14" height="14" fill="#C3A257"/><rect width="14" height="5" fill="#D6BD8A"/><rect y="9" width="14" height="4" fill="#A8873E"/>
+        </pattern>
+        <pattern id="pWood" width="9" height="9" patternUnits="userSpaceOnUse">
+          <rect width="9" height="9" fill="#DCC7A6"/><rect width="1.5" height="9" fill="#C2A67C"/>
+        </pattern>
+        <linearGradient id="pClay" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#EDEAE1"/><stop offset="1" stop-color="#D2CEC2"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1000" height="250" fill="#FBFAF7"/>
+      <rect x="40" y="46" width="34" height="158" fill="url(#pClay)"/>
+      <rect x="74" y="46" width="852" height="158" fill="url(#pStraw)"/>
+      <rect x="926" y="46" width="34" height="158" fill="url(#pClay)"/>
+      <g fill="url(#pWood)">
+        <rect x="150" y="46" width="40" height="158"/><rect x="340" y="46" width="40" height="158"/>
+        <rect x="530" y="46" width="40" height="158"/><rect x="720" y="46" width="40" height="158"/>
+      </g>
+      <g stroke="#000" stroke-width="2" fill="none" opacity=".35">
+        <rect x="40" y="46" width="920" height="158"/><path d="M74 46v158M926 46v158"/>
+      </g>
+      <g font-family="inherit" font-size="26" font-weight="700" text-anchor="middle">
+        <circle cx="57" cy="26" r="17" fill="#000"/><text x="57" y="35" fill="#fff">1</text>
+        <path d="M57 43v3" stroke="#000" stroke-width="2"/>
+        <circle cx="265" cy="26" r="17" fill="#000"/><text x="265" y="35" fill="#fff">2</text>
+        <path d="M265 43v3" stroke="#000" stroke-width="2"/>
+        <circle cx="360" cy="224" r="17" fill="#000"/><text x="360" y="233" fill="#fff">3</text>
+        <path d="M360 204v3" stroke="#000" stroke-width="2"/>
+      </g>
+    </svg>
+  </figure>
+  <dl class="keys">
+    <div class="key"><dt class="key__n">1</dt><dd><b data-i18n="wall.lc">·</b><span data-i18n="wall.lcd">·</span></dd></div>
+    <div class="key"><dt class="key__n">2</dt><dd><b data-i18n="wall.la">·</b><span data-i18n="wall.lad">·</span></dd></div>
+    <div class="key"><dt class="key__n">3</dt><dd><b data-i18n="wall.lb">·</b><span data-i18n="wall.lbd">·</span></dd></div>
+  </dl>
 </section>
 
 <!-- 6 · Stages -->
@@ -788,6 +874,10 @@ const I18N = {
     "wall.la": "Прессованная солома", "wall.lad": "утеплитель, 0,050–0,065 Вт/(м·К)",
     "wall.lb": "Сушёная древесина", "wall.lbd": "каркас до 3 этажей, срок службы до 100 лет",
     "wall.lc": "Глиняный раствор", "wall.lcd": "снаружи и внутри, входит в комплект",
+    "warm.best": "лучший показатель",
+    "warm.w4": "в 4 раза выше",
+    "warm.w7": "в 7 раз выше",
+    "cut.alt": "Разрез стены: глиняная штукатурка снаружи и внутри, между ними прессованная солома с вертикальными стойками деревянного каркаса",
     "warm.cap": "Теплопроводность, Вт/(м·К)",
     "warm.straw": "Солома", "warm.wood": "Дерево", "warm.brick": "Кирпич",
     "warm.note": "Квадратный метр стены весит 40 кг без раствора — кирпичной около 600. Лёгкая стена означает лёгкий фундамент.",
@@ -837,6 +927,7 @@ const I18N = {
     "kits.e1": "Электропроводка к розеткам и светильникам",
     "kits.e2": "Вода и канализация ко всем предметам сантехники",
     "kits.e3": "Отопление с котлом, материалы включены",
+    "kits.strip": "Полоса над карточкой показывает, докуда доходит комплект: солома → глина → инженерия",
     "kits.title": "Три домокомплекта",
     "kits.lead": "Разница между ними только в том, где заканчивается наша работа. Панели, брус, каркас перегородок, перекрытия и стропила входят во все три.",
     "kits.price": "Цена по запросу",
@@ -915,6 +1006,10 @@ const I18N = {
     "wall.la": "Presovana slama", "wall.lad": "izolacija, 0,050–0,065 W/(m·K)",
     "wall.lb": "Sušeno drvo", "wall.lbd": "okvir do 3 sprata, vijek do 100 godina",
     "wall.lc": "Glineni malter", "wall.lcd": "spolja i iznutra, ulazi u komplet",
+    "warm.best": "najbolji rezultat",
+    "warm.w4": "4 puta više",
+    "warm.w7": "7 puta više",
+    "cut.alt": "Presjek zida: glineni malter spolja i iznutra, između njih presovana slama sa vertikalnim stubovima drvenog okvira",
     "warm.cap": "Toplotna provodljivost, W/(m·K)",
     "warm.straw": "Slama", "warm.wood": "Drvo", "warm.brick": "Cigla",
     "warm.note": "Kvadratni metar zida teži 40 kg bez maltera — onaj od cigle oko 600. Lakši zid znači lakši temelj.",
@@ -964,6 +1059,7 @@ const I18N = {
     "kits.e1": "Električne instalacije do utičnica i svjetiljki",
     "kits.e2": "Voda i kanalizacija do svih sanitarija",
     "kits.e3": "Grijanje sa kotlom, materijal uključen",
+    "kits.strip": "Traka iznad kartice pokazuje dokle ide komplet: slama → glina → instalacije",
     "kits.title": "Tri kompleta",
     "kits.lead": "Razlika je samo u tome gdje se završava naš posao. Paneli, grede, okvir pregrada, međuspratna konstrukcija i rogovi ulaze u sva tri.",
     "kits.price": "Cijena na upit",
@@ -1042,6 +1138,10 @@ const I18N = {
     "wall.la": "Pressed straw", "wall.lad": "insulation, 0.050–0.065 W/(m·K)",
     "wall.lb": "Kiln-dried timber", "wall.lbd": "frame up to 3 storeys, rated for 100 years",
     "wall.lc": "Clay mortar", "wall.lcd": "inside and out, included in the kit",
+    "warm.best": "the best of the three",
+    "warm.w4": "4× higher",
+    "warm.w7": "7× higher",
+    "cut.alt": "A section through the wall: clay render inside and out, pressed straw between them with the upright posts of the timber frame",
     "warm.cap": "Thermal conductivity, W/(m·K)",
     "warm.straw": "Straw", "warm.wood": "Timber", "warm.brick": "Brick",
     "warm.note": "A square metre of wall weighs 40 kg without mortar; a brick wall is about 600. A lighter wall means a lighter foundation.",
@@ -1091,6 +1191,7 @@ const I18N = {
     "kits.e1": "Wiring to sockets and light fittings",
     "kits.e2": "Water and drainage to every sanitary fitting",
     "kits.e3": "Heating with a boiler, materials included",
+    "kits.strip": "The band above each card shows how far the kit goes: straw → clay → services",
     "kits.title": "Three kits",
     "kits.lead": "They differ only in where our work stops. Panels, wall plates, partition frames, floor structure and rafters are in all three.",
     "kits.price": "Price on request",
@@ -1183,6 +1284,10 @@ const I18N = {
     "wall.lc": "Enduit de terre",
     "wall.lcd": "intérieur et extérieur, compris dans le kit",
     "wall.cap": "Photo réelle : le mur avant enduit — ossature et paille",
+    "warm.best": "le meilleur résultat",
+    "warm.w4": "4 fois plus",
+    "warm.w7": "7 fois plus",
+    "cut.alt": "Coupe du mur : enduit de terre à l'intérieur et à l'extérieur, paille compressée entre les deux avec les montants de l'ossature bois",
     "warm.cap": "Conductivité thermique, W/(m·K)",
     "warm.straw": "Paille",
     "warm.wood": "Bois",
@@ -1223,6 +1328,7 @@ const I18N = {
     "kits.e1": "Électricité jusqu'aux prises et aux luminaires",
     "kits.e2": "Eau et évacuation vers tous les appareils sanitaires",
     "kits.e3": "Chauffage avec chaudière, fournitures comprises",
+    "kits.strip": "La bande au-dessus de chaque carte montre jusqu'où va le kit : paille → terre → réseaux",
     "kits.title": "Trois kits",
     "kits.lead": "Ils ne diffèrent que par l'endroit où notre travail s'arrête. Panneaux, lisses, ossature des cloisons, plancher et chevrons sont dans les trois.",
     "kits.price": "Prix sur demande",
@@ -1363,6 +1469,14 @@ if ("IntersectionObserver" in window && targets.length) {
     }
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((s) => spy.observe(s));
+}
+
+/* a 1000-wide section becomes a sliver on a phone, so crop in close there */
+const cut = document.querySelector(".cut svg");
+if (cut) {
+  const fit = () => cut.setAttribute("viewBox", window.innerWidth <= 680 ? "0 0 470 250" : "0 0 1000 250");
+  addEventListener("resize", fit);
+  fit();
 }
 
 /* the fixed bar steps aside once the form or the footer is on screen */
